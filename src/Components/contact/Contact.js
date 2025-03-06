@@ -17,7 +17,7 @@ function Contact() {
     <div className='Blog-main-box' style={{backgroundColor:'#f8fafb',height:'70vh',paddingTop:'20vh'}}>
     <div className="Blog-lable">
       <h2 className='Blog-header'>
-      do you want to add your business listing with us?</h2>
+      do you want to add your business listing with us</h2>
       <div className="Blog-subheader">Listrace offer you to list your business with us and we very much able to promote your Business.</div>
   <div style={{paddingTop:'60px',display:'flex',justifyContent:'center'}}>
 
