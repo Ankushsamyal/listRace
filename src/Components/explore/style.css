@@ -1,0 +1,95 @@
+.e-header{
+    text-transform: uppercase;
+    color: #464646;
+    text-align: center;
+    letter-spacing: 5px;
+    font-weight:600;
+}
+.e-subheader{
+    color: #464646;
+    text-align: center;
+    font-size: larger;
+}
+.E-Main-Box{
+    background-color: #f2f2f2;
+    padding-top: 20vh;
+    padding-bottom: 20vh;
+}
+.e-lable{
+    padding-bottom: 10vh;
+}
+.e-Card-header{
+text-transform:capitalize;
+font-weight:600;
+color: #464646;
+}
+:root {
+    --dynamic-bg-color: lightblue; 
+  }
+.e-rating{
+    color: white;
+    border-radius: 2px;
+    padding: 2px;
+    
+}
+.e-rating-lable{
+    text-transform: capitalize;
+}
+
+.e-sub-header-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.e-image-box{
+    display: flex;
+}
+.person-img{
+    border-radius: 174px;
+}
+.e-Card-box{
+   display: grid;
+   grid: auto/ auto auto auto;
+   padding: 40px;
+   grid-gap: 40px;
+   justify-content: space-evenly;
+}
+.e-typeofplace{
+    text-transform: capitalize;
+}
+.e-subheading-main-box{
+    margin: 10px;
+}
+.e-extrainfo{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.e-style-icone{
+    color: #989898;
+    padding: 4px;
+
+    &:hover{ color: #1ba75c;}
+    
+}
+/* anotherthis css */
+.image-container {
+    position: relative;
+  }
+  
+  
+  
+  .small-image {
+    position: absolute;
+    width: 50px; /* Adjust size of the small image */
+    height: auto;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s ease-in-out;
+    color:white;
+    background-color:black ;
+    
+  }
+  
+  .image-container:hover .small-image {
+    opacity: 1; /* Show the small image on hover */
+  }

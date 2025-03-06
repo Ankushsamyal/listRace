@@ -1,0 +1,11 @@
+html {
+    scroll-behavior: smooth;
+  }
+
+.nav-bar{
+  text-decoration:dotted;
+  margin: 10px;
+  font-size:small;
+  font-weight: bold;
+  color: #848484;
+}  

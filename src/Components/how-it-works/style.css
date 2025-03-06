@@ -1,0 +1,38 @@
+.htw-header{
+    text-transform: uppercase;
+    color: #464646;
+    text-align: center;
+    letter-spacing: 5px;
+    font-weight:600;
+}
+.htw-subheader{
+    color: #464646;
+    text-align: center;
+    font-size: larger;
+}
+.Cardpage-mainbox{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+.bodyCard{
+    font-size: larger;
+    line-height: 25px;
+    text-align: center !important;
+    /* color: #999999;
+    &:hover{color: whitesmoke;} */
+}
+.Card-content{
+    justify-items: center;
+    text-align: center;
+}
+.HIW-Main_box{
+    padding-bottom: 15vh;
+    margin-top: 20vh;
+    
+}
+
+
+  

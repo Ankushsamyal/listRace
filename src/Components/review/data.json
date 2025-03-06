@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "place": "Paris",
+    "country": "France",
+    "image": "https://via.placeholder.com/1600x900.png?text=Paris+Eiffel+Tower",
+    "person_image": "https://i.postimg.cc/X7v5Cn9M/c1.png",
+    "comment": "Had an amazing time exploring Paris! The Eiffel Tower was breathtaking, and the Louvre is a must-see. The city has a unique charm with its beautiful streets and incredible food. Definitely a place I'd love to visit again."
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "place": "New York City",
+    "country": "USA",
+    "image": "https://via.placeholder.com/1600x900.png?text=New+York+City",
+    "person_image": "https://i.postimg.cc/28XZdgx1/c2.png",
+    "comment": "New York is an exciting city! From Broadway shows to great food and iconic landmarks like Times Square, there’s never a dull moment. I loved walking through Central Park and exploring different neighborhoods."
+  },
+  {
+    "id": 3,
+    "name": "Alice Johnson",
+    "place": "Tokyo",
+    "country": "Japan",
+    "image": "https://via.placeholder.com/1600x900.png?text=Tokyo+City",
+    "person_image": "https://i.postimg.cc/T3z5FmFG/c3.png",
+    "comment": "Tokyo is a mix of modern and traditional. I enjoyed visiting temples and shrines, then experiencing the futuristic technology and shopping districts. The food is fantastic, especially the sushi!"
+  },
+  {
+    "id": 4,
+    "name": "Michael Brown",
+    "place": "London",
+    "country": "UK",
+    "image": "https://via.placeholder.com/1600x900.png?text=London+City",
+    "person_image": "https://i.postimg.cc/y8gSLnfv/c4.png",
+    "comment": "London was incredible! I loved seeing historic sites like the Tower of London and the British Museum. The city has a great mix of culture, history, and modern attractions. Can’t wait to go back!"
+  },
+  {
+    "id": 5,
+    "name": "Emily Davis",
+    "place": "Sydney",
+    "country": "Australia",
+    "image": "https://via.placeholder.com/1600x900.png?text=Sydney+Opera+House",
+    "person_image": "https://i.postimg.cc/X7v5Cn9M/c1.png",
+    "comment": "Sydney is stunning! The Opera House and Harbour Bridge are iconic. I had a blast at Bondi Beach and exploring the city's vibrant food scene. Highly recommend visiting if you get the chance."
+  },
+  {
+    "id": 6,
+    "name": "Chris Lee",
+    "place": "Barcelona",
+    "country": "Spain",
+    "image": "https://via.placeholder.com/1600x900.png?text=Barcelona+City",
+    "person_image": "https://i.postimg.cc/28XZdgx1/c2.png",
+    "comment": "Barcelona was amazing. Gaudí’s architecture is breathtaking, and the food is just as great. I loved wandering around the Gothic Quarter and enjoying tapas with a glass of sangria.  Can’t wait to go back!"
+  },
+  {
+    "id": 7,
+    "name": "Jessica Wilson",
+    "place": "Cape Town",
+    "country": "South Africa",
+    "image": "https://via.placeholder.com/1600x900.png?text=Cape+Town+Landscape",
+    "person_image": "https://i.postimg.cc/T3z5FmFG/c3.png",
+    "comment": "Cape Town offers stunning landscapes and rich history. The view from Table Mountain is unreal, and the beaches are beautiful. The city has so much to offer, from nature reserves to great local food."
+  },
+  {
+    "id": 8,
+    "name": "David Moore",
+    "place": "Rome",
+    "country": "Italy",
+    "image": "https://via.placeholder.com/1600x900.png?text=Rome+Italy",
+    "person_image": "https://i.postimg.cc/y8gSLnfv/c4.png",
+    "comment": "Rome is a dream destination! The Colosseum and Vatican City are absolute must-sees. The food is amazing, especially the pasta and pizza. Can’t wait to go back! Can’t wait to go back!Can’t wait to go back!"
+  },
+  {
+    "id": 9,
+    "name": "Sophia Taylor",
+    "place": "Bangkok",
+    "country": "Thailand",
+    "image": "https://via.placeholder.com/1600x900.png?text=Bangkok+Thailand",
+    "person_image": "https://i.postimg.cc/X7v5Cn9M/c1.png",
+    "comment": "Bangkok is a lively and vibrant city. I loved exploring the temples and trying the street food. The markets are bustling, and the people are friendly. It’s a city full of energy! Can’t wait to go back!"
+  },
+  {
+    "id": 10,
+    "name": "William Martinez",
+    "place": "Rio de Janeiro",
+    "country": "Brazil",
+    "image": "https://via.placeholder.com/1600x900.png?text=Rio+de+Janeiro+Beach",
+    "person_image": "https://i.postimg.cc/X7v5Cn9M/c1.png",
+    "comment": "Rio is beautiful! Copacabana Beach is iconic, and the views from Sugarloaf Mountain are unforgettable. The city's energy is infectious, and I loved the nightlife  people are friendly. It’s a city full of energy! and samba music."
+  }
+]

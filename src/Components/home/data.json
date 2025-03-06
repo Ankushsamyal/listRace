@@ -1,0 +1,623 @@
+{
+    "categories": [
+      {
+        "name": "Food",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "Vada Pav",
+              "Pav Bhaji",
+              "Pani Puri",
+              "Bhel Puri",
+              "Dabeli",
+              "Kebabs",
+              "Maharashtrian Thali"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "Chaat (Pani Puri)",
+              "Kebabs",
+              "Butter Chicken",
+              "Chole Bhature",
+              "Paranthas",
+              "Aloo Tikki",
+              "Rajma Chawal"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "Biryani",
+              "Mysore Pak",
+              "Idli & Dosa",
+              "Vangi Bath",
+              "Bisibele Bath",
+              "Mangalore Buns",
+              "Ragi Mudde"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Chettinad Chicken Curry",
+              "Dosa",
+              "Sambar",
+              "Kothu Parotta",
+              "Idli",
+              "Pongal",
+              "Filter Coffee"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Kolkata Kathi Roll",
+              "Macher Jhol",
+              "Shorshe Ilish",
+              "Chingri Malai Curry",
+              "Mishti Doi",
+              "Rasgulla",
+              "Sandesh"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "Hyderabadi Biryani",
+              "Mirchi Ka Salan",
+              "Haleem",
+              "Double Ka Meetha",
+              "Bagara Baingan",
+              "Osmania Biscuits"
+            ]
+          },
+          {
+            "city": "Ahmedabad",
+            "country": "India",
+            "items": [
+              "Khakhra",
+              "Dhokla",
+              "Khandvi",
+              "Patra",
+              "Undhiyu",
+              "Thepla",
+              "Farsan"
+            ]
+          },
+          {
+            "city": "Paris",
+            "country": "France",
+            "items": [
+              "Baguette",
+              "Croissant",
+              "Escargot",
+              "Coq au Vin",
+              "Ratatouille",
+              "Crepes",
+              "Macarons"
+            ]
+          },
+          {
+            "city": "Tokyo",
+            "country": "Japan",
+            "items": [
+              "Sushi",
+              "Ramen",
+              "Tempura",
+              "Sashimi",
+              "Takoyaki",
+              "Okonomiyaki",
+              "Mochi"
+            ]
+          },
+          {
+            "city": "New York",
+            "country": "USA",
+            "items": [
+              "New York-Style Pizza",
+              "Bagels",
+              "Cheesecake",
+              "Pretzels",
+              "Hot Dogs",
+              "Pastrami Sandwich",
+              "Buffalo Wings"
+            ]
+          },
+          {
+            "city": "Sydney",
+            "country": "Australia",
+            "items": [
+              "Meat Pies",
+              "Vegemite on Toast",
+              "Tim Tams",
+              "Pavlova",
+              "Lamingtons",
+              "Barbecued Snags",
+              "Anzac Biscuits"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Restaurant",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "Bademiya",
+              "Sarvi Restaurant",
+              "Leopold Cafe",
+              "Britannia & Co.",
+              "Ziya",
+              "The Bombay Canteen",
+              "Doolally Taproom"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "Indian Accent",
+              "Karim's",
+              "SodaBottleOpenerWala",
+              "Bukhara",
+              "Moti Mahal",
+              "Delhi Haat",
+              "Saravana Bhavan"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "MTR",
+              "The 13th Floor",
+              "Shree Sagar",
+              "Nagarjuna",
+              "Koshy’s",
+              "The Only Place",
+              "Windmills Craftworks"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Dakshin",
+              "Annalakshmi",
+              "Murugan Idli Shop",
+              "Peshawri",
+              "Rathna Cafe",
+              "Pind",
+              "The Lotus"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Bhojohori Manna",
+              "6 Ballygunge Place",
+              "Flurys",
+              "Arsalan",
+              "Mocambo",
+              "Peter Cat",
+              "The Park Kolkata"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "Paradise Biryani",
+              "Shilparamam",
+              "Eat India Company",
+              "Chutneys",
+              "Bikanervala",
+              "The Fisherman’s Wharf"
+            ]
+          },
+          {
+            "city": "Ahmedabad",
+            "country": "India",
+            "items": [
+              "Agashiye",
+              "Manek Chowk",
+              "Rajasthan Samrat",
+              "The Chocolate Room",
+              "Shree Dattaguru Tea House"
+            ]
+          },
+          {
+            "city": "Paris",
+            "country": "France",
+            "items": [
+              "Le Meurice",
+              "L'Ambroisie",
+              "Le Jules Verne",
+              "Chez L'Ami Jean",
+              "Pierre Gagnaire",
+              "L'Atelier de Joël Robuchon",
+              "Le Cinq"
+            ]
+          },
+          {
+            "city": "Tokyo",
+            "country": "Japan",
+            "items": [
+              "Sukiyabashi Jiro",
+              "Narisawa",
+              "Kyubey",
+              "Sushi Saito",
+              "Ginza Kojyu",
+              "Ichiryu",
+              "Robot Restaurant"
+            ]
+          },
+          {
+            "city": "New York",
+            "country": "USA",
+            "items": [
+              "Joe's Pizza",
+              "Le Bernardin",
+              "Eleven Madison Park",
+              "Katz's Delicatessen",
+              "Shake Shack",
+              "Nobu",
+              "Per Se"
+            ]
+          },
+          {
+            "city": "Sydney",
+            "country": "Australia",
+            "items": [
+              "Quay",
+              "Tetsuya's",
+              "The Bridge Room",
+              "Aria",
+              "Momofuku Seiobo",
+              "Rockpool Bar & Grill",
+              "Bennelong"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Best Place",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "Gateway of India",
+              "Marine Drive",
+              "Chhatrapati Shivaji Maharaj Terminus",
+              "Elephanta Caves",
+              "Juhu Beach"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "Qutub Minar",
+              "India Gate",
+              "Red Fort",
+              "Lotus Temple",
+              "Humayun's Tomb"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "Cubbon Park",
+              "Lalbagh Botanical Garden",
+              "Bangalore Palace",
+              "Vidhana Soudha",
+              "Bannerghatta National Park"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Marina Beach",
+              "Kapaleeshwarar Temple",
+              "Santhome Cathedral Basilica",
+              "Fort St. George",
+              "Birla Planetarium"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Victoria Memorial",
+              "Howrah Bridge",
+              "Kalighat Temple",
+              "Eden Gardens",
+              "Indian Museum"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "Charminar",
+              "Golconda Fort",
+              "Hussain Sagar Lake",
+              "Ramoji Film City",
+              "Chilkur Balaji Temple"
+            ]
+          },
+          {
+            "city": "Paris",
+            "country": "France",
+            "items": [
+              "Eiffel Tower",
+              "Louvre Museum",
+              "Notre-Dame Cathedral",
+              "Champs-Élysées",
+              "Sacré-Cœur Basilica"
+            ]
+          },
+          {
+            "city": "Tokyo",
+            "country": "Japan",
+            "items": [
+              "Tokyo Tower",
+              "Senso-ji Temple",
+              "Shinjuku Gyoen",
+              "Odaiba",
+              "Meiji Shrine"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Hospital",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "Kokilaben Dhirubhai Ambani Hospital",
+              "Lilavati Hospital",
+              "Tata Memorial Hospital",
+              "Breach Candy Hospital",
+              "Jaslok Hospital"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "All India Institute of Medical Sciences (AIIMS)",
+              "Fortis Escorts Heart Institute",
+              "Max Super Speciality Hospital",
+              "Sir Ganga Ram Hospital",
+              "Medanta – The Medicity"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "Manipal Hospital",
+              "Fortis La Femme",
+              "Narayana Health",
+              "Sakra Premium Clinic",
+              "St. John's Medical College Hospital"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Apollo Hospital",
+              "Fortis Malar Hospital",
+              "Madras Medical Mission",
+              "MIOT International",
+              "Sri Ramachandra Medical Center"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Sree C.M. Hospital",
+              "AMRI Hospitals",
+              "Kothari Medical Centre",
+              "Fortis Hospital",
+              "Belle Vue Clinic"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "Care Hospitals",
+              "Yashoda Hospital",
+              "Apollo Health City",
+              "Rainbow Children’s Hospital",
+              "KIMS Hospital"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "RealEstate",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "PropTiger",
+              "Square Yards",
+              "Makaan",
+              "MagicBricks",
+              "Anand Realtors"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "99acres",
+              "Dlf Properties",
+              "Ansal API",
+              "JLL India",
+              "Eldeco Group"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "Sobha Limited",
+              "Prestige Group",
+              "Brigade Group",
+              "Mantri Developers",
+              "Puravankara"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Akshaya Pvt Ltd",
+              "Appaswamy Real Estates",
+              "Jain Housing",
+              "Olympia Group",
+              "Casagrand Builder"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Srijan Realty",
+              "Diamond Group",
+              "Hiland Group",
+              "Rupayan Realty",
+              "Merlin Group"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "MyHome Group",
+              "Lodha Group",
+              "Sriram Properties",
+              "Cybercity Builders",
+              "Phoenix Group"
+            ]
+          },
+          {
+            "city": "Paris",
+            "country": "France",
+            "items": [
+              "Foncia",
+              "Century 21",
+              "Orpi",
+              "Laforêt",
+              "Square Habitat"
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Car Repairing",
+        "locations": [
+          {
+            "city": "Mumbai",
+            "country": "India",
+            "items": [
+              "Auto Hangar",
+              "Sai Service",
+              "Kores Car Service",
+              "Mahindra First Choice",
+              "Hyundai Service Center"
+            ]
+          },
+          {
+            "city": "Delhi",
+            "country": "India",
+            "items": [
+              "Maruti Suzuki Service Center",
+              "Honda Car Service",
+              "Tata Motors Service",
+              "Renault Service",
+              "Hyundai Service"
+            ]
+          },
+          {
+            "city": "Bangalore",
+            "country": "India",
+            "items": [
+              "Carz Spa",
+              "Bangalore Auto Service",
+              "Maruti Suzuki Service",
+              "Tata Motors Service",
+              "Volkswagen Service Center"
+            ]
+          },
+          {
+            "city": "Chennai",
+            "country": "India",
+            "items": [
+              "Chennai Auto Care",
+              "Volkswagen Service",
+              "Hyundai Service Center",
+              "Nissan Service"
+            ]
+          },
+          {
+            "city": "Kolkata",
+            "country": "India",
+            "items": [
+              "Tata Motors Service",
+              "Mahindra Service Center",
+              "Nissan Service",
+              "Hyundai Car Service"
+            ]
+          },
+          {
+            "city": "Hyderabad",
+            "country": "India",
+            "items": [
+              "Hema Hyundai",
+              "Kia Motors Service Center",
+              "Mahindra First Choice",
+              "Maruti Suzuki Service Center",
+              "Honda Service"
+            ]
+          },
+          {
+            "city": "Paris",
+            "country": "France",
+            "items": [
+              "Renault Service",
+              "Peugeot Service",
+              "Citroën Service",
+              "BMW Service",
+              "Volkswagen Service"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+  
