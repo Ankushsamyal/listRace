@@ -1,7 +1,6 @@
 import React from 'react'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Navbar from './navbar/nabar';
-// import './App.css'
 import Home from './Components/home/Home';
 import Contact from './Components/contact/Contact';
 import Blogpage from './Components/blog/Blog';
@@ -9,39 +8,48 @@ import Explore from './Components/explore/Explore';
 import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
 
-
+function NavigationWrapper({footerNav , children}){
+  return (
+    <>
+    <Navbar/>
+    {children}
+    {/* {footerNav &&  */}
+    <Navbar footerNav={true}/>
+     {/* } */}
+    </>
+)}
 function App() { 
 
   const router = createBrowserRouter([
     {
       path:'/',
-      element:(<> <Navbar/> <Home/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Home/></NavigationWrapper>)
     },
     {
       path:'/how-it-works',
-      element:(<> <Navbar/> <Howitworks/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Howitworks/></NavigationWrapper>)
     },
     {
       path:'/explore',
-      element:(<> <Navbar/> <Explore/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Explore/></NavigationWrapper>)
     },
     {
       path:'/review',
-      element:(<> <Navbar/> <Review/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Review/></NavigationWrapper>)
     },
     {
       path:'/blog',
-      element:(<> <Navbar/> <Blogpage/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Blogpage/></NavigationWrapper>)
     },
     {
       path:'/contact',
-      element:(<> <Navbar/> <Contact/> <Navbar footerNav={true}/></>)
+      element:(<NavigationWrapper><Contact/></NavigationWrapper>)
     }
   ])
   return (
 
     <div >
-     <RouterProvider router={router}></RouterProvider>
+     <RouterProvider router={router}/>
      
     </div>
   );

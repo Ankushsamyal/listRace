@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Box, TextField } from '@mui/material';
+import { Alert, Autocomplete, Box, Stack, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -15,97 +15,127 @@ function HeroPageTextArea() {
     const [whatchoose, setwhatchoose] = useState("")
     const [locationChoose, setlocationChoose] = useState("")
     const [anchorElPage, setAnchorElPage] = useState(false)
-
-    const handleData = (event) => {
-        setwhatchoose(event.target.value)
-    }
-    const handleData2 = (event) => {
-        console.log(event.target.value,"event.target.value");
-        
-        setlocationChoose(event.target.value)
-    }
-   
+    const [AutomaticLocations, setAutomaticLocations] = useState([])
+    const handleData = (event) => { setwhatchoose(event.target.value) }
+    const handleData2 = (event) => { setlocationChoose(event.target.value) }
     const selectedData = whatchoose.toLocaleLowerCase()
     const cityData2 = locationChoose.toLocaleLowerCase()
-    useEffect(()=>{
-        console.log(locationChoose,"locationChoose");
-        
-    },[locationChoose])
-
-    const handleClick = ()=>{ 
+    const handleClick = () => {
         newData.map(value => {
-        if (selectedData === value.name.toLocaleLowerCase()) {
-            const filterValue= value.locations.find(item=>item.city.toLocaleLowerCase()===cityData2);
-            console.log(filterValue,"filterValue");
-            
-            if(filterValue?.items.length>=0 ){
-               dispatch(incrementByAmount(filterValue.items))
+            if (selectedData === value?.name?.toLocaleLowerCase()) {
+                const filterValue = value?.locations?.find(item => item?.city.toLocaleLowerCase() === cityData2 );
+                if (filterValue?.items.length >= 0) {
+                    dispatch(incrementByAmount(filterValue.items))
+                    setAnchorElPage(true);
+                }else if (filterValue === undefined || !filterValue.items) {
+                    dispatch(incrementByAmount(null));
+                    return (<Alert severity="error">This is an error Alert.</Alert>)}
 
-               setAnchorElPage(true);
-           }else if(filterValue === undefined){
-            dispatch(incrementByAmount(null))
-           }
-        }
-        
-        
-        return 0
-    })}
+                 else if (filterValue.items.length === 0) {
+                    return(<Alert severity="error">This is an error Alert.</Alert>
+                    )
+                }
+            }
+            
+        })
+    }
+    useEffect(() => {
+        Data?.categories?.map(option2 => {
+            if (selectedData === option2?.name.toLocaleLowerCase()) {
+                const DataOption = option2?.locations?.map(FindingNames => {
+                    return FindingNames?.city
+                })
+                setAutomaticLocations(DataOption)
+            }
+            return 0
+        })
+    }, [selectedData])
     return (
         <div style={{ padding: '40px' }}>
-            <Box sx={{display:'flex'}}>
+            <Box sx={{ display: 'flex' }}>
                 <ThemeProvider theme={theme}>
-                    <TextField
-                        id="choose-what-to"
-                        
-                        sx={{
-                            m: 0,
-                            width: '40ch',
-                            margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: '', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
-                            backgroundColor: 'white',
-                            '& .MuiFilledInput-root': {
-                                backgroundColor: 'white',
-                            },
-                            borderTopLeftRadius: '5px',
-                            borderEndStartRadius: '5px'
+                    <Stack id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Autocomplete
+                            id="choose-what-to"
+                            freeSolo
+                            value={whatchoose}
+                            onChange={(event, newValue) => {
+                                setwhatchoose(newValue);
+                            }}
+                            disableClearable
+                            options={Data.categories.map((option) => option.name)}
+                            renderInput={(params) => (
+                                <TextField
+                                    {...params}
+                                    id="choose-what-to"
+                                    data_test_id="choose-what-to-data"
+                                    sx={{
+                                        m: 0,
+                                        width: '40ch',
+                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: '', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
+                                        backgroundColor: 'white',
+                                        '& .MuiFilledInput-root': {
+                                            backgroundColor: 'white',
+                                        },
+                                        borderTopLeftRadius: '5px',
+                                        borderEndStartRadius: '5px'
 
-                        }}
-                        placeholder="Ex: Place, Food"
-                        slotProps={{
-                            input: {
-                                startAdornment: <div position="start" style={{ color: '#333333', paddingRight: '5px', fontWeight: 'bold' }}>What? </div>,
-                                endAdornment: <FormatListBulletedIcon 
-                                data_test_id="choose-what-to-data"/>
-                            },
-                        }}
-                        value={whatchoose}
-                        onChange={handleData}
-                        
-                    />
-                    <TextField
-                        id="choose-location"
-                        
-                        sx={{
-                            m: 0, width: '40ch',
-                            backgroundColor: 'white', '& .MuiFilledInput-root': { backgroundColor: 'white', },
-                            margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: 'none', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
-                            borderEndEndRadius: '5px',
-                            borderTopRightRadius: '5px'
-                        }}
-                        placeholder="Ex: New Delhi, Noida"
-                        slotProps={{
-                            input: {
-                                data_test_id:"choose-location-data",
-                                startAdornment: <div position="start" style={{ color: '#333333', fontWeight: 'bold', paddingRight: '5px' }}>Location</div>,
-                                endAdornment: <GpsFixedIcon
-                                 />
+                                    }}
+                                    placeholder="Ex: Place, Food"
+                                    slotProps={{
+                                        input: {
+                                            data_test_id: "choose-what-to-data",
+                                            ...params.InputProps,
+                                            type: 'search',
+                                            startAdornment: <div position="start" style={{ color: '#333333', paddingRight: '5px', fontWeight: 'bold' }}>What? </div>,
+                                            endAdornment: <FormatListBulletedIcon
+                                            />
+                                        },
+                                    }}
+                                    value={whatchoose}
+                                    onChange={handleData}
 
-                            },
-                        }}
-                    value={locationChoose}
-                    onChange={handleData2} 
-                    />
+                                />)} />
+                        <Autocomplete
+                            id="choose-what-to"
+                            freeSolo
+                            disableClearable
+                            value={locationChoose}
+                            onChange={(event, newValue) => {
+                                setlocationChoose(newValue);
+                            }}
+                            options={AutomaticLocations}
+                            renderInput={(params) => (
+                                <TextField
+                                    id="choose-location"
+                                    {...params}
+                                    sx={{
+                                        m: 0, width: '40ch',
+                                        backgroundColor: 'white', '& .MuiFilledInput-root': { backgroundColor: 'white', },
+                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: 'none', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
+                                        borderEndEndRadius: '5px',
+                                        borderTopRightRadius: '5px'
+                                    }}
+                                    placeholder="Ex: New Delhi, Noida"
+                                    slotProps={{
+                                        input: {
+                                            data_test_id: "choose-location-data",
+                                            ...params.InputProps,
+                                            type: 'search',
+                                            startAdornment: <div position="start" style={{ color: '#333333', fontWeight: 'bold', paddingRight: '5px' }}>Location</div>,
+                                            endAdornment: <GpsFixedIcon
+                                            />
+
+                                        },
+                                    }}
+                                    value={locationChoose}
+                                    onChange={handleData2}
+                                />
+                            )}
+                        />
+                    </Stack>
                 </ThemeProvider >
-             <BasicPopover  handleClick={handleClick} anchorElPage={anchorElPage} setAnchorElPage={setAnchorElPage}/>
+                <BasicPopover handleClick={handleClick} anchorElPage={anchorElPage} setAnchorElPage={setAnchorElPage} />
             </Box>
 
         </div>

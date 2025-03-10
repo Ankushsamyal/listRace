@@ -22,7 +22,6 @@ export default function BasicPopover(props) {
   const {  handleClick = () => { },anchorElPage , setAnchorElPage} = props;
   const finalValue = useSelector((state) => state.counter.finalValue);
   const open = Boolean(anchorElPage);
-console.log(anchorElPage);
 const id = open ? 'simple-popover' : undefined;
   return (
     <div>
