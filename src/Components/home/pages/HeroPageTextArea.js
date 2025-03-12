@@ -20,23 +20,26 @@ function HeroPageTextArea() {
     const handleData2 = (event) => { setlocationChoose(event.target.value) }
     const selectedData = whatchoose.toLocaleLowerCase()
     const cityData2 = locationChoose.toLocaleLowerCase()
+    const [isAlert, setIsAlert] = useState(false)
     const handleClick = () => {
         newData.map(value => {
+            // debugger
             if (selectedData === value?.name?.toLocaleLowerCase()) {
-                const filterValue = value?.locations?.find(item => item?.city.toLocaleLowerCase() === cityData2 );
+                const filterValue = value?.locations?.find(item => item?.city.toLocaleLowerCase() === cityData2);
                 if (filterValue?.items.length >= 0) {
                     dispatch(incrementByAmount(filterValue.items))
                     setAnchorElPage(true);
-                }else if (filterValue === undefined || !filterValue.items) {
+                    setIsAlert(false);
+                }
+                else {
+                    setIsAlert(true);
                     dispatch(incrementByAmount(null));
-                    return (<Alert severity="error">This is an error Alert.</Alert>)}
-
-                 else if (filterValue.items.length === 0) {
-                    return(<Alert severity="error">This is an error Alert.</Alert>
-                    )
                 }
             }
-            
+            else{
+                return 0
+            }
+
         })
     }
     useEffect(() => {
@@ -51,8 +54,17 @@ function HeroPageTextArea() {
         })
     }, [selectedData])
     return (
-        <div style={{ padding: '40px' }}>
-            <Box sx={{ display: 'flex' }}>
+        <div style={{ padding: '40px',display:'flex' }}>
+           <Box sx={{ display: 'flex' }}>
+            {isAlert && (<Stack sx={{ 
+            position: 'fixed', 
+            top:"60%",
+            left: "40%", 
+            zIndex: 9999,  
+            padding: 2
+        }} spacing={2}>
+          <Alert severity="error">Please select a valid Data</Alert>
+        </Stack>)}
                 <ThemeProvider theme={theme}>
                     <Stack id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
                         <Autocomplete
