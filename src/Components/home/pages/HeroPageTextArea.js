@@ -68,7 +68,7 @@ function HeroPageTextArea() {
                 <ThemeProvider theme={theme}>
                     <Stack id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
                         <Autocomplete
-                            id="choose-what-to"
+                        id='AutoComplete-choose-what-to'
                             freeSolo
                             value={whatchoose}
                             onChange={(event, newValue) => {
@@ -82,16 +82,11 @@ function HeroPageTextArea() {
                                     id="choose-what-to"
                                     data_test_id="choose-what-to-data"
                                     sx={{
-                                        m: 0,
-                                        width: '40ch',
-                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: '', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
-                                        backgroundColor: 'white',
-                                        '& .MuiFilledInput-root': {
-                                            backgroundColor: 'white',
-                                        },
+                                        m: 0, width: '40ch',
+                                        backgroundColor: 'white', '& .MuiFilledInput-root': { backgroundColor: 'white', },
+                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: 'none', }, '&:hover fieldset': { border: 'none', }, '&.Mui-focused fieldset': { border: 'none', }, },
                                         borderTopLeftRadius: '5px',
-                                        borderEndStartRadius: '5px'
-
+                                        borderBottomLeftRadius: '5px',
                                     }}
                                     placeholder="Ex: Place, Food"
                                     slotProps={{
@@ -109,7 +104,7 @@ function HeroPageTextArea() {
 
                                 />)} />
                         <Autocomplete
-                            id="choose-what-to"
+                        id='Automatic-choose-location'
                             freeSolo
                             disableClearable
                             value={locationChoose}
