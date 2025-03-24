@@ -4,7 +4,6 @@ import Heroimage from '../../Images/images/welcome-hero/banner.jpg';
 import { Box } from '@mui/material';
 import HeroCards from './pages/HeroCards';
 import 'animate.css';
-import { Counter } from '../redux/Counter';
 
 
 function Home() {

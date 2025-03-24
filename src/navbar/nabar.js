@@ -49,6 +49,9 @@ const Navbar = ({ footerNav }) => {
           <Link
             className='nav-bar'to="/contact"
           >CONTACT</Link>
+          <Link
+            className='nav-bar'to="/ChatBot"
+          >CHATBOT</Link>
         </Box>
       </Toolbar>
     </AppBar>

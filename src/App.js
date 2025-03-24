@@ -7,6 +7,8 @@ import Blogpage from './Components/blog/Blog';
 import Explore from './Components/explore/Explore';
 import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
+import HomePageChatBot from './Components/ChatBot/HomePageChatBot';
+import HomePageAI from './Components/ChatBot/HomePageAI';
 
 function NavigationWrapper({footerNav , children}){
   return (
@@ -44,6 +46,14 @@ function App() {
     {
       path:'/contact',
       element:(<NavigationWrapper><Contact/></NavigationWrapper>)
+    },
+    {
+      path:'/ChatBot',
+      element:(<NavigationWrapper><HomePageChatBot/></NavigationWrapper>)
+    }, 
+    {
+      path:'/AI',
+      element:(<NavigationWrapper><HomePageAI/></NavigationWrapper>)
     }
   ])
   return (
