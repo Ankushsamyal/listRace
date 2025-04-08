@@ -32,3 +32,19 @@
     color: white;
     
 }
+/* Ensure slick-track has proper height */
+.slick-slide > div {
+  height: 100%;
+}
+
+/* Center mode active slide highlight */
+.slick-center .Review-card {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Fix for slick-list overflow */
+.slick-list {
+  padding: 20px 0 !important;
+  margin: 0 -10px !important;
+}

@@ -1,5 +1,5 @@
-import React from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import React, { useLayoutEffect } from 'react'
+import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom';
 import Navbar from './navbar/nabar';
 import Home from './Components/home/Home';
 import Contact from './Components/contact/Contact';
@@ -8,16 +8,22 @@ import Explore from './Components/explore/Explore';
 import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
 import HomePageChatBot from './Components/ChatBot/HomePageChatBot';
-import HomePageAI from './Components/ChatBot/HomePageAI';
 
-function NavigationWrapper({footerNav , children}){
+function ScrollToTop() {
+  const pathname  = useLocation();
+useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+return null;
+}
+
+function NavigationWrapper({ children}){
   return (
     <>
     <Navbar/>
+    <ScrollToTop/>
     {children}
-    {/* {footerNav &&  */}
-    <Navbar footerNav={true}/>
-     {/* } */}
+    <Navbar  footerNav={true}/>
     </>
 )}
 function App() { 
@@ -25,35 +31,31 @@ function App() {
   const router = createBrowserRouter([
     {
       path:'/',
-      element:(<NavigationWrapper><Home/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Home/></NavigationWrapper>)
     },
     {
       path:'/how-it-works',
-      element:(<NavigationWrapper><Howitworks/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Howitworks/></NavigationWrapper>)
     },
     {
       path:'/explore',
-      element:(<NavigationWrapper><Explore/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Explore/></NavigationWrapper>)
     },
     {
       path:'/review',
-      element:(<NavigationWrapper><Review/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Review/></NavigationWrapper>)
     },
     {
       path:'/blog',
-      element:(<NavigationWrapper><Blogpage/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Blogpage/></NavigationWrapper>)
     },
     {
       path:'/contact',
-      element:(<NavigationWrapper><Contact/></NavigationWrapper>)
+      element:(<NavigationWrapper ><Contact/></NavigationWrapper>)
     },
     {
       path:'/ChatBot',
-      element:(<NavigationWrapper><HomePageChatBot/></NavigationWrapper>)
-    }, 
-    {
-      path:'/AI',
-      element:(<NavigationWrapper><HomePageAI/></NavigationWrapper>)
+      element:(<NavigationWrapper ><HomePageChatBot/></NavigationWrapper>)
     }
   ])
   return (

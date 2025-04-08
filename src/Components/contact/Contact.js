@@ -35,7 +35,7 @@ function Contact() {
                         placeholder="Enter your email here"
                         
                     />
-    <ColorButton style={{ height: '56px',borderRadius:'0' }} variant="contained" >Create Account</ColorButton>
+    <ColorButton style={{ height: '56px',borderRadius:'0' }} variant="contained" >Contact Us</ColorButton>
   </div>
     </div>
   </div>

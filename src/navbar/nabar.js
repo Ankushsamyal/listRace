@@ -35,9 +35,6 @@ const Navbar = ({ footerNav }) => {
             className='nav-bar' to="/"
           >HOME</Link>
           <Link
-            className='nav-bar' to="/how-it-works"
-          >HOW IT WORKS</Link>
-          <Link
             className='nav-bar' to="/explore"
           >EXPLORE</Link>
           <Link
