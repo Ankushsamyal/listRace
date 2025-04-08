@@ -3,7 +3,6 @@ import React from 'react'
 import data from './data.json'
 
 function BlogCards() {
-    console.log(data);
 
     return (
         <div className='BlogCards-Main-box' style={{paddingTop:'30px'}}>

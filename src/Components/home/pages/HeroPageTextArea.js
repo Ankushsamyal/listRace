@@ -22,14 +22,19 @@ function HeroPageTextArea() {
     const cityData2 = locationChoose.toLocaleLowerCase()
     const [isAlert, setIsAlert] = useState(false)
     const handleClick = () => {
-        newData.map(value => {
-            // debugger
-            if (selectedData === value?.name?.toLocaleLowerCase()) {
-                const filterValue = value?.locations?.find(item => item?.city.toLocaleLowerCase() === cityData2);
+        const checkValue = newData.filter(item => item.name.toLocaleLowerCase()===selectedData) 
+        console.log(checkValue,"this is text value")
+        checkValue.map(value => {
+            //  debugger
+            if (checkValue) {
+                const filterValue = value?.locations?.find(item => {
+                    return item?.city?.toLocaleLowerCase() === cityData2;
+                });
+
                 if (filterValue?.items.length >= 0) {
+                    setIsAlert(false);
                     dispatch(incrementByAmount(filterValue.items))
                     setAnchorElPage(true);
-                    setIsAlert(false);
                 }
                 else {
                     setIsAlert(true);
@@ -37,7 +42,8 @@ function HeroPageTextArea() {
                 }
             }
             else{
-                return 0
+                 setIsAlert(true);
+                  return 0
             }
 
         })

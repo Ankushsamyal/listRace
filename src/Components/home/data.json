@@ -386,7 +386,7 @@
         ]
       },
       {
-        "name": "Hospital",
+        "name": "Health Care",
         "locations": [
           {
             "city": "Mumbai",
@@ -539,7 +539,7 @@
         ]
       },
       {
-        "name": "Car Repairing",
+        "name": "Automotion",
         "locations": [
           {
             "city": "Mumbai",
