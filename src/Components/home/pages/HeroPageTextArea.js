@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { Alert, Autocomplete, Box, Stack, TextField } from '@mui/material';
+import { Alert, Autocomplete, Box, Stack, TextField, Typography } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Data from '../data.json'
-import BasicPopover from './BasicPopover';
 import { incrementByAmount } from '../../redux/slice/counterSlice';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import CustomPopOver from '../../../CommonComponents/CustomPopOver';
+import SearchIcon from '@mui/icons-material/Search';
+import HeroButton from '../../../CommonComponents/HeroButton';
+
+
 
 function HeroPageTextArea() {
     const theme = createTheme({ palette: { primary: { main: '#ff545a' }, secondary: { main: '#1976d2' }, }, });
@@ -14,16 +18,18 @@ function HeroPageTextArea() {
     const dispatch = useDispatch()
     const [whatchoose, setwhatchoose] = useState("")
     const [locationChoose, setlocationChoose] = useState("")
-    const [anchorElPage, setAnchorElPage] = useState(false)
+    const [anchorEl, setAnchorEl] = useState(null)
     const [AutomaticLocations, setAutomaticLocations] = useState([])
     const handleData = (event) => { setwhatchoose(event.target.value) }
     const handleData2 = (event) => { setlocationChoose(event.target.value) }
     const selectedData = whatchoose.toLocaleLowerCase()
     const cityData2 = locationChoose.toLocaleLowerCase()
     const [isAlert, setIsAlert] = useState(false)
+    const finalValue = useSelector((state) => state.counter.finalValue);
     const handleClick = () => {
-        const checkValue = newData.filter(item => item.name.toLocaleLowerCase()===selectedData) 
-        console.log(checkValue,"this is text value")
+        const checkValue = newData.filter(item => item.name.toLocaleLowerCase() === selectedData)
+        if (checkValue.length <= 0) setIsAlert(true)
+        console.log(checkValue, "this is text value")
         checkValue.map(value => {
             //  debugger
             if (checkValue) {
@@ -34,18 +40,19 @@ function HeroPageTextArea() {
                 if (filterValue?.items.length >= 0) {
                     setIsAlert(false);
                     dispatch(incrementByAmount(filterValue.items))
-                    setAnchorElPage(true);
+                    setAnchorEl(true);
                 }
                 else {
                     setIsAlert(true);
                     dispatch(incrementByAmount(null));
                 }
             }
-            else{
-                 setIsAlert(true);
-                  return 0
+            else {
+                setIsAlert(true);
+                return 0
             }
 
+            return 0;
         })
     }
     useEffect(() => {
@@ -60,21 +67,21 @@ function HeroPageTextArea() {
         })
     }, [selectedData])
     return (
-        <div style={{ padding: '40px',display:'flex' }}>
-           <Box sx={{ display: 'flex' }}>
-            {isAlert && (<Stack sx={{ 
-            position: 'fixed', 
-            top:"60%",
-            left: "40%", 
-            zIndex: 9999,  
-            padding: 2
-        }} spacing={2}>
-          <Alert severity="error">Please select a valid Data</Alert>
-        </Stack>)}
-                <ThemeProvider theme={theme}>
-                    <Stack id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
+        <div className='Main-Box-outter' style={{ padding: '40px', display: 'flex' }}>
+            <Box className='Main-Box' sx={{ display: 'flex' }}>
+                {isAlert && (<Stack sx={{
+                    position: 'fixed',
+                    top: "60%",
+                    left: "40%",
+                    zIndex: 9999,
+                    padding: 2
+                }} spacing={2}>
+                    <Alert severity="error">Please select a valid Data</Alert>
+                </Stack>)}
+                <ThemeProvider className='Theme-Provider' theme={theme}>
+                    <Stack className='Main-Stack' id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
                         <Autocomplete
-                        id='AutoComplete-choose-what-to'
+                            id='AutoComplete-choose-what-to'
                             freeSolo
                             value={whatchoose}
                             onChange={(event, newValue) => {
@@ -110,7 +117,7 @@ function HeroPageTextArea() {
 
                                 />)} />
                         <Autocomplete
-                        id='Automatic-choose-location'
+                            id='Automatic-choose-location'
                             freeSolo
                             disableClearable
                             value={locationChoose}
@@ -148,7 +155,22 @@ function HeroPageTextArea() {
                         />
                     </Stack>
                 </ThemeProvider >
-                <BasicPopover handleClick={handleClick} anchorElPage={anchorElPage} setAnchorElPage={setAnchorElPage} />
+                <HeroButton
+                    handleClick={handleClick}
+                    endIcon={<SearchIcon />}
+                    customMargin="34px"
+                >Search</HeroButton>
+
+                <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl} >
+                    {finalValue && finalValue.map((value) => (
+
+                        <Typography data_test_id={value} key={value} id={value} component="div" sx={{ p: 2 }}>{value}</Typography>
+                    ))}
+
+                </CustomPopOver>
+
+
+
             </Box>
 
         </div>

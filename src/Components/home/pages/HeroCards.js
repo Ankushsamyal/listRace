@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Card, CardActionArea, CardContent, Typography } from '@mui/material'
+import { Box, Card, CardActionArea, CardContent, Stack, Typography } from '@mui/material'
 import CarRepairOutlinedIcon from '@mui/icons-material/CarRepairOutlined';
 import '../style.css';
 import BackpackOutlinedIcon from '@mui/icons-material/BackpackOutlined';
@@ -7,7 +7,7 @@ import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutl
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import CustomPopOver from './CustomPopOver';
+import CustomPopOver from '../../../CommonComponents/CustomPopOver';
 import Data from '../data.json'
 
 
@@ -55,37 +55,45 @@ const dataJson = [
     }
 ]
 function HeroCards() {
-    const [anchorEl, setAnchorEl] =useState(false);
+    const [anchorEl, setAnchorEl] = useState(false);
     const [cityList, setCityList] = useState([]);
     const [itemsCityList, setItemsCityList] = useState([]);
     const handleClick = (title) => {
-        const getcityList = Data.categories.find(item => item.name === title); 
+        const getcityList = Data.categories.find(item => item.name === title);
         let cityListArry = [];
         let itemListArry = [];
-        
+
         getcityList.locations.forEach(element => {
             cityListArry.push(element.city);
             itemListArry.push(element.items);
         });
-        setCityList(cityListArry);  
+        setCityList(cityListArry);
         setItemsCityList(itemListArry);
         setAnchorEl(true);
 
     };
 
     return (<div className='hero-card-main-box'>
-        <div style={{ paddingTop: '23vh' }}>
+        <div style={{ paddingTop: '21vh' }}>
             <Box sx={{ display: 'grid', grid: 'auto / auto auto auto auto ', alignItems: 'center', margin: '0 auto' }}>
-                {dataJson.map((value,index) => (
-                    <Card className='Hero-cards'  key={index} sx={{ minWidth: 200, margin: '10px' }}>
-                        <CardActionArea onClick={()=>handleClick(value.title)}  sx={{ '&:hover': { boxShaadow: '0 4px rgbari(0,0,0,0.2)', backgroundColor: '#ff4d4d', color: 'whitesmoke' } }}>
+                {dataJson.map((value, index) => (
+                    <Card className='Hero-cards' key={index} sx={{ minWidth: 200, margin: '20px' }}>
+                        <CardActionArea onClick={() => handleClick(value.title)} sx={{ '&:hover': { boxShaadow: '0 4px rgbari(0,0,0,0.2)', backgroundColor: '#ff4d4d', color: 'whitesmoke' } }}>
                             <CardContent className='Card-content' sx={{ justifyItems: 'center', }}>
                                 {value.icon}
                                 <Typography variant='h6'>{value.title}  </Typography>
                                 <Typography variant='body'>{value.description}</Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CustomPopOver itemsCityList={itemsCityList} cityList={cityList} anchorEl={anchorEl} setAnchorEl={setAnchorEl}/>
+                        <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
+                            {cityList && cityList.map((name, index) => (
+                                <Stack key={index} sx={{ boxShadow: "rgba(99, 99, 99, 0.2) 0px 2px 8px 0px", margin: '10px' }} spacing={2}>
+                                    <Typography variant='h6' sx={{ p: 1 }}>{name}</Typography>
+                                    <Typography sx={{ p: 1 }}> {itemsCityList[index] && itemsCityList[index].join(", ")}
+                                    </Typography>
+                                </Stack>
+                            ))}
+                        </CustomPopOver>
                     </Card>))}
             </Box>
         </div>

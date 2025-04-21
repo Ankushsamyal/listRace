@@ -17,10 +17,9 @@ function ReviewCard() {
         speed: 300,
         arrows: false,
         autoplay: true,
-        autoplaySpeed: 2200,
-        // Add these important settings:
+        autoplaySpeed: 1500,
         focusOnSelect: true,
-        variableWidth: false, // Set to false for consistent widths
+        variableWidth: false, 
         
     };
 
