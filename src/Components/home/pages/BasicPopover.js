@@ -19,22 +19,20 @@ const ColorButton = styled(Button)(() => ({
 }));
 
 export default function BasicPopover(props) {
-  const {  handleClick = () => { },anchorElPage , setAnchorElPage} = props;
-  const finalValue = useSelector((state) => state.counter.finalValue);
-  const open = Boolean(anchorElPage);
+  const {  handleClick = () => { },anchorEl , setanchorEl} = props;
+ 
+  const open = Boolean(anchorEl);
 const id = open ? 'simple-popover' : undefined;
   return (
     <div>
-      <ColorButton data_test_id="Search-Button" aria-describedby={id} variant="contained" onClick={()=>handleClick()} endIcon={<SearchIcon />}>
-        Search
-      </ColorButton>
-     { anchorElPage && <Popover
+      
+     { anchorEl && <Popover
       data_test_id="Search-Popover"
         className='Popover-but-style'
         id={id}
-        open={anchorElPage}
-        anchorEl={anchorElPage}
-        onClose={()=>setAnchorElPage(false)}
+        open={anchorEl}
+        anchorEl={anchorEl}
+        onClose={()=>setanchorEl(false)}
         anchorOrigin={{
           vertical: 'center',
           horizontal: 'center',
@@ -50,10 +48,7 @@ const id = open ? 'simple-popover' : undefined;
         }}
 
       >
-        {finalValue && finalValue.map((value) => (
-
-          <Typography data_test_id={value} key={value} id={value} component="div" sx={{ p: 2 }}>{value}</Typography>
-        ))}
+       
       </Popover>}
     </div>
   );

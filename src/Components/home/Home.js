@@ -1,16 +1,14 @@
 import React from 'react'
 import HeroPageTextArea from './pages/HeroPageTextArea'
 import Heroimage from '../../Images/images/welcome-hero/banner.jpg';
-import { Box } from '@mui/material';
 import HeroCards from './pages/HeroCards';
 import 'animate.css';
 
 
 function Home() {
     return (
-        <div style={{height:'160vh'}}>
-            <Box>
-                <div
+        <div style={{height:'160vh',backgroundColor:'whitesmoke'}}>
+                <div className='Hero-Main-box'
                     style={{
                         height: '110vh',
                         backgroundSize:'cover',
@@ -18,6 +16,7 @@ function Home() {
                         backgroundRepeat:'no-repeat',
                         backgroundImage: ` linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)),url(${Heroimage})`,
                         justifyItems: 'center',
+                        // backgroundColor:'black',
                         marginTop:'12vh'
 
                     }}>
@@ -46,7 +45,6 @@ function Home() {
                     <HeroPageTextArea />
                     <HeroCards/>
                 </div>
-            </Box>
         </div>
     )
 }

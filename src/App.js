@@ -7,7 +7,8 @@ import Blogpage from './Components/blog/Blog';
 import Explore from './Components/explore/Explore';
 import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
-import HomePageChatBot from './Components/ChatBot/HomePageChatBot';
+import LoginPage from './Components/login/LogIn';
+import Signup from './Components/signup/SignUp';
 
 function ScrollToTop() {
   const pathname  = useLocation();
@@ -54,8 +55,12 @@ function App() {
       element:(<NavigationWrapper ><Contact/></NavigationWrapper>)
     },
     {
-      path:'/ChatBot',
-      element:(<NavigationWrapper ><HomePageChatBot/></NavigationWrapper>)
+      path:'/login',
+      element:(<NavigationWrapper ><LoginPage/></NavigationWrapper>)
+    },
+    {
+      path:'/signup',
+      element:(<NavigationWrapper ><Signup/></NavigationWrapper>)
     }
   ])
   return (
