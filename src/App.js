@@ -7,8 +7,8 @@ import Blogpage from './Components/blog/Blog';
 import Explore from './Components/explore/Explore';
 import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
-import LoginPage from './Components/login/LogIn';
-import Signup from './Components/signup/SignUp';
+import LoginPage from './Components/Login_Signup/login/LogIn';
+import Signup from './Components/Login_Signup/signup/SignUp';
 
 function ScrollToTop() {
   const pathname  = useLocation();
