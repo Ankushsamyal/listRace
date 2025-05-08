@@ -7,7 +7,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import CloseIcon from '@mui/icons-material/Close';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import './style.css'
+import '../Components/explore/style.css';
 
 const iconStyle = (valuedata) => ({
     fontSize: 'large',
@@ -44,7 +44,13 @@ function ExploreCards({ data, setSaveBookmark, saveBookmark, flag, setAnchorEl }
     };
     return (
         <div className='E-Card-Main-Box'>
-            <Box className="e-Card-box" >
+            <Box className="e-Card-boxss" style={{
+                display:flag ? 'flex' : 'grid',
+                grid: flag ? '' : 'auto / auto auto auto',
+                padding: '40px',
+                gridGap: '40px',
+                justifyContent: 'space-evenly'
+            }}>
                 {data && data.map((valuedata, index) => (
 
                     <Card className='e-card' key={index} sx={{
@@ -71,19 +77,19 @@ function ExploreCards({ data, setSaveBookmark, saveBookmark, flag, setAnchorEl }
                                             fontSize="small"
                                             className="small-image"
                                             sx={PhotoiconStyle}
-                                            style={{color:'red'}}  />
+                                            style={{ color: 'red' }} />
                                         :
                                         <BookmarkBorderIcon
                                             onClick={() => { openBookmark(valuedata) }}
                                             fontSize="small"
                                             className="small-image"
-                                            sx={PhotoiconStyle}/>
+                                            sx={PhotoiconStyle} />
                                 }
                                 <ZoomOutMapIcon onClick={() => { openImage(valuedata.Himage_url) }}
-                                 className='small-image' 
-                                 fontSize="large"
-                                  sx={PhotoiconStyle}
-                                  style={{right:'40px'}} />
+                                    className='small-image'
+                                    fontSize="large"
+                                    sx={PhotoiconStyle}
+                                    style={{ right: '40px' }} />
                             </Box>
                         </Box>
                         <CardContent className='E-card-content'>

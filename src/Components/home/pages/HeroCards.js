@@ -8,62 +8,56 @@ import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import CustomPopOver from '../../../CommonComponents/CustomPopOver';
-import Data from '../data.json'
 
 
-const dataJson = [
+const dataItems = [
     {
-        "id": 1,
-        "title": "Restaurant",
-        "description": "150 listing",
-        "icon": <DinnerDiningOutlinedIcon fontSize='large' />
+        id: 1,
+        title: "Restaurant",
+        description: "150 listings",
+        icon: <DinnerDiningOutlinedIcon fontSize="large" />
     },
     {
-        "id": 2,
-        "title": "Best Place",
-        "description": "214 listing",
-        "icon": <BackpackOutlinedIcon fontSize='large' />
-
+        id: 2,
+        title: "Best Place",
+        description: "214 listings",
+        icon: <BackpackOutlinedIcon fontSize="large" />
     },
     {
-        "id": 3,
-        "title": "Food",
-        "description": "185 listing",
-        "icon": <HotelOutlinedIcon fontSize='large' />
-
+        id: 3,
+        title: "Food",
+        description: "185 listings",
+        icon: <HotelOutlinedIcon fontSize="large" />
     },
     {
-        "id": 4,
-        "title": "Health Care",
-        "description": "120 listing",
-        "icon": <MedicalServicesOutlinedIcon fontSize='large' />
-
+        id: 4,
+        title: "Health Care",
+        description: "120 listings",
+        icon: <MedicalServicesOutlinedIcon fontSize="large" />
     },
     {
-        "id": 5,
-        "title": "Automotion",
-        "description": "120 listing",
-        "icon": <CarRepairOutlinedIcon fontSize='large' />
-
+        id: 5,
+        title: "Automotion",
+        description: "120 listings",
+        icon: <CarRepairOutlinedIcon fontSize="large" />
     },
     {
-        "id": 6,
-        "title": "RealEstate",
-        "description": "220 listing",
-        "icon": <ApartmentIcon fontSize='large' />
-
+        id: 6,
+        title: "Real Estate",
+        description: "220 listings",
+        icon: <ApartmentIcon fontSize="large" />
     }
-]
-function HeroCards() {
+];
+function HeroCards({ catagoriData, loading, error}) {
     const [anchorEl, setAnchorEl] = useState(false);
     const [cityList, setCityList] = useState([]);
     const [itemsCityList, setItemsCityList] = useState([]);
     const handleClick = (title) => {
-        const getcityList = Data.categories.find(item => item.name === title);
+        const getcityList = catagoriData?.find(item => item.name === title);
         let cityListArry = [];
         let itemListArry = [];
 
-        getcityList.locations.forEach(element => {
+        getcityList?.locations?.forEach(element => {
             cityListArry.push(element.city);
             itemListArry.push(element.items);
         });
@@ -74,9 +68,9 @@ function HeroCards() {
     };
 
     return (<div className='hero-card-main-box'>
-        <div style={{ paddingTop: '21vh' }}>
+        <div style={{ paddingTop: '25vh' }}>
             <Box sx={{ display: 'grid', grid: 'auto / auto auto auto auto ', alignItems: 'center', margin: '0 auto' }}>
-                {dataJson.map((value, index) => (
+                {dataItems.map((value, index) => (
                     <Card className='Hero-cards' key={index} sx={{ minWidth: 200, margin: '20px' }}>
                         <CardActionArea onClick={() => handleClick(value.title)} sx={{ '&:hover': { boxShaadow: '0 4px rgbari(0,0,0,0.2)', backgroundColor: '#ff4d4d', color: 'whitesmoke' } }}>
                             <CardContent className='Card-content' sx={{ justifyItems: 'center', }}>
@@ -102,3 +96,4 @@ function HeroCards() {
 }
 
 export default HeroCards
+
