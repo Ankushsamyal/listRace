@@ -9,7 +9,66 @@ import CustomPopOver from '../../../CommonComponents/CustomPopOver';
 import SearchIcon from '@mui/icons-material/Search';
 import HeroButton from '../../../CommonComponents/HeroButton';
 
-function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
+// Neomorphic styles
+const neoStyles = {
+  mainContainer: {
+    paddingTop: '5vh',
+    display: 'flex',
+    justifyContent: 'center',
+    // background: '#e0e5ec',
+    // minHeight: '100vh',
+    width: '100%'
+  },
+  searchContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '16px',
+    flexDirection: { xs: 'column', sm: 'row' },
+    padding: '20px',
+    borderRadius: '20px',
+    // background: '#e0e5ec',
+    // boxShadow: '20px 20px 60px #bebebe, -20px -20px 60px #ffffff',
+  },
+  textField: {
+    '& .MuiOutlinedInput-root': {
+      borderRadius: '15px',
+      background: '#e0e5ec',
+      boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
+      '& fieldset': { border: 'none' },
+      '&.Mui-focused': {
+        boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff',
+      }
+    },
+    '& .MuiInputLabel-root': {
+      color: '#6b6b6b',
+      '&.Mui-focused': { color: '#ff545a' },
+    },
+    '& .MuiInputBase-input': { 
+      color: '#4a4a4a',
+    },
+    width: '40ch', // Increased from 40ch to 60ch
+    margin: '0'
+  },
+  alert: {
+    position: 'fixed',
+    top: '65%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    zIndex: 9999,
+    padding: '16px',
+    borderRadius: '15px',
+  },
+  popover: {
+    p: 3,
+    margin:'5px',
+    borderRadius: '15px',
+    background: '#e0e5ec',
+    boxShadow: '20px 20px 60px #bebebe, -20px -20px 60px #ffffff',
+    color: '#4a4a4a',
+  }
+};
+
+function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     const theme = createTheme({ palette: { primary: { main: '#ff545a' }, secondary: { main: '#1976d2' } } });
     const dispatch = useDispatch();
     const [whatchoose, setwhatchoose] = useState('');
@@ -23,8 +82,6 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
 
     const selectedData = whatchoose.toLocaleLowerCase();
     const cityData2 = locationChoose.toLocaleLowerCase();
-
- 
 
     const handleClick = () => {
         const checkValue = catagoriData.filter(item => item.name.toLocaleLowerCase() === selectedData);
@@ -52,23 +109,16 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
         });
     }, [selectedData, catagoriData]);
 
-
     return (
-        <div className='Main-Box-outter' style={{ paddingTop: '10vh', display: 'flex' }}>
-            <Box className='Main-Box' sx={{ display: 'flex' }}>
+        <div style={neoStyles.mainContainer}>
+            <Box sx={neoStyles.searchContainer}>
                 {isAlert && (
-                    <Stack sx={{
-                        position: 'fixed',
-                        top: "60%",
-                        left: "40%",
-                        zIndex: 9999,
-                        padding: 2
-                    }} spacing={2}>
+                    <Stack sx={neoStyles.alert} spacing={2}>
                         <Alert severity="error">Please select a valid Data</Alert>
                     </Stack>
                 )}
-                <ThemeProvider className='Theme-Provider' theme={theme}>
-                    <Stack className='Main-Stack' id="stack-style-text" style={{ display: 'flex', flexDirection: 'row' }}>
+                <ThemeProvider theme={theme}>
+                    <Stack direction="row" spacing={1}>
                         <Autocomplete
                             id='AutoComplete-choose-what-to'
                             freeSolo
@@ -82,11 +132,9 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
                                     id="choose-what-to"
                                     data_test_id="choose-what-to-data"
                                     sx={{
-                                        m: 0, width: '40ch',
-                                        backgroundColor: 'white', '& .MuiFilledInput-root': { backgroundColor: 'white' },
-                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: 'none' } },
-                                        borderTopLeftRadius: '5px',
-                                        borderBottomLeftRadius: '5px',
+                                        ...neoStyles.textField,
+                                        borderTopLeftRadius: '15px',
+                                        borderBottomLeftRadius: '15px',
                                     }}
                                     placeholder="Ex: Place, Food"
                                     slotProps={{
@@ -94,8 +142,12 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
                                             data_test_id: "choose-what-to-data",
                                             ...params.InputProps,
                                             type: 'search',
-                                            startAdornment: <div position="start" style={{ color: '#333333', paddingRight: '5px', fontWeight: 'bold' }}>What? </div>,
-                                            endAdornment: <FormatListBulletedIcon />
+                                            startAdornment: <div position="start" style={{ 
+                                              color: '#6b6b6b', 
+                                              paddingRight: '10px', 
+                                              fontWeight: 'bold'
+                                            }}>What? </div>,
+                                            endAdornment: <FormatListBulletedIcon sx={{ color: '#6b6b6b' }} />
                                         },
                                     }}
                                     onChange={handleData}
@@ -114,11 +166,9 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
                                     id="choose-location"
                                     {...params}
                                     sx={{
-                                        m: 0, width: '40ch',
-                                        backgroundColor: 'white', '& .MuiFilledInput-root': { backgroundColor: 'white' },
-                                        margin: '0', '& .MuiOutlinedInput-root': { '& fieldset': { border: 'none' } },
-                                        borderEndEndRadius: '5px',
-                                        borderTopRightRadius: '5px'
+                                        ...neoStyles.textField,
+                                        borderTopRightRadius: '15px',
+                                        borderBottomRightRadius: '15px',
                                     }}
                                     placeholder="Ex: New Delhi, Noida"
                                     slotProps={{
@@ -126,8 +176,12 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
                                             data_test_id: "choose-location-data",
                                             ...params.InputProps,
                                             type: 'search',
-                                            startAdornment: <div position="start" style={{ color: '#333333', fontWeight: 'bold', paddingRight: '5px' }}>Location</div>,
-                                            endAdornment: <GpsFixedIcon />
+                                            startAdornment: <div position="start" style={{ 
+                                              color: '#6b6b6b', 
+                                              fontWeight: 'bold', 
+                                              paddingRight: '10px'
+                                            }}>Location</div>,
+                                            endAdornment: <GpsFixedIcon sx={{ color: '#6b6b6b' }} />
                                         },
                                     }}
                                     onChange={handleData2}
@@ -139,13 +193,32 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
                 <HeroButton
                     handleClick={handleClick}
                     endIcon={<SearchIcon />}
-                    customMargin="34px"
+                    customMargin="0"
+                    customHeight="55px"
+                    sx={{
+                        borderRadius: '15px',
+                        background: '#e0e5ec',
+                        boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
+                        '&:active': {
+                            boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
+                        },
+                        color: '#ff545a',
+                        fontWeight: 'bold'
+                    }}
                 >
                     Search
                 </HeroButton>
                 <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
                     {finalValue.map((value) => (
-                        <Typography data_test_id={value} key={value} id={value} component="div" sx={{ p: 2 }}>{value}</Typography>
+                        <Typography 
+                            data_test_id={value} 
+                            key={value} 
+                            id={value} 
+                            component="div" 
+                            sx={neoStyles.popover}
+                        >
+                            {value}
+                        </Typography>
                     ))}
                 </CustomPopOver>
             </Box>
@@ -153,4 +226,4 @@ function HeroPageTextArea( { catagoriData, isAlert,setIsAlert } ) {
     );
 }
 
-export default HeroPageTextArea;
+export default HeroPageTextArea;    

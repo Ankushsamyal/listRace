@@ -4,9 +4,10 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { connectToDb } = require('./connect.cjs'); 
-const authRoutes = require('./routes/authRoutes'); 
-const apiRoutes = require('./routes/apiRoutes'); 
+const { connectToDb } = require('./connect.cjs');
+const authRoutes = require('./routes/authRoutes');
+const apiRoutes = require('./routes/apiRoutes');
+const bookmarkRoutes = require('./routes/bookmarkRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -39,6 +40,7 @@ connectToDb((err) => {
   // Routes
   app.use('/auth', authLimiter, authRoutes); // Protected with rate limiting
   app.use('/api', apiRoutes);
+  app.use('/api/bookmark', bookmarkRoutes);
 
   // Health check
   app.get('/', (req, res) => {

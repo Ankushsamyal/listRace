@@ -52,4 +52,17 @@ router.get('/login', async (req, res) => {
   }
 });
 
+router.get('/bookmark', async (req, res) => {
+  try {
+    const data = await getDb().collection('bookmark').find().toArray();
+    res.json(data);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch categories' });
+  }
+});
+
+
+
+
 module.exports = router;

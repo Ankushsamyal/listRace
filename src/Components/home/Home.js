@@ -3,7 +3,7 @@ import HeroPageTextArea from './pages/HeroPageTextArea';
 import Heroimage from '../../Images/images/welcome-hero/banner.jpg';
 import HeroCards from './pages/HeroCards';
 import 'animate.css';
-
+import TryTestingCount from './pages/TryTestingCount';
 const HeroMainBoxStyles = {
     height: '110vh',
     backgroundSize: 'cover',
@@ -93,8 +93,9 @@ function Home() {
                 <div style={HeroDescriptionStyles}>
                     Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
                 </div>
-                <React.Fragment>
+                <React.Fragment sx={{ display: 'flex',justifyItems: 'center'     }}>
                     <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert}  />
+                    {/* <TryTestingCount/> */}
                     <HeroCards catagoriData={catagoriData}   />
                 </React.Fragment>
             </div>

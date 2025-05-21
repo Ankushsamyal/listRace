@@ -23,9 +23,10 @@ const pageStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#e0e5ec',
+    background: 'white',
     marginTop: '20px',
-    paddingTop: '60px',
+    paddingTop: '70px',
+    paddingBottom: '50px'
   },
   container: {
     padding: '40px',

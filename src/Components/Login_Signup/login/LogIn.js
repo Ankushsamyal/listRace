@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {
@@ -15,6 +15,7 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import HeroButton from '../../../CommonComponents/HeroButton';
+import { AuthContext } from '../../../CommonComponents/AuthContext';
 
 const pageStyles = {
   root: {
@@ -22,9 +23,9 @@ const pageStyles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    background: '#e0e5ec',
+    background: 'white',
     marginTop: '20px',
-    paddingTop: '20px',
+    paddingTop: '30px',
   },
   container: {
     padding: '40px',
@@ -92,6 +93,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { setUser } = useContext(AuthContext);
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -121,9 +123,9 @@ const Login = () => {
         { email, password },
         { withCredentials: true }
       );
-
       if (response.data.token) {
         localStorage.setItem('authToken', response.data.token);
+        setUser(response.data.user);
       }
       navigate('/');
     } catch (err) {

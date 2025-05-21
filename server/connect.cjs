@@ -37,8 +37,12 @@ const connectToDb = async (callback) => {
     connection.client = client;
     connection.db = client.db('BlazBloom');
     
-    console.log('Successfully connected to MongoDB');
-    
+   console.log('✅ Successfully connected to MongoDB');
+
+    const collections = await client.db('BlazBloom').listCollections().toArray();
+console.log('📁 Available collections:', collections.map(c => c.name));
+
+
     // Add event listeners for connection issues
     client.on('serverClosed', (event) => {
       console.log('MongoDB connection closed:', event);
