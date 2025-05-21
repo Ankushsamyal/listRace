@@ -1,133 +1,151 @@
 import React from 'react';
-import { AppBar, Toolbar, Box, Divider, Grid2 } from '@mui/material';
+import { AppBar, Toolbar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
-import '../App.css'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GoogleIcon from '@mui/icons-material/Google';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import HeroButton from '../CommonComponents/HeroButton';
+
 const styles = {
-  richCharcoal: {
-    fontFamily: "'Arial', sans-serif",
+  container: {
+    background: '#e0e5ec',
+  },
+  navBar: {
+    background: '#e0e5ec',
+    borderRadius: '10px',
+  },
+  logo: {
+    fontFamily: "'Poppins', sans-serif",
     fontSize: '25px',
-    fontWeight: '900',
+    fontWeight: '700',
+    color: '#4d4d4d',
+    textShadow: `
+      2px 2px 4px rgba(163, 177, 198, 0.6),
+      -2px -2px 4px rgba(255, 255, 255, 0.8)
+    `,
+    padding: '8px 16px',
+    borderRadius: '10px',
+    background: '#e0e5ec',
+    boxShadow: `
+      inset 3px 3px 7px rgba(163, 177, 198, 0.6),
+      inset -3px -3px 7px rgba(255, 255, 255, 0.8)
+    `,
+  },
+  navLink: {
+    margin: '0 4px',
+    padding: '8px 16px',
+    borderRadius: '10px',
+    background: '#e0e5ec',
+    color: '#5a5a5a',
+    fontWeight: '500',
     textTransform: 'uppercase',
-    color: '#1F1F1F',
-    background: 'linear-gradient(145deg,rgb(106, 125, 207) 0%,rgb(37, 46, 101) 100%)',
-    WebkitBackgroundClip: 'text',
-    backgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    textShadow: '0px 0px 0px #B3B3B3, 1px -1px 0px #B3B3B3, 1.5px 1.5px 2px #000000, 2px 2px 3px rgba(0, 0, 0, 0.6)',
-    padding: '3px 8px',
-    borderRadius: '3px',
-    position: 'relative',
-    textAlign: 'center',
-    display: 'inline-block'
-  }
+    transition: 'all 0.2s ease',
+    //   5px 5px 10px rgba(163, 177, 198, 0.6),
+    //   -5px -5px 10px rgba(255, 255, 255, 0.8)
+    // `,
+    '&:hover': {
+      boxShadow: `
+        inset 3px 3px 5px rgba(163, 177, 198, 0.6),
+        inset -3px -3px 5px rgba(255, 255, 255, 0.8)
+      `,
+      color: 'red',
+      
+    },
+  },
+  socialIcon: {
+    background: '#e0e5ec',
+    borderRadius: '50%',
+    padding: '8px',
+    margin: '0 5px',
+    color: '#6a6a6a',
+    transition: 'all 0.2s ease',
+    boxShadow: `
+      5px 5px 10px rgba(163, 177, 198, 0.6),
+      -5px -5px 10px rgba(255, 255, 255, 0.8)
+    `,
+    '&:hover': {
+      boxShadow: `
+        inset 3px 3px 5px rgba(163, 177, 198, 0.6),
+        inset -3px -3px 5px rgba(255, 255, 255, 0.8)
+      `,
+    },
+  },
+  footer: {
+    background: '#e0e5ec',
+    color: '#6a6a6a',
+    padding: 4,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
 };
+
 const Navbar = ({ footerNav }) => {
-
-  return (<div>
-    <AppBar
-      elevation={footerNav ? 0 : 1}
-      style={{
-        position: !footerNav ? "fixed" : "static",
-        backgroundColor: 'white',
-        justifyItems: 'center',
-        height: footerNav ? "100px" : "80px",
-      }}
-    >
-      <Toolbar sx={{
-        height: '100%',
-        display: 'flex', justifyContent: 'space-between'
-      }}>
-        <Box className='logo' id='logo' sx={{ flexGrow: 1, paddingTop: '2px', marginLeft: '20px', fontSize: 'x-large', fontWeight: 'bold' }}>
-          <Link size="large" style={{ textDecoration: 'none', display: "flex" }} component={Link} to="/">
-            {/* <div style={{alignContent:'center',paddingLeft:'2px',color:'#F97316'}}>BlazeBloom</div> */}
-
-            <h1 style={styles.richCharcoal}>BlazeBloom</h1>
-
-          </Link>
-        </Box>
-        <Box sx={{ display: 'flex' }}>
-          <Link
-            style={{ alignContent: 'center' }}
-            className='nav-bar' to="/"
-          >HOME</Link>
-          <Link style={{ alignContent: 'center' }}
-            className='nav-bar' to="/explore"
-          >EXPLORE</Link>
-          <Link
-            style={{ alignContent: 'center' }}
-            className='nav-bar' to="/review"
-          >REVIEW</Link>
-          <Link
-            style={{ alignContent: 'center' }}
-            className='nav-bar' to="/blog"
-          >BLOG</Link>
-          <Link
-            style={{ alignContent: 'center' }}
-            className='nav-bar' to="/contact"
-          >CONTACT</Link>
-          <Link
-            style={{ alignContent: 'center' }}
-            className='nav-bar' to="/login"
-          >
-            <HeroButton>login</HeroButton>
-          </Link>
-        </Box>
-      </Toolbar>
-    </AppBar>
-
-    {/* footernav */}
-
-    {footerNav ? <div>
-      <Divider variant="middle" />
-      <Box
+  return (
+    <div style={styles.container}>
+      <AppBar
+        position={!footerNav ? 'fixed' : 'static'}
+        elevation={0}
         sx={{
-          padding: 4,
-          color: '#464646',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
+          background: 'transparent',
+          boxShadow: 'none',
+          height: footerNav ? '100px' : '80px',
         }}
       >
-        <Box variant="body2" sx={{ fontSize: '14px', color: '#a5adb3' }}>
-          © Copyright. Designed and developed by Themesine
-        </Box>
-        <Grid2 container spacing={2}>
-          <Grid2 item sx={{ alignContent: 'center' }}>
-            <Box variant="body2" sx={{ fontSize: '14px' }}>
-              <PhoneIcon sx={{ fontSize: '16px', marginRight: 1, color: '#a5adb3' }} />
+        <Toolbar sx={{ height: '100%', display: 'flex', justifyContent: 'space-between', ...styles.navBar }}>
+          <Box sx={{ flexGrow: 1, ml: 2 }}>
+            <Link to="/" style={{ textDecoration: 'none', display: 'flex' }}>
+              <Box component="h1" sx={styles.logo}>
+                BlazeBloom
+              </Box>
+            </Link>
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            {['/', '/explore', '/review', '/blog', '/contact'].map((path) => (
+              <Link key={path} to={path} style={{ textDecoration: 'none' }}>
+                <Box sx={styles.navLink}>
+                  {path === '/' ? 'HOME' : path.slice(1).toUpperCase()}
+                </Box>
+              </Link>
+            ))}
+            <Link to="/login" style={{ textDecoration: 'none', marginLeft: '16px' }}>
+              <HeroButton >LOGIN</HeroButton>
+            </Link>
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+      {footerNav && (
+        <Box sx={styles.footer}>
+          {/* <Divider variant="middle" sx={{ background: '#d1d9e6' }} /> */}
+          <Box sx={{ fontSize: '14px', color: '#8a8a8a' }}>
+            © Copyright. Designed and developed by Ankush Samyal
+          </Box>
+
+          <Box sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', mr: 3 }}>
+              <PhoneIcon sx={{ fontSize: '16px', mr: 1 }} />
               +91 90765467808
             </Box>
-          </Grid2>
-          <Grid2 item>
-            <a href="https://www.facebook.com" rel="noreferrer" target="_blank" color="#a5adb3">
-              <FacebookIcon sx={{ color: 'rgb(0 0 0 / 54%)' }} />
-            </a>
-          </Grid2>
-          <Grid2 item>
-            <a href="https://www.google.com" rel="noreferrer" target="_blank" color="#a5adb3">
-              <GoogleIcon sx={{ color: 'rgb(0 0 0 / 54%)' }} />
-            </a>
-          </Grid2>
-          <Grid2 item>
-            <a href="https://www.youtube.com" rel="noreferrer" target="_blank" color="#a5adb3">
-              <YouTubeIcon sx={{ color: 'rgb(0 0 0 / 54%)' }} />
-            </a>
-          </Grid2>
-          <Grid2 item>
-            <a href="https://www.linkedin.com" rel="noreferrer" target="_blank" color="#a5adb3">
-              <LinkedInIcon sx={{ color: 'rgb(0 0 0 / 54%)' }} id="linkedin-icon" />
-            </a>
-          </Grid2>
-        </Grid2>
-      </Box>
-    </div> : ''}
-  </div>
+            <Box sx={{ display: 'flex' }}>
+              {[
+                { icon: <FacebookIcon />, url: 'https://www.facebook.com' },
+                { icon: <GoogleIcon />, url: 'https://www.google.com' },
+                { icon: <YouTubeIcon />, url: 'https://www.youtube.com' },
+                { icon: <LinkedInIcon />, url: 'https://www.linkedin.com' },
+              ].map((social, index) => (
+                <a key={index} href={social.url} target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
+                  <Box sx={styles.socialIcon}>{social.icon}</Box>
+                </a>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+      )}
+    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import Review from './Components/review/Review';
 import Howitworks from './Components/how-it-works/Page';
 import LoginPage from './Components/Login_Signup/login/LogIn';
 import Signup from './Components/Login_Signup/signup/SignUp';
+import { AuthProvider } from './CommonComponents/AuthContext';
 
 function ScrollToTop() {
   const pathname  = useLocation();
@@ -66,7 +67,9 @@ function App() {
   return (
 
     <div >
+      <AuthProvider>
      <RouterProvider router={router}/>
+      </AuthProvider>
      
     </div>
   );
