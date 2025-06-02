@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { AppBar, Toolbar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -7,6 +7,9 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import HeroButton from '../CommonComponents/HeroButton';
+import { AuthContext } from '../CommonComponents/AuthContext';
+import UserProfile from '../Components/Login_Signup/Profile/UserProfile';
+
 
 const styles = {
   container: {
@@ -83,6 +86,7 @@ const styles = {
 };
 
 const Navbar = ({ footerNav }) => {
+   const { user } = useContext(AuthContext);
   return (
     <div style={styles.container}>
       <AppBar
@@ -111,9 +115,10 @@ const Navbar = ({ footerNav }) => {
                 </Box>
               </Link>
             ))}
-            <Link to="/login" style={{ textDecoration: 'none', marginLeft: '16px' }}>
+            {(user ==null) ?<Link to="/login" style={{ textDecoration: 'none', marginLeft: '16px' }}>
               <HeroButton >LOGIN</HeroButton>
-            </Link>
+            </Link>:<UserProfile/>}
+            
           </Box>
         </Toolbar>
       </AppBar>

@@ -2,39 +2,70 @@ const express = require('express');
 const { getDb } = require('../connect.cjs');
 const router = express.Router();
 
-// POST /api/bookmark to save bookmarks
+// POST /api/bookmark to save or update bookmarks
 router.post('/', async (req, res) => {
     const { userId, bookmarks } = req.body;
-
-    // Check if the data is received correctly
     if (!userId || !bookmarks) {
-        return res.status(400).json({ error: 'Missing userId or bookmarks' });
+        return res.status(400).json({ error: 'Invalid or missing userId/bookmarks' });
     }
 
     try {
-        // Check if user already has bookmarks stored
-        const existingData = await getDb()
-            .collection('bookmarks')
-            .findOne({ userId: userId });
+        const db = getDb();
+        const collection = db.collection('bookmarks');
+
+        const existingData = await collection.findOne({ userId });
 
         if (existingData) {
-            // If bookmarks exist for the user, update the existing ones
-            const updatedData = await getDb().collection('bookmarks').updateOne(
-                { userId: userId },
-                { $set: { bookmarks: bookmarks } }
-            );
-            return res.json({ message: 'Bookmarks updated successfully', updatedData });
-        } else {
-            // If no bookmarks exist for the user, create a new document with bookmarks
-            const result = await getDb().collection('bookmarks').insertOne({
-                userId: userId,
-                bookmarks: bookmarks,
-            });
-            return res.json({ message: 'Bookmarks saved successfully', result });
+            const DbData = existingData.bookmarks || [];
+            if (DbData) {
+                const DefaultValue = bookmarks;
+                const result = await collection.updateOne(
+                    { userId },
+                    { $set: { bookmarks: DefaultValue } }
+                );
+                return res.status(200).json({
+                    message: 'Bookmarks inserted successfully',
+                    modifiedCount: result.modifiedCount,
+                    bookmarks: DefaultValue,
+                });
+            }
+            else {
+                const isDuplicate = DbData.some(item => item.id === bookmarks.id);
+                if (isDuplicate) {
+                    return res.status(200).json({
+                        message: 'Bookmark already exists, no update needed',
+                        bookmarks: DbData,
+                    });
+                }
+
+                const updatedBookmarks = [...DbData, bookmarks];
+
+                const result = await collection.updateOne(
+                    { userId },
+                    { $set: { bookmarks: updatedBookmarks } }
+                );
+
+                return res.status(200).json({
+                    message: 'Bookmarks updateeed successfully',
+                    modifiedCount: result.modifiedCount,
+                    bookmarks: updatedBookmarks,
+                });
+            }
         }
+        else {
+
+            const result = await collection.insertOne({ userId });
+
+            return res.status(201).json({
+                message: 'Bookmarks saved successfully',
+                insertedId: result.insertedId,
+                bookmarks,
+            });
+        }
+
     } catch (err) {
-        console.error('Error saving bookmarks:', err);
-        return res.status(500).json({ error: 'Failed to save bookmarks' });
+        console.error('Error saving/updating bookmarks:', err);
+        return res.status(500).json({ error: 'Failed to save or update bookmarks' });
     }
 });
 

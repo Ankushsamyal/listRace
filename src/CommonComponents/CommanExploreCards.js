@@ -24,7 +24,7 @@
             color: "red"
         },
     });
-    function ExploreCards({ data, setSaveBookmark, saveBookmark, flag, setAnchorEl,user }) {
+    function ExploreCards({ data, saveBookmark, flag,setSaveBookmark }) {
         const getBackgroundColor = (rating) => {
             if (rating >= 4.5) return 'green';
             else if (rating >= 3) return 'orange';
@@ -34,57 +34,26 @@
             window.open(imageUrl);
         }
 
-      const openBookmark = async (BookMarkData) => {
-    // Add bookmark to local state
+// Add a bookmark (only updates state)
+
+  const openBookmark = (BookMarkData) => {
     const updatedBookmarks = [...saveBookmark, BookMarkData];
     setSaveBookmark(updatedBookmarks);
+  };
 
-    // Send the updated list of bookmarks to the backend
-    try {
-        const response = await fetch('http://localhost:5000/api/bookmark', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-           body: JSON.stringify({ userId: user.id, bookmarks: updatedBookmarks })
-        });
-        
-        if (!response.ok) {
-            throw new Error('Failed to save bookmark');
-        }
-        const result = await response.json();
-        console.log(result); // Handle the response
-    } catch (error) {
-        console.error('Error saving bookmark:', error);
-    }
-};
-
-const clearBookmark = async (FindSaveBookmark) => {
-    // Remove bookmark from local state
+  // Remove a specific bookmark (only updates state)
+  const clearBookmark = (FindSaveBookmark) => {
     const updatedBookmarks = saveBookmark.filter((item) => item.id !== FindSaveBookmark.id);
     setSaveBookmark(updatedBookmarks);
+  };
 
-    // Send the updated list of bookmarks to the backend
-    try {
-        const response = await fetch('http://localhost:5000/api/bookmark', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ userId: 'yourUserId', bookmarks: updatedBookmarks }) // Replace 'yourUserId' with actual user ID
-        });
 
-        if (!response.ok) {
-            throw new Error('Failed to remove bookmark');
-        }
-        const result = await response.json();
-        console.log(result); // Handle the response
-    } catch (error) {
-        console.error('Error removing bookmark:', error);
-    }
-};
 
         return (
             <div className='E-Card-Main-Box'>
                 <Box className="e-Card-boxss" style={{
-                    display:flag ? 'flex' : 'grid',
-                    grid: flag ? '' : 'auto / auto auto auto',
+                    display:'grid',
+                    grid: flag ? 'auto / auto' : 'auto / auto auto auto',
                     padding: '40px',
                     gridGap: '40px',
                     justifyContent: 'space-evenly'
