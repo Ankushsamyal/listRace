@@ -124,6 +124,7 @@ const Login = () => {
         { withCredentials: true }
       );
       if (response.data.token) {
+        console.log(response.data.token,"login cred")
         localStorage.setItem('authToken', response.data.token);
         setUser(response.data.user);
       }

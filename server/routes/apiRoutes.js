@@ -52,15 +52,16 @@ router.get('/login', async (req, res) => {
   }
 });
 
-router.get('/bookmark', async (req, res) => {
+router.get('/fetch-bookmarks', async (req, res) => {
   try {
-    const data = await getDb().collection('bookmark').find().toArray();
+    const data = await getDb().collection('bookmarks').find().toArray();
     res.json(data);
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: 'Failed to fetch categories' });
+    res.status(500).json({ error: 'Failed to fetch bookmarks' });
   }
 });
+
 
 
 
