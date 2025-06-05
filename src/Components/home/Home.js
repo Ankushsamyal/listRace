@@ -3,7 +3,7 @@ import HeroPageTextArea from './pages/HeroPageTextArea';
 import Heroimage from '../../Images/images/welcome-hero/banner.jpg';
 import HeroCards from './pages/HeroCards';
 import 'animate.css';
-import TryTestingCount from './pages/TryTestingCount';
+import { Box } from '@mui/material';
 const HeroMainBoxStyles = {
     height: '110vh',
     backgroundSize: 'cover',
@@ -12,9 +12,6 @@ const HeroMainBoxStyles = {
     backgroundImage: `linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)), url(${Heroimage})`,
     justifyItems: 'center',
     marginTop: '12vh',
-    '@media (max-width: 768px)': {
-        height: '80vh',
-    },
 };
 
 const HeroTitleStyles = {
@@ -26,9 +23,6 @@ const HeroTitleStyles = {
     width: '118vh',
     textAlign: 'center',
     paddingTop: '100px',
-    '@media (max-width: 768px)': {
-        fontSize: '5vh',
-    },
 };
 
 const HeroDescriptionStyles = {
@@ -36,9 +30,6 @@ const HeroDescriptionStyles = {
     fontSize: '3vh',
     fontWeight: 600,
     padding: '40px',
-    '@media (max-width: 768px)': {
-        fontSize: '2vh',
-    },
 };
 
 function Home() {
@@ -93,11 +84,10 @@ function Home() {
                 <div style={HeroDescriptionStyles}>
                     Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
                 </div>
-                <React.Fragment sx={{ display: 'flex',justifyItems: 'center'     }}>
+                <Box >
                     <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert}  />
-                    {/* <TryTestingCount/> */}
                     <HeroCards catagoriData={catagoriData}   />
-                </React.Fragment>
+                </Box>
             </div>
         </div>
     );

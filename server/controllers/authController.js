@@ -232,9 +232,6 @@ const login = async (req, res) => {
 };
 
 const logout = (req, res) => {
-  // In a token-based auth system, logout is handled client-side
-  // by removing the token. For server-side tracking, you could
-  // implement token blacklisting here if needed.
   return res.json({
     success: true,
     message: 'Logout successful (client should remove token)'

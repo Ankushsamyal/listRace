@@ -76,7 +76,7 @@ useEffect(() => {
       }
     };
     saveBookmarksToAPI();
-},[saveBookmark]);
+},[saveBookmark,user]);
  
  
 

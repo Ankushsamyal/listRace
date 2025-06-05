@@ -94,7 +94,14 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
+  const [usertoken, setToken] = useState('');
 
+//  useEffect(() => {
+//   const token = localStorage.getItem('authToken',usertoken); 
+//   if (token) {
+//     setUser(true);
+//   }
+// }, []);
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);

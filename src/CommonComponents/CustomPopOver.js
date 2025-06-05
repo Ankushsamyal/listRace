@@ -3,10 +3,12 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 
 export default function CustomPopOver(props) {
-  const { children, anchorEl, setAnchorEl, } = props
-  const handleClose = () => { setAnchorEl(false) };
+  const { children, anchorEl, setAnchorEl } = props;
+  const handleClose = () => { setAnchorEl(null); };  
+
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
+
   return (
     <div>
       <Popover
@@ -30,9 +32,8 @@ export default function CustomPopOver(props) {
           overflow: "auto",
         }}
       >
-        <Typography>{children}</Typography>
+        {children}
       </Popover>
     </div>
   );
 }
-

@@ -8,15 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import CustomPopOver from '../../../CommonComponents/CustomPopOver';
 import SearchIcon from '@mui/icons-material/Search';
 import HeroButton from '../../../CommonComponents/HeroButton';
+import { selectFinalValue } from '../../redux/slice/counterSlice';
 
-// Neomorphic styles
 const neoStyles = {
   mainContainer: {
     paddingTop: '5vh',
     display: 'flex',
     justifyContent: 'center',
-    // background: '#e0e5ec',
-    // minHeight: '100vh',
     width: '100%'
   },
   searchContainer: {
@@ -26,8 +24,6 @@ const neoStyles = {
     flexDirection: { xs: 'column', sm: 'row' },
     padding: '20px',
     borderRadius: '20px',
-    // background: '#e0e5ec',
-    // boxShadow: '20px 20px 60px #bebebe, -20px -20px 60px #ffffff',
   },
   textField: {
     '& .MuiOutlinedInput-root': {
@@ -46,7 +42,7 @@ const neoStyles = {
     '& .MuiInputBase-input': { 
       color: '#4a4a4a',
     },
-    width: '40ch', // Increased from 40ch to 60ch
+    width: '40ch',
     margin: '0'
   },
   alert: {
@@ -75,7 +71,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     const [locationChoose, setlocationChoose] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [AutomaticLocations, setAutomaticLocations] = useState([]);
-    const finalValue = useSelector((state) => state.counter.finalValue || []);
+    const finalValue = useSelector(selectFinalValue);
 
     const handleData = (event) => { setwhatchoose(event.target.value); };
     const handleData2 = (event) => { setlocationChoose(event.target.value); };
@@ -83,7 +79,8 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     const selectedData = whatchoose.toLocaleLowerCase();
     const cityData2 = locationChoose.toLocaleLowerCase();
 
-    const handleClick = () => {
+    // FIXED: accept event to set anchorEl properly
+    const handleClick = (event) => {
         const checkValue = catagoriData.filter(item => item.name.toLocaleLowerCase() === selectedData);
         if (checkValue.length <= 0) {
             setIsAlert(true);
@@ -92,7 +89,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
             if (filterValue && filterValue.items.length > 0) {
                 setIsAlert(false);
                 dispatch(incrementByAmount(filterValue.items));
-                setAnchorEl(true);
+                setAnchorEl(event.currentTarget);  // <-- Here: anchorEl must be an element, NOT true
             } else {
                 setIsAlert(true);
                 dispatch(incrementByAmount(null));
@@ -142,11 +139,15 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                                             data_test_id: "choose-what-to-data",
                                             ...params.InputProps,
                                             type: 'search',
-                                            startAdornment: <div position="start" style={{ 
-                                              color: '#6b6b6b', 
-                                              paddingRight: '10px', 
-                                              fontWeight: 'bold'
-                                            }}>What? </div>,
+                                            startAdornment: (
+                                                <span style={{ 
+                                                  color: '#6b6b6b', 
+                                                  paddingRight: '10px', 
+                                                  fontWeight: 'bold' 
+                                                }}>
+                                                  What? 
+                                                </span>
+                                            ),
                                             endAdornment: <FormatListBulletedIcon sx={{ color: '#6b6b6b' }} />
                                         },
                                     }}
@@ -176,11 +177,15 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                                             data_test_id: "choose-location-data",
                                             ...params.InputProps,
                                             type: 'search',
-                                            startAdornment: <div position="start" style={{ 
-                                              color: '#6b6b6b', 
-                                              fontWeight: 'bold', 
-                                              paddingRight: '10px'
-                                            }}>Location</div>,
+                                            startAdornment: (
+                                                <span style={{ 
+                                                  color: '#6b6b6b', 
+                                                  fontWeight: 'bold', 
+                                                  paddingRight: '10px' 
+                                                }}>
+                                                  Location
+                                                </span>
+                                            ),
                                             endAdornment: <GpsFixedIcon sx={{ color: '#6b6b6b' }} />
                                         },
                                     }}
@@ -190,8 +195,9 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                         />
                     </Stack>
                 </ThemeProvider>
+                {/* FIXED: pass event onClick to handleClick */}
                 <HeroButton
-                    handleClick={handleClick}
+                    handleClick={(event) => handleClick(event)}
                     endIcon={<SearchIcon />}
                     customMargin="0"
                     customHeight="55px"
@@ -209,16 +215,15 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                     Search
                 </HeroButton>
                 <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
-                    {finalValue.map((value) => (
-                        <Typography 
+                   {finalValue?.map((value) => (
+                        <Box 
                             data_test_id={value} 
                             key={value} 
                             id={value} 
-                            component="div" 
                             sx={neoStyles.popover}
                         >
                             {value}
-                        </Typography>
+                        </Box>
                     ))}
                 </CustomPopOver>
             </Box>
@@ -226,4 +231,4 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     );
 }
 
-export default HeroPageTextArea;    
+export default HeroPageTextArea;

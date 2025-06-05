@@ -2,15 +2,18 @@ import React, { useContext, useState } from 'react';
 import { Button, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { AuthContext } from '../../../CommonComponents/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserProfile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const { setUser } = useContext(AuthContext);
+   const navigate = useNavigate();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -25,8 +28,7 @@ setUser(null);
 
   const handleProfile = () => {
     handleClose();
-    // If you want to show the profile page, you could trigger state/UI updates
-    console.log('Profile clicked');
+   navigate('/profile');
   };
 
   return (
@@ -37,9 +39,7 @@ setUser(null);
         startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>N</Avatar>}
         endIcon={<ArrowDropDownIcon />}
         sx={{ textTransform: 'none' }}
-      >
-        {/* Optional username */}
-      </Button>
+      />
 
       <Menu
         anchorEl={anchorEl}
