@@ -1,86 +1,101 @@
 import React, { useContext, useEffect, useState } from 'react';
-import ExploreCards from '../../CommonComponents/CommanExploreCards';
-import CustomPopOver from '../../CommonComponents/CustomPopOver';
+import ExploreCards from '../../commonComponents/ExplorePageCards';
+import CustomPopOver from '../../commonComponents/PopOver';
 import { Skeleton, Box, Stack } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { AuthContext } from '../../CommonComponents/AuthContext';
+import { AuthContext } from '../../commonComponents/AuthProvider';
+import { fetchBookmarks, fetchExplore, PostBookmark } from '../../API/ApiService';
 
 function Explore() {
   const [exploreData, setExploreData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setIsAlert] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [flag, setFlag] = useState(true);
   const { user } = useContext(AuthContext);
   const [saveBookmark, setSaveBookmark] = useState([]);
-  // Fetch explore data
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const res = await fetch('http://localhost:5000/api/explore');
-        const data = await res.json();
-        setExploreData(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+ 
+useEffect(() => {
+  const fetchExploreData = async () => {
+    try {
+      setLoading(false);
+      setIsAlert(null);
+      const exploreData = await fetchExplore();
+      setExploreData(exploreData);
+    } catch (err) {
+      console.error('Error fetching explore data:', err);
+    }
+  };
+
+  fetchExploreData();
+}, []); 
+// This useEffect depends on user
+useEffect(() => {
+  if (!user) return;
+
+  const fetchUserData = async () => {
+    try {
+      const bookmarksData = await fetchBookmarks();
+      const userBookmarks = bookmarksData.find(item => item.userId === user.id);
+
+      if (userBookmarks) {
+        setSaveBookmark(userBookmarks.bookmarks);
       }
-    };
-    fetchData();
-  }, []);
+    } catch (err) {
+      console.error('Error fetching bookmarks:', err);
+      setIsAlert(err instanceof Error ? err.message : 'Unknown error');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchUserData();
+}, [user]);
 
 
-    // Fetch user's bookmarks
-  useEffect(() => {
-     if (!user ) return;
-      const fetchBookmarks = async () => {
-        try { 
-          const res = await fetch(`http://localhost:5000/api/fetch-bookmarks`);
-          const data = await res.json();
-          const findData = data.find((item) => item.userId === user.id);
-          if(findData){
-            setSaveBookmark(findData.bookmarks);
-          }
-        
-        } catch (err) {
-          console.error('Error fetching bookmarks:', err);
-        }
-      };
-      fetchBookmarks();
-    
-  }, [user]);
+
+
+  // Fetch user's bookmarks
+  // useEffect(() => {
+  //   if (!user) return;
+  //   const fetchBookmarks = async () => {
+  //     try {
+  //       const res = await fetch(`http://localhost:5000/api/fetch-bookmarks`);
+  //       const data = await res.json();
+  //       const findData = data.find((item) => item.userId === user.id);
+  //       if (findData) {
+  //         setSaveBookmark(findData.bookmarks);
+  //       }
+
+  //     } catch (err) {
+  //       console.error('Error fetching bookmarks:', err);
+  //     }
+  //   };
+  //   fetchBookmarks();
+
+  // }, [user]);
 
   // post bookmarks data with backend
 
 useEffect(() => {
-  if (!user || !user.id) return;
-  const saveBookmarksToAPI = async () => {
+    if (!user || !user.id) return;
 
-      try {
-        const res = await fetch('http://localhost:5000/api/bookmark', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: user.id, bookmarks: saveBookmark })
-        });
-
-        if (!res.ok) {
-          throw new Error(`Failed to save bookmarks: ${res.status}`);
+    const syncBookmarks = async () => {
+        try {
+            const result = await PostBookmark(user.id, saveBookmark);
+            console.log('Bookmarks synced:', result);
+        } catch (err) {
+            console.error('Error syncing bookmarks:', err);
         }
-
-        const result = await res.json();
-        console.log('Bookmarks synced:', result);
-      } catch (err) {
-        console.error('Error syncing bookmarks:', err);
-      }
     };
-    saveBookmarksToAPI();
-},[saveBookmark,user]);
- 
- 
 
-  
+    syncBookmarks();
+}, [saveBookmark, user]);
+
+
+
+
 
   // Clear all bookmarks
   const clearAllBookmarks = () => {

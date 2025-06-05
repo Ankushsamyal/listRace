@@ -1,16 +1,17 @@
+
 import React, { useLayoutEffect } from 'react';
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom';
+import Home from './components/home/HomePage';
+import Signup from './Login_Signup/signup/SignUp';
+import Blogpage from './components/blog/HomePage';
+import Howitworks from './components/how-it-works/HowItWork';
+import Explore from './components/explore/ExplorePage';
+import Review from './components/review/ReviewPage';
+import Contact from './components/contact/ContactPage';
+import { AuthProvider } from './commonComponents/AuthProvider';
+import ProfilePage from './Login_Signup/profile Page/ProfilePages';
 import Navbar from './navbar/nabar';
-import Home from './Components/home/Home';
-import Contact from './Components/contact/Contact';
-import Blogpage from './Components/blog/Blog';
-import Explore from './Components/explore/Explore';
-import Review from './Components/review/Review';
-import Howitworks from './Components/how-it-works/Page';
-import LoginPage from './Components/Login_Signup/login/LogIn';
-import Signup from './Components/Login_Signup/signup/SignUp';
-import { AuthProvider } from './CommonComponents/AuthContext';
-import ProfilePage from './Components/Login_Signup/profile Page/ProfilePage';
+import Login from './Login_Signup/login/LogInPage';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -23,7 +24,7 @@ function ScrollToTop() {
 function NavigationWrapper({ children }) {
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <ScrollToTop />
       {children}
       <Navbar footerNav={true} />
@@ -40,7 +41,7 @@ function App() {
       { path: '/review', element: <NavigationWrapper><Review /></NavigationWrapper> },
       { path: '/blog', element: <NavigationWrapper><Blogpage /></NavigationWrapper> },
       { path: '/contact', element: <NavigationWrapper><Contact /></NavigationWrapper> },
-      { path: '/login', element: <NavigationWrapper><LoginPage /></NavigationWrapper> },
+      { path: '/login', element: <NavigationWrapper><Login /></NavigationWrapper> },
       { path: '/signup', element: <NavigationWrapper><Signup /></NavigationWrapper> },
       { path: '/profile', element: <NavigationWrapper><ProfilePage /></NavigationWrapper> },
     ],

@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Autocomplete, Box, Stack, TextField, Typography } from '@mui/material';
+import { Alert, Autocomplete, Box, Stack, TextField } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import { incrementByAmount } from '../../redux/slice/counterSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import CustomPopOver from '../../../CommonComponents/CustomPopOver';
 import SearchIcon from '@mui/icons-material/Search';
-import HeroButton from '../../../CommonComponents/HeroButton';
-import { selectFinalValue } from '../../redux/slice/counterSlice';
+import { incrementByAmount, selectFinalValue } from '../../../redux/slice/CounterSlice';
+import CustomPopOver from '../../../commonComponents/PopOver';
+import HeroButton from '../../../commonComponents/MainButton';
+ 
 
 const neoStyles = {
   mainContainer: {

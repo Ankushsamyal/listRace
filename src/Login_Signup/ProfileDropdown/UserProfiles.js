@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { Button, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
-import { AuthContext } from '../../../CommonComponents/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../commonComponents/AuthProvider';
 
 export default function UserProfile() {
   const [anchorEl, setAnchorEl] = useState(null);

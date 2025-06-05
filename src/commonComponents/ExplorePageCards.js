@@ -7,7 +7,7 @@
     import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
     import CloseIcon from '@mui/icons-material/Close';
     import BookmarkIcon from '@mui/icons-material/Bookmark';
-    import '../Components/explore/style.css';
+    import '../components/explore/style.css';
 
     const iconStyle = (valuedata) => ({
         fontSize: 'large',

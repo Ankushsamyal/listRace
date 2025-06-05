@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import {
   Container,
   Box,
@@ -14,8 +13,9 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import HeroButton from '../../../CommonComponents/HeroButton';
-import { AuthContext } from '../../../CommonComponents/AuthContext';
+import { AuthContext } from '../../commonComponents/AuthProvider';
+import HeroButton from '../../commonComponents/MainButton';
+import { loginUser } from '../../API/ApiService';
 
 const pageStyles = {
   root: {
@@ -94,7 +94,6 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
-  const [usertoken, setToken] = useState('');
 
 //  useEffect(() => {
 //   const token = localStorage.getItem('authToken',usertoken); 
@@ -124,26 +123,21 @@ const Login = () => {
       return;
     }
 
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/auth/login', 
-        { email, password },
-        { withCredentials: true }
-      );
-      if (response.data.token) {
-        console.log(response.data.token,"login cred")
-        localStorage.setItem('authToken', response.data.token);
-        setUser(response.data.user);
-      }
-      navigate('/');
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                         err.response?.data?.error || 
-                         'Login failed. Please try again.';
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
+      try {
+    const data = await loginUser(email, password);
+
+    if (data.token) {
+      console.log(data.token, "login cred");
+      localStorage.setItem('authToken', data.token);
+      setUser(data.user);
     }
+
+    navigate('/');
+  } catch (err) {
+    setError(err); 
+  } finally {
+    setLoading(false);
+  }
   };
 
   const handleSignUp = () => {

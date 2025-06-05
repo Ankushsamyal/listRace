@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import HeroPageTextArea from './pages/HeroPageTextArea';
-import Heroimage from '../../Images/images/welcome-hero/banner.jpg';
+import Heroimage from '../../images/images/welcome-hero/banners.jpg';
 import HeroCards from './pages/HeroCards';
 import 'animate.css';
 import { Box } from '@mui/material';
+import { fetchCategories } from '../../API/ApiService';
 const HeroMainBoxStyles = {
     height: '110vh',
     backgroundSize: 'cover',
@@ -40,40 +41,15 @@ function Home() {
         const fetchData = async () => {
             try {
                 setIsAlert(false);
-
-                const categoriesResponse = await fetch(`http://localhost:5000/api/categories`);
-
-                if (!categoriesResponse.ok) {
-                    throw new Error(`HTTP error! status: ${categoriesResponse.status}`);
-                }
-
-                const categoriesData = await categoriesResponse.json();
-
-
-                // Validate data structure if needed
-                if (!categoriesData) {
-                    throw new Error('Received empty or invalid data');
-                }
-
-
-                setcatagoriData(categoriesData[0].categories);
+                const categories = await fetchCategories();
+                setcatagoriData(categories);
             } catch (err) {
-                setIsAlert(err instanceof Error ? err.message : 'An unknown error occurred');
-                // Consider adding error logging here
-                console.error('Fetch error:', err);
-            } finally {
-                
+                setIsAlert(err);
+                console.error('API error:', err);
             }
         };
 
-        // Add cleanup function to abort fetch if component unmounts
-        const abortController = new AbortController();
-
         fetchData();
-
-        return () => {
-            abortController.abort();
-        };
     }, []);
     return (
         <div style={{ height: '160vh', backgroundColor: 'whitesmoke' }}>

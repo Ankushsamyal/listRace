@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Popover from '@mui/material/Popover';
-import Typography from '@mui/material/Typography';
 
 export default function CustomPopOver(props) {
   const { children, anchorEl, setAnchorEl } = props;
