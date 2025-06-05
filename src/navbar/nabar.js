@@ -6,9 +6,9 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import HeroButton from '../CommonComponents/HeroButton';
-import { AuthContext } from '../CommonComponents/AuthContext';
-import UserProfile from '../Components/Login_Signup/Profile/UserProfile';
+import HeroButton from '../commonComponents/MainButton';
+import { AuthContext } from '../commonComponents/AuthProvider';
+import UserProfile from '../Login_Signup/ProfileDropdown/UserProfiles';
 
 
 const styles = {

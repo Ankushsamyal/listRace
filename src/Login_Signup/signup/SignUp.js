@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import {
   Container,
   Box,
@@ -14,7 +13,8 @@ import {
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import HeroButton from '../../../CommonComponents/HeroButton';
+import HeroButton from '../../commonComponents/MainButton';
+import { signupUser } from '../../API/ApiService';
 
 
 const pageStyles = {
@@ -109,47 +109,42 @@ const Signup = () => {
     return password.length >= minLength && hasUpperCase && hasNumber;
   };
 
-  const handleSignup = async (e) => {
-    e?.preventDefault();
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
-      return;
+ const handleSignup = async (e) => {
+  e?.preventDefault();
+
+  if (!validateEmail(email)) {
+    setError('Please enter a valid email address');
+    return;
+  }
+
+  if (!validatePassword(password)) {
+    setError('Password must be 8+ characters with at least one uppercase letter and one number');
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setError('Passwords do not match.');
+    return;
+  }
+
+  setLoading(true);
+  setError('');
+
+  try {
+    const data = await signupUser(email, password, confirmPassword);
+
+    if (data.token) {
+      localStorage.setItem('authToken', data.token);
     }
 
-    if (!validatePassword(password)) {
-      setError('Password must be 8+ characters with at least one uppercase letter and one number');
-      return;
-    }
+    navigate('/login');
+  } catch (err) {
+    setError(err);
+  } finally {
+    setLoading(false);
+  }
+};
 
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
-
-    setLoading(true);
-    setError('');
-
-    try {
-      const response = await axios.post(
-        'http://localhost:5000/auth/signup', 
-        { email, password, confirmPassword },
-        { withCredentials: true }
-      );
-      
-      if (response.data.token) {
-        localStorage.setItem('authToken', response.data.token);
-      }
-      
-      navigate('/login');
-    } catch (err) {
-      const errorMessage = err.response?.data?.message || 
-                         err.response?.data?.error || 
-                         'Signup failed. Please try again.';
-      setError(errorMessage);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   const handleSignIn = () => {
     navigate('/login');
