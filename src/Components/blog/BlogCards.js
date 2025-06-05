@@ -8,7 +8,7 @@ function BlogCards() {
         <div className='BlogCards-Main-box' style={{paddingTop:'30px'}}>
             <Box className="e-Card-box" >
                 {data && data.map(value => (
-                    <Card className='e-card' sx={{
+                    <Card key={value.id} className='e-card' sx={{
                         maxWidth: 280, borderRadius: '0.7',
                         '&:hover': { boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }
                     }}>
@@ -30,7 +30,7 @@ function BlogCards() {
                                     </div>
                                    
                                     <Divider orientation="vertical" flexItem />
-                                    <Typography className="e-hotel-price-lable" sx={{textTransform:'uppercase',color: 'text.secondary'}} component='body' fontSize={13}>
+                                    <Typography className="e-hotel-price-lable" sx={{textTransform:'uppercase',color: 'text.secondary'}} component='span' fontSize={13}>
                                         {value.date}
                                     </Typography>
                                 </Box>
