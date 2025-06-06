@@ -1,5 +1,5 @@
     import { Box, Button, Card, CardContent, CardMedia, Divider, Typography } from '@mui/material'
-    import React from 'react';
+    import React, { useContext } from 'react';
     import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
     import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
     import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
@@ -8,6 +8,7 @@
     import CloseIcon from '@mui/icons-material/Close';
     import BookmarkIcon from '@mui/icons-material/Bookmark';
     import '../components/explore/style.css';
+import { AuthContext } from './AuthProvider';
 
     const iconStyle = (valuedata) => ({
         fontSize: 'large',
@@ -25,6 +26,8 @@
         },
     });
     function ExploreCards({ data, saveBookmark, flag,setSaveBookmark }) {
+        
+          const { user } = useContext(AuthContext);
         const getBackgroundColor = (rating) => {
             if (rating >= 4.5) return 'green';
             else if (rating >= 3) return 'orange';
@@ -37,8 +40,12 @@
 // Add a bookmark (only updates state)
 
   const openBookmark = (BookMarkData) => {
+    if(!user) {
+        alert ("Login to save this place")
+    }
+    else{
     const updatedBookmarks = [...saveBookmark, BookMarkData];
-    setSaveBookmark(updatedBookmarks);
+    setSaveBookmark(updatedBookmarks);}
   };
 
   // Remove a specific bookmark (only updates state)

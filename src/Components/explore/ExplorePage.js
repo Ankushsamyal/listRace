@@ -15,43 +15,43 @@ function Explore() {
   const [flag, setFlag] = useState(true);
   const { user } = useContext(AuthContext);
   const [saveBookmark, setSaveBookmark] = useState([]);
- 
-useEffect(() => {
-  const fetchExploreData = async () => {
-    try {
-      setLoading(false);
-      setIsAlert(null);
-      const exploreData = await fetchExplore();
-      setExploreData(exploreData);
-    } catch (err) {
-      console.error('Error fetching explore data:', err);
-    }
-  };
 
-  fetchExploreData();
-}, []); 
-// This useEffect depends on user
-useEffect(() => {
-  if (!user) return;
-
-  const fetchUserData = async () => {
-    try {
-      const bookmarksData = await fetchBookmarks();
-      const userBookmarks = bookmarksData.find(item => item.userId === user.id);
-
-      if (userBookmarks) {
-        setSaveBookmark(userBookmarks.bookmarks);
+  useEffect(() => {
+    const fetchExploreData = async () => {
+      try {
+        setLoading(false);
+        setIsAlert(null);
+        const exploreData = await fetchExplore();
+        setExploreData(exploreData);
+      } catch (err) {
+        console.error('Error fetching explore data:', err);
       }
-    } catch (err) {
-      console.error('Error fetching bookmarks:', err);
-      setIsAlert(err instanceof Error ? err.message : 'Unknown error');
-    } finally {
-      setLoading(false);
-    }
-  };
+    };
 
-  fetchUserData();
-}, [user]);
+    fetchExploreData();
+  }, []);
+  // This useEffect depends on user
+  useEffect(() => {
+    if (!user) return;
+
+    const fetchUserData = async () => {
+      try {
+        const bookmarksData = await fetchBookmarks();
+        const userBookmarks = bookmarksData.find(item => item.userId === user.id);
+
+        if (userBookmarks) {
+          setSaveBookmark(userBookmarks.bookmarks);
+        }
+      } catch (err) {
+        console.error('Error fetching bookmarks:', err);
+        setIsAlert(err instanceof Error ? err.message : 'Unknown error');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
 
 
 
@@ -78,20 +78,20 @@ useEffect(() => {
 
   // post bookmarks data with backend
 
-useEffect(() => {
+  useEffect(() => {
     if (!user || !user.id) return;
 
     const syncBookmarks = async () => {
-        try {
-            const result = await PostBookmark(user.id, saveBookmark);
-            console.log('Bookmarks synced:', result);
-        } catch (err) {
-            console.error('Error syncing bookmarks:', err);
-        }
+      try {
+        const result = await PostBookmark(user.id, saveBookmark);
+        console.log('Bookmarks synced:', result);
+      } catch (err) {
+        console.error('Error syncing bookmarks:', err);
+      }
     };
 
     syncBookmarks();
-}, [saveBookmark, user]);
+  }, [saveBookmark, user]);
 
 
 
@@ -105,8 +105,13 @@ useEffect(() => {
 
   // Show bookmark popover
   const showBookmarkData = (event) => {
-    if (saveBookmark.length === 0) {
+    if (!user) {
+      alert("Please login first");
+      return
+    }
+    else if (saveBookmark.length === 0) {
       alert("No saved data found");
+      
     } else {
       setAnchorEl(event.currentTarget);
     }
