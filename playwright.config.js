@@ -13,9 +13,6 @@ module.exports = defineConfig({
     // },
   ],
 
-  // Configure the test reporter to generate an HTML report
-  reporter: [['html', { outputFolder: 'playwright-report' }]],  // HTML report in the 'playwright-report' folder
-
-  // Optional: Set the timeout and other test settings
-  timeout: 30000, // 30 seconds timeout for each test
+  reporter: [['html', { outputFolder: 'playwright-report' }]],  
+  timeout: 30000, 
 });

@@ -9,8 +9,8 @@ export default function CustomPopOver(props) {
   const id = open ? 'simple-popover' : undefined;
 
   return (
-    <div>
       <Popover
+      data_test_id="Search-Popover"
         id={id}
         open={open}
         anchorEl={anchorEl}
@@ -33,6 +33,5 @@ export default function CustomPopOver(props) {
       >
         {children}
       </Popover>
-    </div>
   );
 }

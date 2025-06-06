@@ -65,7 +65,7 @@ export const PostBookmark = async (userId, bookmarks) => {
 // src/api/api.js
 export const loginUser = async (email, password) => {
     try {
-      const response =  await api.post(API_URL.LOGIN, { email, password }, { withCredentials: true });
+      const response =  await api.post(`${API_URL.LOGIN}`, { email, password }, { withCredentials: true });
         return response.data;
     } catch (error) {
         throw error?.response?.data?.message || 

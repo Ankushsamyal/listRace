@@ -17,7 +17,8 @@ const styles = {
   },
   navBar: {
     background: '#e0e5ec',
-    borderRadius: '10px',
+    borderBottomRightRadius: '10px',
+    borderBottomLeftRadius: '10px',
   },
   logo: {
     fontFamily: "'Poppins', sans-serif",

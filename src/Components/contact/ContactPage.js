@@ -14,7 +14,7 @@ function Contact() {
     },
 }));
   return (
-    <div className='Blog-main-box' style={{backgroundColor:'#f8fafb',height:'70vh',paddingTop:'20vh'}}>
+    <div className='Blog-main-box' style={{backgroundColor:'#f8fafb',height:'70vh',paddingTop:'20vh',marginTop:'13vh'}}>
     <div className="Blog-lable">
       <h2 className='Blog-header'>
       do you want to add your business listing with us</h2>
