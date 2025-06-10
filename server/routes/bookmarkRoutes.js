@@ -5,7 +5,8 @@ const router = express.Router();
 // POST /api/bookmark to save or update bookmarks
 router.post('/', async (req, res) => {
     const { userId, bookmarks } = req.body;
-    if (!userId || !bookmarks) {
+
+    if (!bookmarks || !userId) {
         return res.status(400).json({ error: 'Invalid or missing userId/bookmarks' });
     }
 
@@ -13,53 +14,51 @@ router.post('/', async (req, res) => {
         const db = getDb();
         const collection = db.collection('bookmarks');
 
-        const existingData = await collection.findOne({ userId });
+        const existingEntry = await collection.findOne({ userId });
 
-        if (existingData) {
-            const DbData = existingData.bookmarks || [];
-            if (DbData) {
-                const DefaultValue = bookmarks;
+        if (existingEntry) {
+            const existingBookmarks = existingEntry.bookmarks || [];
+
+            if (existingBookmarks.length === 0) {
                 const result = await collection.updateOne(
                     { userId },
-                    { $set: { bookmarks: DefaultValue } }
+                    { $set: { bookmarks } }
                 );
+
                 return res.status(200).json({
                     message: 'Bookmarks inserted successfully',
                     modifiedCount: result.modifiedCount,
-                    bookmarks: DefaultValue,
+                    bookmarks
                 });
             }
-            else {
-                const isDuplicate = DbData.some(item => item.id === bookmarks.id);
-                if (isDuplicate) {
-                    return res.status(200).json({
-                        message: 'Bookmark already exists, no update needed',
-                        bookmarks: DbData,
-                    });
-                }
 
-                const updatedBookmarks = [...DbData, bookmarks];
+            const isBookmarkExist = existingBookmarks.some(b => b.id === bookmarks.id);
 
+            if (!isBookmarkExist) {
                 const result = await collection.updateOne(
                     { userId },
-                    { $set: { bookmarks: updatedBookmarks } }
+                    { $set: { bookmarks } }
                 );
 
                 return res.status(200).json({
-                    message: 'Bookmarks updateeed successfully',
+                    message: 'Bookmarks updated successfully',
                     modifiedCount: result.modifiedCount,
-                    bookmarks: updatedBookmarks,
+                    bookmarks
                 });
             }
-        }
-        else {
 
-            const result = await collection.insertOne({ userId });
+            return res.status(200).json({
+                message: 'Bookmark already exists. No update performed.',
+                bookmarks: existingBookmarks
+            });
+
+        } else {
+            const result = await collection.insertOne({ userId, bookmarks });
 
             return res.status(201).json({
                 message: 'Bookmarks saved successfully',
                 insertedId: result.insertedId,
-                bookmarks,
+                bookmarks
             });
         }
 

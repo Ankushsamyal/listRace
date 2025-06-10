@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { Button, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../commonComponents/AuthProvider';
 
 export default function UserProfile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const { setUser } = useContext(AuthContext);
    const navigate = useNavigate();
 
   const handleClick = (event) => {
@@ -22,7 +20,9 @@ export default function UserProfile() {
   const handleLogout = () => {
     handleClose();
    localStorage.removeItem('authToken');
-setUser(null);
+   localStorage.removeItem('userEmail');
+   localStorage.removeItem('userId');
+   navigate("/login")
     console.log('User has been logged out'); 
   };
 
@@ -36,7 +36,7 @@ setUser(null);
       <Button
         onClick={handleClick}
         color="primary"
-        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>N</Avatar>}
+        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>T</Avatar>}
         endIcon={<ArrowDropDownIcon />}
         sx={{ textTransform: 'none' }}
       />
