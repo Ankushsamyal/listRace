@@ -52,7 +52,7 @@ function Home() {
         fetchData();
     }, []);
     return (
-        <div style={{ height: '160vh', backgroundColor: 'whitesmoke' }}>
+        <div style={{ backgroundColor: 'whitesmoke' }}>
             <div className="Hero-Main-box" style={HeroMainBoxStyles}>
                 <div className={`animate__fadeInDown`} style={HeroTitleStyles}>
                     Best place to find and explore that all you need
@@ -60,11 +60,9 @@ function Home() {
                 <div style={HeroDescriptionStyles}>
                     Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
                 </div>
-                <Box >
-                    <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert}  />
-                    <HeroCards catagoriData={catagoriData}   />
-                </Box>
+                <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert} />
             </div>
+            <HeroCards catagoriData={catagoriData} />
         </div>
     );
 };

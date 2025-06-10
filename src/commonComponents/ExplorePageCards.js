@@ -1,5 +1,5 @@
     import { Box, Button, Card, CardContent, CardMedia, Divider, Typography } from '@mui/material'
-    import React, { useContext } from 'react';
+    import React from 'react';
     import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
     import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
     import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
@@ -8,7 +8,6 @@
     import CloseIcon from '@mui/icons-material/Close';
     import BookmarkIcon from '@mui/icons-material/Bookmark';
     import '../components/explore/style.css';
-import { AuthContext } from './AuthProvider';
 
     const iconStyle = (valuedata) => ({
         fontSize: 'large',
@@ -27,7 +26,7 @@ import { AuthContext } from './AuthProvider';
     });
     function ExploreCards({ data, saveBookmark, flag,setSaveBookmark }) {
         
-          const { user } = useContext(AuthContext);
+          const user = localStorage.getItem('userId')
         const getBackgroundColor = (rating) => {
             if (rating >= 4.5) return 'green';
             else if (rating >= 3) return 'orange';
@@ -40,17 +39,20 @@ import { AuthContext } from './AuthProvider';
 // Add a bookmark (only updates state)
 
   const openBookmark = (BookMarkData) => {
-    if(!user) {
-        alert ("Login to save this place")
-    }
+    if(user) {
+        const updatedBookmarks = [...saveBookmark, BookMarkData];
+        setSaveBookmark(updatedBookmarks);}
+    
     else{
-    const updatedBookmarks = [...saveBookmark, BookMarkData];
-    setSaveBookmark(updatedBookmarks);}
+        alert ("Login to save this place")}
   };
 
   // Remove a specific bookmark (only updates state)
   const clearBookmark = (FindSaveBookmark) => {
+    console.log("findsave book ", FindSaveBookmark)
+    console.log("savebookmark",saveBookmark)    
     const updatedBookmarks = saveBookmark.filter((item) => item.id !== FindSaveBookmark.id);
+    console.log("clear bookmark",updatedBookmarks)
     setSaveBookmark(updatedBookmarks);
   };
 
@@ -60,7 +62,7 @@ import { AuthContext } from './AuthProvider';
             <div className='E-Card-Main-Box'>
                 <Box className="e-Card-boxss" style={{
                     display:'grid',
-                    grid: flag ? 'auto / auto' : 'auto / auto auto auto',
+                    grid: flag ? 'auto' : 'auto / auto auto auto',
                     padding: '40px',
                     gridGap: '40px',
                     justifyContent: 'space-evenly'
@@ -86,7 +88,7 @@ import { AuthContext } from './AuthProvider';
                                             sx={PhotoiconStyle}
                                             onClick={() => { clearBookmark(valuedata) }}></CloseIcon>
                                         :
-                                        saveBookmark.some((item) => item.id === valuedata.id) ?
+                                        saveBookmark?.some((item) => item.id === valuedata.id) ?
                                             <BookmarkIcon
                                                 fontSize="small"
                                                 className="small-image"

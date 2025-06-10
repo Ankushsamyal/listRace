@@ -15,7 +15,7 @@ export const fetchCategories = async () => {
         const response = await api.get(`${API_URL.HOME}`);
         return response.data[0].categories;
     } catch (error) {
-        throw error?.response?.data?.message || error.message || 'Unknown error';
+        throw error?.response?.data?.message || error.message || 'API error';
     }
 };
 export const fetchExplore = async () => {
@@ -23,7 +23,7 @@ export const fetchExplore = async () => {
         const response = await api.get(`${API_URL.EXPLORE}`);
         return response.data;
     } catch (error) {
-        throw error?.response?.data?.message || error.message || 'Unknown error';
+        throw error?.response?.data?.message || error.message || 'API error';
     }
 };
 export const fetchBookmarks = async () => {
@@ -31,7 +31,7 @@ export const fetchBookmarks = async () => {
         const response = await api.get(`${API_URL.FETCH_BOOKMARKS}`);
         return response.data;
     } catch (error) {
-        throw error?.response?.data?.message || error.message || 'Unknown error';
+        throw error?.response?.data?.message || error.message || 'API error';
     }
 };
 
@@ -40,7 +40,7 @@ export const fetchBlog = async () => {
         const response = await api.get(`${API_URL.BLOG}`);
         return response.data;
     } catch (error) {
-        throw error?.response?.data?.message || error.message || 'Unknown error';
+        throw error?.response?.data?.message || error.message || 'API error';
     }
 };
 
@@ -57,7 +57,7 @@ export const PostBookmark = async (userId, bookmarks) => {
         return response.data;
 
     } catch (error) {
-        throw error?.response?.data?.message || error.message || 'Unknown error';
+        throw error?.response?.data?.message || error.message || 'API error';
     }
 };
 

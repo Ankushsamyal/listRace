@@ -4,6 +4,7 @@ import { Button, styled } from '@mui/material';
 function HeroButton({ children, handleClick, endIcon, Isdisabled, customMargin, customHeight }) {
     const NeomorphicButton = styled(Button)(({ theme }) => ({
         color: 'white',
+        width: 'fit-content',
         backgroundColor: '#f55f56',
         borderRadius: '15px',
         padding: '10px 24px',

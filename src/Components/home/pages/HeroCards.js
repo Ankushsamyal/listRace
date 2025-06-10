@@ -54,18 +54,16 @@ const dataItems = [
   }
 ];
 
-// Neomorphic styles
 const neoStyles = {
 
   mainContainer: {
-    paddingTop: '15vh',
-    display: 'flex',
-    justifyContent: 'center',
-    minHeight: '50vh',
-    width: '100%',
-    paddingBottom: '50px'
+    width: 'fit-content',
+    paddingBottom: '50px',  
   },
+
   gridContainer: {
+    position:'relative',
+    top:'-95px' ,
     display: 'grid',
     gridTemplateColumns: {
       xs: '1fr',
@@ -77,7 +75,7 @@ const neoStyles = {
     padding: '20px',
     maxWidth: '1400px',
     margin: '0 auto',
-    alignItems: 'flex-start' // Ensures cards fit content height
+    alignItems: 'flex-start',
   },
   card: {
     minWidth: 200,
@@ -149,7 +147,7 @@ function HeroCards({ catagoriData, loading, error }) {
   };
 
   return (
-    <Box sx={neoStyles.mainContainer}>
+    <div style={{display:'flex',alignItems:'center'}}>
       <Box sx={neoStyles.gridContainer}>
         {dataItems.map((value, index) => (
           <Card key={index} sx={neoStyles.card}>
@@ -181,7 +179,7 @@ function HeroCards({ catagoriData, loading, error }) {
           </Card>
         ))}
       </Box>
-    </Box>
+    </div>
   );
 }
 

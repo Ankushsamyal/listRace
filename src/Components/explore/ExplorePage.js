@@ -1,10 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ExploreCards from '../../commonComponents/ExplorePageCards';
 import CustomPopOver from '../../commonComponents/PopOver';
 import { Skeleton, Box, Stack } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { AuthContext } from '../../commonComponents/AuthProvider';
 import { fetchBookmarks, fetchExplore, PostBookmark } from '../../API/ApiService';
 
 function Explore() {
@@ -13,9 +12,11 @@ function Explore() {
   const [error, setIsAlert] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [flag, setFlag] = useState(true);
-  const { user } = useContext(AuthContext);
+  const user = localStorage.getItem('userId')
   const [saveBookmark, setSaveBookmark] = useState([]);
+  const [exploreLoaded, setExploreLoaded] = useState(false);
 
+  //first api to run
   useEffect(() => {
     const fetchExploreData = async () => {
       try {
@@ -24,25 +25,27 @@ function Explore() {
         const exploreData = await fetchExplore();
         setExploreData(exploreData);
       } catch (err) {
+         setLoading(true);
         console.error('Error fetching explore data:', err);
       }
     };
-
-    fetchExploreData();
+    fetchExploreData()
   }, []);
-  // This useEffect depends on user
+  
+  //then this will run
   useEffect(() => {
-    if (!user) return;
+    if (!user ) return;
 
     const fetchUserData = async () => {
       try {
         const bookmarksData = await fetchBookmarks();
-        const userBookmarks = bookmarksData.find(item => item.userId === user.id);
-
-        if (userBookmarks) {
+        const userBookmarks = bookmarksData.find(item => item.userId === user);
+        console.log("user bookmark data",userBookmarks)
+        if (userBookmarks.userId) {
           setSaveBookmark(userBookmarks.bookmarks);
         }
       } catch (err) {
+         setLoading(true);
         console.error('Error fetching bookmarks:', err);
         setIsAlert(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -53,44 +56,23 @@ function Explore() {
     fetchUserData();
   }, [user]);
 
-
-
-
-  // Fetch user's bookmarks
-  // useEffect(() => {
-  //   if (!user) return;
-  //   const fetchBookmarks = async () => {
-  //     try {
-  //       const res = await fetch(`http://localhost:5000/api/fetch-bookmarks`);
-  //       const data = await res.json();
-  //       const findData = data.find((item) => item.userId === user.id);
-  //       if (findData) {
-  //         setSaveBookmark(findData.bookmarks);
-  //       }
-
-  //     } catch (err) {
-  //       console.error('Error fetching bookmarks:', err);
-  //     }
-  //   };
-  //   fetchBookmarks();
-
-  // }, [user]);
-
-  // post bookmarks data with backend
-
+  // post bookmark mark
   useEffect(() => {
-    if (!user || !user.id) return;
-
-    const syncBookmarks = async () => {
-      try {
-        const result = await PostBookmark(user.id, saveBookmark);
+    if (user) {
+      const syncBookmarks = async () => {
+        try {
+        const result = await PostBookmark(user, saveBookmark);
         console.log('Bookmarks synced:', result);
-      } catch (err) {
-        console.error('Error syncing bookmarks:', err);
-      }
-    };
+        } catch (err) {
+          console.error('Error syncing bookmarks:', err);
+        }
+      };
 
-    syncBookmarks();
+      syncBookmarks();
+
+    }
+    else return;
+
   }, [saveBookmark, user]);
 
 
@@ -111,7 +93,7 @@ function Explore() {
     }
     else if (saveBookmark.length === 0) {
       alert("No saved data found");
-      
+
     } else {
       setAnchorEl(event.currentTarget);
     }
@@ -182,23 +164,23 @@ function Explore() {
       ) : (
         <>
           <ExploreCards
-            user={user}
             data={exploreData}
             setSaveBookmark={setSaveBookmark}
             saveBookmark={saveBookmark}
+            user={user}
           />
           <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
-            <div onClick={clearAllBookmarks}>
+            <div onClick={clearAllBookmarks} style={{display:'flex'}}>
               <h4>Clear All</h4>
-              <CancelIcon />
+              <CancelIcon style={{alignSelf:'center',display:'flex'}}/>
             </div>
             <ExploreCards
               setAnchorEl={setAnchorEl}
               data={saveBookmark}
               flag={flag}
               setFlag={setFlag}
-              setSaveBookmark={setSaveBookmark}
               saveBookmark={saveBookmark}
+              setSaveBookmark={setSaveBookmark}
             />
           </CustomPopOver>
         </>

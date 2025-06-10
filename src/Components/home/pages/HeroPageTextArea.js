@@ -8,22 +8,22 @@ import SearchIcon from '@mui/icons-material/Search';
 import { incrementByAmount, selectFinalValue } from '../../../redux/slice/CounterSlice';
 import CustomPopOver from '../../../commonComponents/PopOver';
 import HeroButton from '../../../commonComponents/MainButton';
- 
 
 const neoStyles = {
   mainContainer: {
     paddingTop: '5vh',
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection:'column',
     width: '100%'
   },
   searchContainer: {
     display: 'flex',
-    alignItems: 'center',
+    flexDirection:'column',
+    alignItems:'center',
     gap: '16px',
-    flexDirection: { xs: 'column', sm: 'row' },
     padding: '20px',
     borderRadius: '20px',
+    alignItem:'center'
   },
   textField: {
     '& .MuiOutlinedInput-root': {
@@ -89,7 +89,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
             if (filterValue && filterValue.items.length > 0) {
                 setIsAlert(false);
                 dispatch(incrementByAmount(filterValue.items));
-                setAnchorEl(event.currentTarget);  // <-- Here: anchorEl must be an element, NOT true
+                setAnchorEl(event.currentTarget); 
             } else {
                 setIsAlert(true);
                 dispatch(incrementByAmount(null));
@@ -109,6 +109,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     return (
         <div style={neoStyles.mainContainer}>
             <Box sx={neoStyles.searchContainer}>
+
                 {isAlert && (
                     <Stack sx={neoStyles.alert} spacing={2}>
                         <Alert severity="error">Please select a valid Data</Alert>
@@ -195,7 +196,6 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                         />
                     </Stack>
                 </ThemeProvider>
-                {/* FIXED: pass event onClick to handleClick */}
                 <HeroButton
                     handleClick={(event) => handleClick(event)}
                     endIcon={<SearchIcon />}

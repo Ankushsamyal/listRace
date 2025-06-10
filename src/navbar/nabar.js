@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { AppBar, Toolbar, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import FacebookIcon from '@mui/icons-material/Facebook';
@@ -7,7 +7,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import HeroButton from '../commonComponents/MainButton';
-import { AuthContext } from '../commonComponents/AuthProvider';
 import UserProfile from '../Login_Signup/ProfileDropdown/UserProfiles';
 
 
@@ -87,7 +86,8 @@ const styles = {
 };
 
 const Navbar = ({ footerNav }) => {
-   const { user } = useContext(AuthContext);
+const user = localStorage.getItem('userId')
+  
   return (
     <div style={styles.container}>
       <AppBar

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, {  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -13,7 +13,6 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import { AuthContext } from '../../commonComponents/AuthProvider';
 import HeroButton from '../../commonComponents/MainButton';
 import { loginUser } from '../../API/ApiService';
 
@@ -93,14 +92,7 @@ const Login = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
 
-//  useEffect(() => {
-//   const token = localStorage.getItem('authToken',usertoken); 
-//   if (token) {
-//     setUser(true);
-//   }
-// }, []);
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -129,7 +121,9 @@ const Login = () => {
     if (data.token) {
       console.log(data.token, "login cred");
       localStorage.setItem('authToken', data.token);
-      setUser(data.user);
+      localStorage.setItem('userEmail', data.user.email);
+      localStorage.setItem('userId', data.user.id);
+      console.log("login token",data);
     }
 
     navigate('/');
