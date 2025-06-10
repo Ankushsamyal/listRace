@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import HeroPageTextArea from './pages/HeroPageTextArea';
 import Heroimage from '../../images/images/welcome-hero/banners.jpg';
-import HeroCards from './pages/HeroCards';
+import HeroCards from './pages/HeroCard';
 import 'animate.css';
-import { Box } from '@mui/material';
 import { fetchCategories } from '../../API/ApiService';
+import HeroPageTextArea from './pages/HeroPageTextFields';
 const HeroMainBoxStyles = {
     height: '110vh',
     backgroundSize: 'cover',
@@ -62,7 +61,7 @@ function Home() {
                 </div>
                 <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert} />
             </div>
-            <HeroCards catagoriData={catagoriData} />
+            <HeroCards catagoriData={catagoriData}/>
         </div>
     );
 };
