@@ -14,7 +14,6 @@ function Explore() {
   const [flag, setFlag] = useState(true);
   const user = localStorage.getItem('userId')
   const [saveBookmark, setSaveBookmark] = useState([]);
-  const [exploreLoaded, setExploreLoaded] = useState(false);
 
   //first api to run
   useEffect(() => {
