@@ -3,10 +3,12 @@ import { Button, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate } from 'react-router-dom';
 
-export default function UserProfile() {
+export default function   UserProfile() {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
    const navigate = useNavigate();
+   const username = localStorage.getItem('userName')
+   const uppercase = username.charAt(0).toUpperCase();
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -36,7 +38,7 @@ export default function UserProfile() {
       <Button
         onClick={handleClick}
         color="primary"
-        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>T</Avatar>}
+        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>{uppercase}</Avatar>}
         endIcon={<ArrowDropDownIcon />}
         sx={{ textTransform: 'none' }}
       />

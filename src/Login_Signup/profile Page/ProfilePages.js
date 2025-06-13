@@ -8,6 +8,8 @@ const neumorphismShadow = {
 };
 
 const ProfilePage = () => {
+   const username = localStorage.getItem('userName')
+
     return (
         <Container maxWidth="sm" sx={{ mt: 5, marginTop: '150px', marginBottom: '100px' }}>
             <Paper
@@ -33,7 +35,7 @@ const ProfilePage = () => {
                     }}
                 />
                 <Typography variant="h4" component="h1" mt={2} sx={{ color: '#333' }}>
-                    Ankush
+                    {username}
                 </Typography>
                 <Typography
                     variant="body1"

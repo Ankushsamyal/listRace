@@ -66,6 +66,7 @@ export const PostBookmark = async (userId, bookmarks) => {
 export const loginUser = async (email, password) => {
     try {
       const response =  await api.post(`${API_URL.LOGIN}`, { email, password }, { withCredentials: true });
+      console.log("login data",response.data)
         return response.data;
     } catch (error) {
         throw error?.response?.data?.message || 
@@ -76,10 +77,10 @@ export const loginUser = async (email, password) => {
 };
 
 
-export const signupUser = async (email, password, confirmPassword) => {
+export const signupUser = async (email, password, confirmPassword ,name) => {
   try {
     const response = await api.post(API_URL.SIGNUP, 
-      { email, password, confirmPassword },
+      { email, password, confirmPassword,name },
       { withCredentials: true }
     );
     return response.data;

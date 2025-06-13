@@ -12,6 +12,7 @@ import { AuthProvider } from './commonComponents/AuthProvider';
 import ProfilePage from './Login_Signup/profile Page/ProfilePages';
 import Navbar from './navbar/nabar';
 import Login from './Login_Signup/login/LogInPage';
+import { CssBaseline } from '@mui/material';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -26,6 +27,7 @@ function NavigationWrapper({ children }) {
     <>
       <Navbar/>
       <ScrollToTop />
+      <CssBaseline/>
       {children}
       <Navbar footerNav={true} />
     </>
@@ -33,6 +35,12 @@ function NavigationWrapper({ children }) {
 }
 
 function App() {
+  //  const navigate = useNavigate();
+  // const user = localStorage.getItem('userId')
+  // if(!user){
+      
+    
+  // }
   const router = createBrowserRouter(
     [
       { path: '/', element: <NavigationWrapper><Home /></NavigationWrapper> },

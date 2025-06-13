@@ -14,6 +14,7 @@ import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import ApartmentIcon from '@mui/icons-material/Apartment';
 import CustomPopOver from '../../../commonComponents/PopOver';
+import useIsMobile from '../../../hooks/useIsMobile';
 
 const dataItems = [
   {
@@ -63,7 +64,7 @@ const neoStyles = {
 
   gridContainer: {
     position:'relative',
-    top:'-95px' ,
+    // top:'-95px' ,
     display: 'grid',
     gridTemplateColumns: {
       xs: '1fr',
@@ -130,6 +131,7 @@ function HeroCards({ catagoriData, loading, error }) {
   const [anchorEl, setAnchorEl] = useState(false);
   const [cityList, setCityList] = useState([]);
   const [itemsCityList, setItemsCityList] = useState([]);
+  const isMobile = useIsMobile();
 
   const handleClick = (title) => {
     const getcityList = catagoriData?.find((item) => item.name === title);
@@ -148,7 +150,7 @@ function HeroCards({ catagoriData, loading, error }) {
 
   return (
     <div style={{display:'flex',alignItems:'center'}}>
-      <Box sx={neoStyles.gridContainer}>
+      <Box sx={neoStyles.gridContainer} top={isMobile?'-80px':'-95px'}>
         {dataItems.map((value, index) => (
           <Card key={index} sx={neoStyles.card}>
             <CardActionArea

@@ -18,13 +18,13 @@ import { loginUser } from '../../API/ApiService';
 
 const pageStyles = {
   root: {
-    minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     background: 'white',
-    marginTop: '20px',
+    marginTop: '70px',
     paddingTop: '30px',
+    paddingBottom:'30px'
   },
   container: {
     padding: '40px',
@@ -34,7 +34,7 @@ const pageStyles = {
     textAlign: 'center'
   },
   icon: {
-    fontSize: 40,
+    fontSize: 100,
     mb: 2,
     color: '#ff6b6b',
     background: '#e0e5ec',
@@ -122,8 +122,8 @@ const Login = () => {
       console.log(data.token, "login cred");
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userEmail', data.user.email);
+      localStorage.setItem('userName',data.user.name)
       localStorage.setItem('userId', data.user.id);
-      console.log("login token",data);
     }
 
     navigate('/');
