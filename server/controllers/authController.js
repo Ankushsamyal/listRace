@@ -34,6 +34,7 @@ const validatePassword = (password) => {
 };
 
 const signup = async (req, res) => {
+  console.log("req ",req.body)
   try {
     // Validate request body
     if (!req.body || Object.keys(req.body).length === 0) {
@@ -44,10 +45,10 @@ const signup = async (req, res) => {
       });
     }
 
-    const { email, password, confirmPassword } = req.body;
+    const { email, password, confirmPassword,name } = req.body;
     
     // Validate required fields
-    if (!email || !password || !confirmPassword) {
+    if (!email || !password || !confirmPassword || !name) {
       return res.status(400).json({
         success: false,
         error: 'VALIDATION_ERROR',
@@ -102,6 +103,7 @@ const signup = async (req, res) => {
 
     // Create new user in login collection
     const newUser = {
+      name:name,
       email: email.toLowerCase(),
       passwordHash,
       createdAt: new Date(),
@@ -157,6 +159,7 @@ const login = async (req, res) => {
 
     const { email, password } = req.body;
 
+
     // Validate required fields
     if (!email || !password) {
       return res.status(400).json({
@@ -171,9 +174,8 @@ const login = async (req, res) => {
 
     // Find user in login collection
     const user = await loginCollection.findOne({ 
-      email: email.toLowerCase() 
+      email: email.toLowerCase(),
     });
-
     if (!user) {
       return res.status(401).json({
         success: false,
@@ -217,7 +219,8 @@ const login = async (req, res) => {
       token,
       user: {
         email: user.email,
-        id: user._id
+        id: user._id,
+        name:user.name
       }
     });
 

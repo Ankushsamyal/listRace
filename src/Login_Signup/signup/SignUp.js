@@ -19,14 +19,14 @@ import { signupUser } from '../../API/ApiService';
 
 const pageStyles = {
   root: {
-    minHeight: '100vh',
+    // minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     background: 'white',
-    marginTop: '20px',
-    paddingTop: '70px',
-    paddingBottom: '50px'
+    marginTop: '80px',
+    paddingTop: '30px',
+    paddingBottom: '30px'
   },
   container: {
     padding: '40px',
@@ -36,7 +36,7 @@ const pageStyles = {
     textAlign: 'center'
   },
   icon: {
-    fontSize: 40,
+    fontSize: 100,
     mb: 2,
     color: '#ff6b6b',
     background: '#e0e5ec',
@@ -89,6 +89,7 @@ const pageStyles = {
 
 const Signup = () => {
   const [email, setEmail] = useState('');
+  const [name, setName] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
@@ -109,9 +110,22 @@ const Signup = () => {
     return password.length >= minLength && hasUpperCase && hasNumber;
   };
 
+    const validateName = (name) => {
+    if (!name.trim()) {
+      return 'Name is required.';
+    } else if (!/^[a-zA-Z\s]+$/.test(name)) {
+      return 'Name can only contain letters and spaces.';
+    } else if (name.trim().length < 2) {
+      return 'Name must be at least 2 characters long.';
+    }
+    return '';
+  };
  const handleSignup = async (e) => {
   e?.preventDefault();
-
+if (validateName(name)){
+  setError('please enter a valid name')
+  return
+}
   if (!validateEmail(email)) {
     setError('Please enter a valid email address');
     return;
@@ -131,7 +145,7 @@ const Signup = () => {
   setError('');
 
   try {
-    const data = await signupUser(email, password, confirmPassword);
+    const data = await signupUser(email, password, confirmPassword ,name);
 
     if (data.token) {
       localStorage.setItem('authToken', data.token);
@@ -189,6 +203,19 @@ const Signup = () => {
             onSubmit={handleSignup}
             onKeyPress={handleKeyPress}
           >
+             <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Full name"
+              label="Full name"
+              name="Full name"
+              autoComplete="Full name"
+              autoFocus
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              sx={pageStyles.textField}
+            />
             <TextField
               margin="normal"
               required
@@ -197,7 +224,6 @@ const Signup = () => {
               label="Email Address"
               name="email"
               autoComplete="email"
-              autoFocus
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               sx={pageStyles.textField}

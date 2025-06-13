@@ -24,7 +24,6 @@
 .Review-number-mainbox{
     display: flex;
     justify-content: space-evenly;
-    height: 50vh;
     align-items: center;
     background-image: linear-gradient(to bottom, rgba(88, 88, 88, 0.6), rgba(46, 30, 110, 0.3)),url('../../images/images//counter/counter-banners.jpg');
     background-attachment: fixed;

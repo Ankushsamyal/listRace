@@ -18,7 +18,18 @@ function BlogCards() {
     }, []);
     return (
         <div className='BlogCards-Main-box' style={{ paddingTop: '30px' }}>
-            <Box className="e-Card-box" >
+            <Box className="e-Card-box"  sx={{
+                display: 'grid',
+                gridTemplateColumns: {
+                    xs: '1fr',
+                    sm: 'repeat(2, 1fr)',
+                    md: 'repeat(3, 1fr)',
+                    lg: 'repeat(3, 1fr)'
+                },
+                padding: '40px',
+                gridGap: '50px',
+                justifyItems:'center'
+            }}>
                 {blogData && blogData.map(value => (
                     <Card key={value.id} className='e-card' sx={{
                         maxWidth: 280, borderRadius: '0.7',

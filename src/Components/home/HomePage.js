@@ -4,33 +4,51 @@ import HeroCards from './pages/HeroCard';
 import 'animate.css';
 import { fetchCategories } from '../../API/ApiService';
 import HeroPageTextArea from './pages/HeroPageTextFields';
-const HeroMainBoxStyles = {
-    height: '110vh',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    backgroundRepeat: 'no-repeat',
-    backgroundImage: `linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)), url(${Heroimage})`,
-    justifyItems: 'center',
-    marginTop: '12vh',
-};
+import styled from 'styled-components';
+const HeroMainBox = styled.div`
+    height: 110vh;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: red;
+    background-image: 
+        linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)),
+        url(${Heroimage});
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5vh;
+      @media screen and (max-width: 768px) {
+       
+    }
+`;
 
-const HeroTitleStyles = {
-    animationDuration: '2s',
-    textTransform: 'uppercase',
-    color: 'whitesmoke',
-    fontSize: '7vh',
-    fontWeight: 'bolder',
-    width: '118vh',
-    textAlign: 'center',
-    paddingTop: '100px',
-};
+const HeroTitleStyles = styled.div`
+    padding:10px;
+    animation-duration: 2s;
+    text-transform: uppercase;
+    color: whitesmoke;
+    font-size: 7vh;
+    font-weight: bolder;
+    width: 118vh;
+    text-align: center;
+    padding-top: 50px;
+     @media screen and (max-width: 768px) {
+       font-size:4vh;
+       width:auto;
+    }
+`
 
-const HeroDescriptionStyles = {
-    color: 'whitesmoke',
-    fontSize: '3vh',
-    fontWeight: 600,
-    padding: '40px',
-};
+const HeroDescriptionStyles = styled.div`
+    color: whitesmoke;
+    fontSize: 3vh;
+    fontWeight: 600;
+    padding: 20px;
+     @media screen and (max-width: 768px) {
+       font-size:2vh;
+    }
+`
 
 function Home() {
     const [catagoriData, setcatagoriData] = useState([]);
@@ -52,16 +70,16 @@ function Home() {
     }, []);
     return (
         <div style={{ backgroundColor: 'whitesmoke' }}>
-            <div className="Hero-Main-box" style={HeroMainBoxStyles}>
-                <div className={`animate__fadeInDown`} style={HeroTitleStyles}>
+            <HeroMainBox className="Hero-Main-box">
+                <HeroTitleStyles className={`animate__fadeInDown`}>
                     Best place to find and explore that all you need
-                </div>
-                <div style={HeroDescriptionStyles}>
+                </HeroTitleStyles>
+                <HeroDescriptionStyles>
                     Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
-                </div>
+                </HeroDescriptionStyles>
                 <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert} />
-            </div>
-            <HeroCards catagoriData={catagoriData}/>
+            </HeroMainBox>
+            <HeroCards catagoriData={catagoriData} />
         </div>
     );
 };

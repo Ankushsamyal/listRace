@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Alert, Autocomplete, Box, Stack, TextField } from '@mui/material';
+import { Alert, Autocomplete, Stack } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
@@ -8,88 +8,44 @@ import SearchIcon from '@mui/icons-material/Search';
 import { incrementByAmount, selectFinalValue } from '../../../redux/slice/CounterSlice';
 import CustomPopOver from '../../../commonComponents/PopOver';
 import HeroButton from '../../../commonComponents/MainButton';
-
-const neoStyles = {
-  mainContainer: {
-    paddingTop: '5vh',
-    display: 'flex',
-    flexDirection:'column',
-    width: '100%'
-  },
-  searchContainer: {
-    display: 'flex',
-    flexDirection:'column',
-    alignItems:'center',
-    gap: '16px',
-    padding: '20px',
-    borderRadius: '20px',
-    alignItem:'center'
-  },
-  textField: {
-    '& .MuiOutlinedInput-root': {
-      borderRadius: '15px',
-      background: '#e0e5ec',
-      boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
-      '& fieldset': { border: 'none' },
-      '&.Mui-focused': {
-        boxShadow: 'inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff',
-      }
-    },
-    '& .MuiInputLabel-root': {
-      color: '#6b6b6b',
-      '&.Mui-focused': { color: '#ff545a' },
-    },
-    '& .MuiInputBase-input': { 
-      color: '#4a4a4a',
-    },
-    width: '40ch',
-    margin: '0'
-  },
-  alert: {
-    position: 'fixed',
-    top: '65%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    zIndex: 9999,
-    padding: '16px',
-    borderRadius: '15px',
-  },
-  popover: {
-    p: 3,
-    margin:'5px',
-    borderRadius: '15px',
-    background: '#e0e5ec',
-    boxShadow: '20px 20px 60px #bebebe, -20px -20px 60px #ffffff',
-    color: '#4a4a4a',
-  }
-};
+import {
+    MainContainer,
+    SearchContainer,
+    StyledTextField,
+    AlertWrapper,
+    PopoverWrapper
+} from './StyledComponents';
+import useIsMobile from '../../../hooks/useIsMobile';
 
 function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
-    const theme = createTheme({ palette: { primary: { main: '#ff545a' }, secondary: { main: '#1976d2' } } });
+    const theme = createTheme({
+        palette: {
+            primary: { main: '#ff545a' },
+            secondary: { main: '#1976d2' },
+        },
+    });
+
     const dispatch = useDispatch();
     const [whatchoose, setwhatchoose] = useState('');
     const [locationChoose, setlocationChoose] = useState('');
     const [anchorEl, setAnchorEl] = useState(null);
     const [AutomaticLocations, setAutomaticLocations] = useState([]);
     const finalValue = useSelector(selectFinalValue);
-
-    const handleData = (event) => { setwhatchoose(event.target.value); };
-    const handleData2 = (event) => { setlocationChoose(event.target.value); };
-
-    const selectedData = whatchoose.toLocaleLowerCase();
-    const cityData2 = locationChoose.toLocaleLowerCase();
-
-    // FIXED: accept event to set anchorEl properly
+    const handleData = (event) => setwhatchoose(event.target.value);
+    const handleData2 = (event) => setlocationChoose(event.target.value);
+    const isMobile = useIsMobile(768)
+    const selectedData = whatchoose.toLowerCase();
+    const cityData2 = locationChoose.toLowerCase();
     const handleClick = (event) => {
-        const checkValue = catagoriData.filter(item => item.name.toLocaleLowerCase() === selectedData);
+        const checkValue = catagoriData.filter(item => item.name.toLowerCase() === selectedData);
         if (checkValue.length <= 0) {
             setIsAlert(true);
         } else {
-            const filterValue = checkValue[0]?.locations?.find(item => item?.city?.toLocaleLowerCase() === cityData2);
+            const filterValue = checkValue[0]?.locations?.find(item => item?.city?.toLowerCase() === cityData2);
             if (filterValue && filterValue.items.length > 0) {
                 setIsAlert(false);
                 dispatch(incrementByAmount(filterValue.items));
-                setAnchorEl(event.currentTarget); 
+                setAnchorEl(event.currentTarget);
             } else {
                 setIsAlert(true);
                 dispatch(incrementByAmount(null));
@@ -99,7 +55,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
 
     useEffect(() => {
         catagoriData.forEach(option2 => {
-            if (selectedData === option2?.name.toLocaleLowerCase()) {
+            if (selectedData === option2?.name.toLowerCase()) {
                 const DataOption = option2?.locations?.map(FindingNames => FindingNames?.city) || [];
                 setAutomaticLocations(DataOption);
             }
@@ -107,16 +63,15 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
     }, [selectedData, catagoriData]);
 
     return (
-        <div style={neoStyles.mainContainer}>
-            <Box sx={neoStyles.searchContainer}>
-
+        <MainContainer>
+            <SearchContainer>
                 {isAlert && (
-                    <Stack sx={neoStyles.alert} spacing={2}>
+                    <AlertWrapper spacing={2}>
                         <Alert severity="error">Please select a valid Data</Alert>
-                    </Stack>
+                    </AlertWrapper>
                 )}
                 <ThemeProvider theme={theme}>
-                    <Stack direction="row" spacing={1}>
+                    <Stack direction={isMobile ? "column" : 'row'} spacing={1}>
                         <Autocomplete
                             id='AutoComplete-choose-what-to'
                             freeSolo
@@ -125,34 +80,22 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             disableClearable
                             options={catagoriData.map((option) => option.name)}
                             renderInput={(params) => (
-                                <TextField
+                                <StyledTextField
                                     {...params}
                                     id="choose-what-to"
                                     data_test_id="choose-what-to-data"
-                                    sx={{
-                                        ...neoStyles.textField,
-                                        borderTopLeftRadius: '15px',
-                                        borderBottomLeftRadius: '15px',
-                                    }}
                                     placeholder="Ex: Place, Food"
-                                    slotProps={{
-                                        input: {
-                                            data_test_id: "choose-what-to-data",
-                                            ...params.InputProps,
-                                            type: 'search',
-                                            startAdornment: (
-                                                <span style={{ 
-                                                  color: '#6b6b6b', 
-                                                  paddingRight: '10px', 
-                                                  fontWeight: 'bold' 
-                                                }}>
-                                                  What? 
-                                                </span>
-                                            ),
-                                            endAdornment: <FormatListBulletedIcon sx={{ color: '#6b6b6b' }} />
-                                        },
-                                    }}
                                     onChange={handleData}
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        type: 'search',
+                                        startAdornment: (
+                                            <span style={{ color: '#6b6b6b', paddingRight: '10px', fontWeight: 'bold' }}>
+                                                What?
+                                            </span>
+                                        ),
+                                        endAdornment: <FormatListBulletedIcon sx={{ color: '#6b6b6b' }} />,
+                                    }}
                                 />
                             )}
                         />
@@ -164,33 +107,21 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             onChange={(event, newValue) => setlocationChoose(newValue || '')}
                             options={AutomaticLocations}
                             renderInput={(params) => (
-                                <TextField
-                                    id="choose-location"
+                                <StyledTextField
                                     {...params}
-                                    sx={{
-                                        ...neoStyles.textField,
-                                        borderTopRightRadius: '15px',
-                                        borderBottomRightRadius: '15px',
-                                    }}
+                                    id="choose-location"
                                     placeholder="Ex: New Delhi, Noida"
-                                    slotProps={{
-                                        input: {
-                                            data_test_id: "choose-location-data",
-                                            ...params.InputProps,
-                                            type: 'search',
-                                            startAdornment: (
-                                                <span style={{ 
-                                                  color: '#6b6b6b', 
-                                                  fontWeight: 'bold', 
-                                                  paddingRight: '10px' 
-                                                }}>
-                                                  Location
-                                                </span>
-                                            ),
-                                            endAdornment: <GpsFixedIcon sx={{ color: '#6b6b6b' }} />
-                                        },
-                                    }}
                                     onChange={handleData2}
+                                    InputProps={{
+                                        ...params.InputProps,
+                                        type: 'search',
+                                        startAdornment: (
+                                            <span style={{ color: '#6b6b6b', paddingRight: '10px', fontWeight: 'bold' }}>
+                                                Location
+                                            </span>
+                                        ),
+                                        endAdornment: <GpsFixedIcon sx={{ color: '#6b6b6b' }} />,
+                                    }}
                                 />
                             )}
                         />
@@ -209,25 +140,20 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             boxShadow: 'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
                         },
                         color: '#ff545a',
-                        fontWeight: 'bold'
+                        fontWeight: 'bold',
                     }}
                 >
                     Search
                 </HeroButton>
                 <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
-                   {finalValue?.map((value) => (
-                        <Box 
-                            data_test_id={value} 
-                            key={value} 
-                            id={value} 
-                            sx={neoStyles.popover}
-                        >
+                    {finalValue?.map((value) => (
+                        <PopoverWrapper data_test_id={value} key={value} id={value}>
                             {value}
-                        </Box>
+                        </PopoverWrapper>
                     ))}
                 </CustomPopOver>
-            </Box>
-        </div>
+            </SearchContainer>
+        </MainContainer>
     );
 }
 
