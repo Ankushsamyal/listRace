@@ -71,7 +71,7 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                     </AlertWrapper>
                 )}
                 <ThemeProvider theme={theme}>
-                    <Stack direction={isMobile ? "column" : 'row'} spacing={1}>
+                    <Stack id='textField Stack' direction={isMobile ? "column" : 'row'} spacing={1} sx={{ width: '100%' }}>
                         <Autocomplete
                             id='AutoComplete-choose-what-to'
                             freeSolo
@@ -82,11 +82,14 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             renderInput={(params) => (
                                 <StyledTextField
                                     {...params}
+                                    width='auto'
                                     id="choose-what-to"
                                     data_test_id="choose-what-to-data"
                                     placeholder="Ex: Place, Food"
                                     onChange={handleData}
+                                    sx={{ width: 300 }}
                                     InputProps={{
+                                        style: { width: 'auto' },
                                         ...params.InputProps,
                                         type: 'search',
                                         startAdornment: (
@@ -106,14 +109,19 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             value={locationChoose}
                             onChange={(event, newValue) => setlocationChoose(newValue || '')}
                             options={AutomaticLocations}
+                            sx={{ width: 300 }}
+                            fullWidth
                             renderInput={(params) => (
                                 <StyledTextField
                                     {...params}
                                     id="choose-location"
                                     placeholder="Ex: New Delhi, Noida"
                                     onChange={handleData2}
+                                    fullWidth
                                     InputProps={{
+
                                         ...params.InputProps,
+
                                         type: 'search',
                                         startAdornment: (
                                             <span style={{ color: '#6b6b6b', paddingRight: '10px', fontWeight: 'bold' }}>

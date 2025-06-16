@@ -5,7 +5,6 @@ import { Box, Stack, TextField } from '@mui/material';
 export const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 100%;
 `;
 
 export const SearchContainer = styled(Box)`
@@ -19,34 +18,34 @@ export const SearchContainer = styled(Box)`
 `;
 
 export const StyledTextField = styled(TextField)`
-  width: auto;
+  width: 100%;
   margin: 0;
 
   & .MuiOutlinedInput-root {
-  width: 60vh;
-
-    border-radius: 15px;
-    background: #e0e5ec;
-    box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
-
-    & fieldset {
-      border: none;
+  
+    
+  border-radius: 15px;
+  background: #e0e5ec;
+  box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff;
+  
+  & fieldset {
+    border: none;
     }
-
+    
     &.Mui-focused {
       box-shadow: inset 2px 2px 5px #bebebe, inset -2px -2px 5px #ffffff;
-    }
-  }
-
-  & .MuiInputLabel-root {
-    color: #6b6b6b;
-
-    &.Mui-focused {
-      color: #ff545a;
-    }
-  }
-
-  & .MuiInputBase-input {
+      }
+      }
+      
+      & .MuiInputLabel-root {
+        color: #6b6b6b;
+        
+        &.Mui-focused {
+          color: #ff545a;
+          }
+          }
+          
+          & .MuiInputBase-input {
     color: #4a4a4a;
   }
 `;

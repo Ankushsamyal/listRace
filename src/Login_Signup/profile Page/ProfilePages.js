@@ -49,15 +49,15 @@ const ProfilePage = () => {
                 <Stack direction="row" spacing={2} justifyContent="center">
                     {[{
                         icon: <LinkedIn />,
-                        href: 'https://linkedin.com/in/johndoe',
+                        href: 'https://in.linkedin.com/in/ankush-samyal-71522921a',
                         label: 'LinkedIn',
                     }, {
                         icon: <Twitter />,
-                        href: 'https://twitter.com/johndoe',
+                        href: 'https://x.com/AnkushSamyal25',
                         label: 'Twitter',
                     }, {
                         icon: <GitHub />,
-                        href: 'https://github.com/johndoe',
+                        href: 'https://github.com/Ankushsamyal',
                         label: 'GitHub',
                     }].map(({ icon, href, label }) => (
                         <IconButton

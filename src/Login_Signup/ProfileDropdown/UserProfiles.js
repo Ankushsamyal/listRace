@@ -38,7 +38,7 @@ export default function   UserProfile() {
       <Button
         onClick={handleClick}
         color="primary"
-        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>{uppercase}</Avatar>}
+        startIcon={<Avatar sx={{ bgcolor: '#f55f56' }}>{uppercase && uppercase}</Avatar>}
         endIcon={<ArrowDropDownIcon />}
         sx={{ textTransform: 'none' }}
       />

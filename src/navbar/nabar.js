@@ -8,8 +8,8 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import HeroButton from '../commonComponents/MainButton';
 import UserProfile from '../Login_Signup/ProfileDropdown/UserProfiles';
-import useIsMobile from '../hooks/useIsMobile';
 import MenuIcon from '@mui/icons-material/Menu';
+import useIsMobile from '../hooks/useIsMobile';
 
 const styles = {
   container: { background: '#e0e5ec' },
@@ -82,16 +82,14 @@ const styles = {
 
 const Navbar = ({ footerNav }) => {
   const user = localStorage.getItem('userId');
-  const isMobile = useIsMobile();
+  const isMobile = useIsMobile  ();
   const navigationLinks = ['/', '/explore', '/review', '/blog', '/contact'];
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
-
-  // Internal reusable components inside Navbar
-
+  
   const Logo = () => (
-    <Link to="/" style={{ textDecoration: 'none', display: 'flex' }}>
+    <Link to="/" style={{ textDecoration: 'none',}}>
       <Box component="h1" sx={styles.logo}>
         BlazeBloom
       </Box>
@@ -135,9 +133,7 @@ const Navbar = ({ footerNav }) => {
         }}
       >
         <Toolbar sx={{ height: '100%', display: 'flex', justifyContent: 'space-between', ...styles.navBar }}>
-          <Box sx={{ flexGrow: 1, ml: 2 }}>
-            <Logo />
-          </Box>
+          <Logo />
 
           {isMobile ? (
             <>
@@ -199,12 +195,12 @@ const Navbar = ({ footerNav }) => {
                 <PhoneIcon sx={{ fontSize: '16px', mr: 1 }} />
                 +91 90765467808
               </Box>
-              <Box sx={{ display: 'flex', flexDirection: isMobile ? 'column' : 'row' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
                 {[
                   { icon: <FacebookIcon />, url: 'https://www.facebook.com' },
                   { icon: <GoogleIcon />, url: 'https://www.google.com' },
                   { icon: <YouTubeIcon />, url: 'https://www.youtube.com' },
-                  { icon: <LinkedInIcon />, url: 'https://www.linkedin.com' },
+                  { icon: <LinkedInIcon />, url: 'https://in.linkedin.com/in/ankush-samyal-71522921a' },
                 ].map((social, index) => (
                   <SocialIconLink key={index} icon={social.icon} url={social.url} />
                 ))}

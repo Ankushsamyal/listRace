@@ -31,7 +31,8 @@ const HeroTitleStyles = styled.div`
     color: whitesmoke;
     font-size: 7vh;
     font-weight: bolder;
-    width: 118vh;
+    width: auto;
+    max-width:163vh;
     text-align: center;
     padding-top: 50px;
      @media screen and (max-width: 768px) {
