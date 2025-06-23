@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Container,
@@ -15,6 +15,8 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import HeroButton from '../../commonComponents/MainButton';
 import { loginUser } from '../../API/ApiService';
+import { GoogleLogin } from '@react-oauth/google'
+import { jwtDecode } from 'jwt-decode'
 
 const pageStyles = {
   root: {
@@ -24,7 +26,7 @@ const pageStyles = {
     background: 'white',
     marginTop: '70px',
     paddingTop: '30px',
-    paddingBottom:'30px'
+    paddingBottom: '30px'
   },
   container: {
     padding: '40px',
@@ -92,6 +94,17 @@ const Login = () => {
   const [error, setError] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const [googlecredentialResponse, setGooglecredentialResponse] =useState([])
+  const [jwtGooglecredentialResponse, setJwtGooglecredentialResponse] =useState([])
+  
+
+  if(googlecredentialResponse.credential){
+      localStorage.setItem('authToken',  googlecredentialResponse.credential );
+        localStorage.setItem('userEmail', jwtGooglecredentialResponse.email );
+        localStorage.setItem('userName', jwtGooglecredentialResponse.name);
+        localStorage.setItem('userId',jwtGooglecredentialResponse.sub);
+        navigate('/');
+  }
 
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -115,23 +128,23 @@ const Login = () => {
       return;
     }
 
-      try {
-    const data = await loginUser(email, password);
+    try {
+      const data = await loginUser(email, password);
 
-    if (data.token) {
-      console.log(data.token, "login cred");
-      localStorage.setItem('authToken', data.token);
-      localStorage.setItem('userEmail', data.user.email);
-      localStorage.setItem('userName',data.user.name)
-      localStorage.setItem('userId', data.user.id);
+      if (data.token) {
+        console.log(data.token, "login cred");
+        localStorage.setItem('authToken', data.token || googlecredentialResponse.credential );
+        localStorage.setItem('userEmail', data.user.email || jwtGooglecredentialResponse.email );
+        localStorage.setItem('userName', data.user.name || jwtGooglecredentialResponse.name);
+        localStorage.setItem('userId', data.user.id);
+      }
+
+      navigate('/');
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
     }
-
-    navigate('/');
-  } catch (err) {
-    setError(err); 
-  } finally {
-    setLoading(false);
-  }
   };
 
   const handleSignUp = () => {
@@ -160,14 +173,13 @@ const Login = () => {
           <Typography component="h1" variant="h5" sx={pageStyles.title}>
             Welcome Back
           </Typography>
-          
+
           {error && (
             <Alert severity="error" sx={pageStyles.alert}>
               {error}
             </Alert>
           )}
-          
-          <Box 
+          <Box
             component="form"
             sx={pageStyles.form}
             onSubmit={handleLogin}
@@ -215,7 +227,6 @@ const Login = () => {
                 )
               }}
             />
-            
             <Box sx={pageStyles.buttonContainer}>
               <HeroButton
                 fullWidth
@@ -225,13 +236,24 @@ const Login = () => {
               >
                 {loading ? <CircularProgress size={24} /> : 'Sign In'}
               </HeroButton>
-              
               <HeroButton
                 handleClick={handleSignUp}
               >
                 Sign Up
               </HeroButton>
             </Box>
+            <div style={{ display: 'inline-grid', marginTop: '10px' }}>
+            
+              <GoogleLogin
+                onSuccess={(credentialResponse) => {
+                  console.log(credentialResponse)
+                  setGooglecredentialResponse(credentialResponse)
+                  console.log(jwtDecode(credentialResponse.credential))
+                  setJwtGooglecredentialResponse(jwtDecode(credentialResponse.credential))
+                }}
+                onError={() => console.log('Login fail')}
+              />
+            </div>
           </Box>
         </Box>
       </Container>

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import ExploreCards from '../../commonComponents/ExplorePageCards';
 import CustomPopOver from '../../commonComponents/PopOver';
-import { Skeleton, Box, Stack } from '@mui/material';
+import { Skeleton, Box, Stack, Button } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { fetchBookmarks, fetchExplore, PostBookmark } from '../../API/ApiService';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 function Explore() {
   const [exploreData, setExploreData] = useState([]);
@@ -24,27 +25,27 @@ function Explore() {
         const exploreData = await fetchExplore();
         setExploreData(exploreData);
       } catch (err) {
-         setLoading(true);
+        setLoading(true);
         console.error('Error fetching explore data:', err);
       }
     };
     fetchExploreData()
   }, []);
-  
+
   //then this will run
   useEffect(() => {
-    if (!user ) return;
+    if (!user) return;
 
     const fetchUserData = async () => {
       try {
         const bookmarksData = await fetchBookmarks();
         const userBookmarks = bookmarksData.find(item => item.userId === user);
-        console.log("user bookmark data",userBookmarks)
+        console.log("user bookmark data", userBookmarks)
         if (userBookmarks.userId) {
           setSaveBookmark(userBookmarks.bookmarks);
         }
       } catch (err) {
-         setLoading(true);
+        setLoading(true);
         console.error('Error fetching bookmarks:', err);
         setIsAlert(err instanceof Error ? err.message : 'Unknown error');
       } finally {
@@ -60,8 +61,8 @@ function Explore() {
     if (user) {
       const syncBookmarks = async () => {
         try {
-        const result = await PostBookmark(user, saveBookmark);
-        console.log('Bookmarks synced:', result);
+          const result = await PostBookmark(user, saveBookmark);
+          console.log('Bookmarks synced:', result);
         } catch (err) {
           console.error('Error syncing bookmarks:', err);
         }
@@ -131,20 +132,13 @@ function Explore() {
           <Skeleton variant="text" width={80} height={24} />
         </Box>
       ) : (
-        <div
+        <Button className="bookmark-icon"
+          style={{ paddingLeft: '5%',fontWeight:'bolder' }}
+          color='black'
+          size='large'
           onClick={showBookmarkData}
-          className="bookmark-icon"
-          style={{
-            justifyContent: "end",
-            paddingRight: '40px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '5px'
-          }}
-        >
-          <BookmarkIcon />
-          <h3>Bookmark</h3>
-        </div>
+          startIcon={<BookmarkIcon />}>
+          Bookmark</Button>
       )}
 
       {/* Cards Skeleton */}
@@ -169,10 +163,9 @@ function Explore() {
             user={user}
           />
           <CustomPopOver anchorEl={anchorEl} setAnchorEl={setAnchorEl}>
-            <div onClick={clearAllBookmarks} style={{display:'flex'}}>
-              <h4>Clear All</h4>
-              <CancelIcon style={{alignSelf:'center',display:'flex'}}/>
-            </div>
+            <Button sx={{ margin: '20px' }} onClick={clearAllBookmarks} variant="outlined" startIcon={<DeleteIcon />}>
+              Delete all
+            </Button>
             <ExploreCards
               setAnchorEl={setAnchorEl}
               data={saveBookmark}

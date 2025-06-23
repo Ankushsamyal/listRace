@@ -35,7 +35,7 @@ function ReviewCard() {
                 className='Review-card'
                 sx={{
                   width: '100% !important',
-                  maxWidth: 375,
+                  maxWidth: isMobile?'288px':'375px',
                   borderRadius: '0.7rem',
                   boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
                   margin: '0 auto',

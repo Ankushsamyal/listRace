@@ -3,12 +3,13 @@ import { Button, Menu, MenuItem, Avatar, Box } from '@mui/material';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import { useNavigate } from 'react-router-dom';
 
-export default function   UserProfile() {
+export default function   UserProfile({setMobileOpen,mobileOpen}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
    const navigate = useNavigate();
    const username = localStorage.getItem('userName')
-   const uppercase = username.charAt(0).toUpperCase();
+   const uppercase = username.charAt(0).toUpperCase() || 'A'
+   
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -21,9 +22,11 @@ export default function   UserProfile() {
 
   const handleLogout = () => {
     handleClose();
+    setMobileOpen(!mobileOpen)
    localStorage.removeItem('authToken');
    localStorage.removeItem('userEmail');
    localStorage.removeItem('userId');
+   localStorage.removeItem('userName');
    navigate("/login")
     console.log('User has been logged out'); 
   };
@@ -31,6 +34,7 @@ export default function   UserProfile() {
   const handleProfile = () => {
     handleClose();
    navigate('/profile');
+   setMobileOpen(!mobileOpen)
   };
 
   return (

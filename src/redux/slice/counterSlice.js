@@ -19,7 +19,6 @@ export const counterSlice = createSlice({
     },
   },
 });
-//  Memoized selector to avoid rerenders
 export const selectFinalValue = createSelector(
   (state) => state.counter.finalValue,
   (finalValue) => finalValue || []

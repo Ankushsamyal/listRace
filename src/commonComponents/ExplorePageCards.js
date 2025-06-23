@@ -144,7 +144,7 @@ function ExploreCards({ data, saveBookmark, flag, setSaveBookmark }) {
                                     className='person-img'
                                 />
 
-                                <Typography variant="body2" sx={{ color: 'text.secondary', paddingLeft: '5px' }}>
+                                <Typography variant="body2" sx={{ color: 'text.secondary', paddingLeft: '5px', width:'800px' }}>
                                     {valuedata.message}
                                 </Typography>
                             </Box>

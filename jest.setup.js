@@ -6,10 +6,9 @@ beforeAll(() => {
       typeof msg === 'string' &&
       (msg.includes('ReactDOMTestUtils.act') || msg.includes('not wrapped in act(...)'))
     ) {
-      return; // Suppress act() warnings
+      return; 
     }
 
-    // Log all other errors normally
     return consoleErrorSpy.mock.calls.length ? undefined : console.error(msg, ...args);
   });
 });

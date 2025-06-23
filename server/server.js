@@ -12,17 +12,14 @@ const bookmarkRoutes = require('./routes/bookmarkRoutes');
 const app = express();
 const port = process.env.PORT || 5000;
 
-// Security middleware
 app.use(helmet());
 app.use(express.json());
 
-// Rate limiting for auth routes
 const authLimiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests
+  windowMs: 15 * 60 * 1000,
+  max: 100
 });
 
-// Database connection
 connectToDb((err) => {
   if (err) {
     console.error('Failed to connect to MongoDB:', err);
@@ -31,23 +28,19 @@ connectToDb((err) => {
 
   console.log('Database connection established');
   
-  // CORS configuration
   app.use(cors({
     origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
     credentials: true
   }));
 
-  // Routes
-  app.use('/auth', authLimiter, authRoutes); // Protected with rate limiting
+  app.use('/auth', authLimiter, authRoutes);
   app.use('/api', apiRoutes);
   app.use('/api/bookmark', bookmarkRoutes);
 
-  // Health check
   app.get('/', (req, res) => {
     res.send('BlazeBloom API is running');
   });
 
-  // Error handling
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ 
@@ -56,12 +49,10 @@ connectToDb((err) => {
     });
   });
 
-  // Start server
   const server = app.listen(port, () => {
     console.log(`Server running on port ${port}`);
   });
 
-  // Graceful shutdown
   process.on('SIGTERM', () => {
     server.close(() => {
       console.log('Server closed');

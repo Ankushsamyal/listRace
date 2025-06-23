@@ -13,7 +13,7 @@ const HeroMainBox = styled.div`
     background-color: red;
     background-image: 
         linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)),
-        url(${Heroimage});
+        url(${Heroimage});  
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -38,16 +38,21 @@ const HeroTitleStyles = styled.div`
      @media screen and (max-width: 768px) {
        font-size:4vh;
        width:auto;
+       padding-top:20px;
+       padding-bottom:20px
     }
 `
 
 const HeroDescriptionStyles = styled.div`
     color: whitesmoke;
-    fontSize: 3vh;
-    fontWeight: 600;
+    font-size: 3vh;
+    text-transform:capitalize;
+    font-weight: 600;
+    text-align: center;
     padding: 20px;
      @media screen and (max-width: 768px) {
-       font-size:2vh;
+    font-weight: 400;
+       
     }
 `
 
@@ -62,7 +67,6 @@ function Home() {
                 const categories = await fetchCategories();
                 setcatagoriData(categories);
             } catch (err) {
-                setIsAlert(err);
                 console.error('API error:', err);
             }
         };
@@ -76,7 +80,7 @@ function Home() {
                     Best place to find and explore that all you need
                 </HeroTitleStyles>
                 <HeroDescriptionStyles>
-                    Find Best Place, Restaurant, Hotel, Real State and many more think in just One click
+                    Find Best Place, Restaurant, Hotel, Real Estate and many more think in just One click
                 </HeroDescriptionStyles>
                 <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert} />
             </HeroMainBox>

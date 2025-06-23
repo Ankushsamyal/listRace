@@ -111,11 +111,11 @@ const Navbar = ({ footerNav }) => {
   );
   const AuthSection = () =>
     user == null ? (
-      <Link to="/login" style={{ textDecoration: 'none', marginLeft: '16px' }}>
+      <Link to="/login" style={{ textDecoration: 'none' }} onClick={handleDrawerToggle}>
         <HeroButton>LOGIN</HeroButton>
       </Link>
     ) : (
-      <UserProfile />
+      <UserProfile setMobileOpen={setMobileOpen} mobileOpen={mobileOpen}/>
     );
 
 
