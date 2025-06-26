@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Heroimage from '../../images/images/welcome-hero/banners.jpg';
+import Heroimage from '../../assets/images/welcome-hero/banners.jpg';
 import HeroCards from './pages/HeroCard';
 import 'animate.css';
 import { fetchCategories } from '../../API/ApiService';
 import HeroPageTextArea from './pages/HeroPageTextFields';
+import { HOME_CONSTANT } from '../../constant/HeadingConstant';
 import styled from 'styled-components';
 const HeroMainBox = styled.div`
     height: 110vh;
@@ -77,10 +78,10 @@ function Home() {
         <div style={{ backgroundColor: 'whitesmoke' }}>
             <HeroMainBox className="Hero-Main-box">
                 <HeroTitleStyles className={`animate__fadeInDown`}>
-                    Best place to find and explore that all you need
+                   {HOME_CONSTANT.MAIN_TITLE}
                 </HeroTitleStyles>
                 <HeroDescriptionStyles>
-                    Find Best Place, Restaurant, Hotel, Real Estate and many more think in just One click
+                    {HOME_CONSTANT.SECONDARY_TITLE}
                 </HeroDescriptionStyles>
                 <HeroPageTextArea catagoriData={catagoriData} isAlert={isAlert} setIsAlert={setIsAlert} />
             </HeroMainBox>

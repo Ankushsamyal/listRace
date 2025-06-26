@@ -13,8 +13,8 @@ import {
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import HeroButton from '../../commonComponents/MainButton';
-import { signupUser } from '../../API/ApiService';
+import HeroButton from '../../../component/MainButton';
+import { signupUser } from '../../../API/ApiService';
 
 
 const pageStyles = {
@@ -148,7 +148,7 @@ if (validateName(name)){
     const data = await signupUser(email, password, confirmPassword ,name);
 
     if (data.token) {
-      localStorage.setItem('authToken', data.token);
+      sessionStorage.setItem('authToken', data.token);
     }
 
     navigate('/login');

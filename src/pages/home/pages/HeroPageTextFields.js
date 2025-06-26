@@ -5,9 +5,9 @@ import GpsFixedIcon from '@mui/icons-material/GpsFixed';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import { useDispatch, useSelector } from 'react-redux';
 import SearchIcon from '@mui/icons-material/Search';
-import { incrementByAmount, selectFinalValue } from '../../../redux/slice/CounterSlice';
-import CustomPopOver from '../../../commonComponents/PopOver';
-import HeroButton from '../../../commonComponents/MainButton';
+import { incrementByAmount, selectFinalValue } from '../../../redux_store/slice/CounterSlice';
+import CustomPopOver from '../../../component/PopOver';
+import HeroButton from '../../../component/MainButton';
 import {
     MainContainer,
     SearchContainer,

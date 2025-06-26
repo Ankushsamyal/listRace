@@ -13,8 +13,8 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import HeroButton from '../../commonComponents/MainButton';
-import { loginUser } from '../../API/ApiService';
+import HeroButton from '../../../component/MainButton';
+import { loginUser } from '../../../API/ApiService';
 import { GoogleLogin } from '@react-oauth/google'
 import { jwtDecode } from 'jwt-decode'
 
@@ -99,10 +99,10 @@ const Login = () => {
   
 
   if(googlecredentialResponse.credential){
-      localStorage.setItem('authToken',  googlecredentialResponse.credential );
-        localStorage.setItem('userEmail', jwtGooglecredentialResponse.email );
-        localStorage.setItem('userName', jwtGooglecredentialResponse.name);
-        localStorage.setItem('userId',jwtGooglecredentialResponse.sub);
+      sessionStorage.setItem('authToken',  googlecredentialResponse.credential );
+        sessionStorage.setItem('userEmail', jwtGooglecredentialResponse.email );
+        sessionStorage.setItem('userName', jwtGooglecredentialResponse.name);
+        sessionStorage.setItem('userId',jwtGooglecredentialResponse.sub);
         navigate('/');
   }
 
@@ -133,10 +133,10 @@ const Login = () => {
 
       if (data.token) {
         console.log(data.token, "login cred");
-        localStorage.setItem('authToken', data.token || googlecredentialResponse.credential );
-        localStorage.setItem('userEmail', data.user.email || jwtGooglecredentialResponse.email );
-        localStorage.setItem('userName', data.user.name || jwtGooglecredentialResponse.name);
-        localStorage.setItem('userId', data.user.id);
+        sessionStorage.setItem('authToken', data.token  );
+        sessionStorage.setItem('userEmail', data.user.email);
+        sessionStorage.setItem('userName', data.user.name);
+        sessionStorage.setItem('userId', data.user.id);
       }
 
       navigate('/');

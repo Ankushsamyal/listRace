@@ -7,7 +7,7 @@ export default function   UserProfile({setMobileOpen,mobileOpen}) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
    const navigate = useNavigate();
-   const username = localStorage.getItem('userName')
+   const username = sessionStorage.getItem('userName')
    const uppercase = username.charAt(0).toUpperCase() || 'A'
    
 
@@ -23,10 +23,10 @@ export default function   UserProfile({setMobileOpen,mobileOpen}) {
   const handleLogout = () => {
     handleClose();
     setMobileOpen(!mobileOpen)
-   localStorage.removeItem('authToken');
-   localStorage.removeItem('userEmail');
-   localStorage.removeItem('userId');
-   localStorage.removeItem('userName');
+   sessionStorage.removeItem('authToken');
+   sessionStorage.removeItem('userEmail');
+   sessionStorage.removeItem('userId');
+   sessionStorage.removeItem('userName');
    navigate("/login")
     console.log('User has been logged out'); 
   };
