@@ -6,10 +6,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 import PhoneIcon from '@mui/icons-material/Phone';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import YouTubeIcon from '@mui/icons-material/YouTube';
-import HeroButton from '../commonComponents/MainButton';
-import UserProfile from '../Login_Signup/ProfileDropdown/UserProfiles';
+import HeroButton from '../../component/MainButton';
+import UserProfile from '../login_signup/ProfileDropdown/UserProfiles';
 import MenuIcon from '@mui/icons-material/Menu';
-import useIsMobile from '../hooks/useIsMobile';
+import useIsMobile from '../../hooks/useIsMobile';
 
 const styles = {
   container: { background: '#e0e5ec' },
@@ -81,7 +81,7 @@ const styles = {
 };
 
 const Navbar = ({ footerNav }) => {
-  const user = localStorage.getItem('userId');
+  const user = sessionStorage.getItem('userId');
   const isMobile = useIsMobile  ();
   const navigationLinks = ['/', '/explore', '/review', '/blog', '/contact'];
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -195,7 +195,7 @@ const Navbar = ({ footerNav }) => {
                 <PhoneIcon sx={{ fontSize: '16px', mr: 1 }} />
                 +91 90765467808
               </Box>
-              <Box sx={{ display: 'flex', flexDirection: 'row' }}>
+              <Box sx={{ display: 'flex', flexDirection: 'row',paddingTop:'10px' }}>
                 {[
                   { icon: <FacebookIcon />, url: 'https://www.facebook.com' },
                   { icon: <GoogleIcon />, url: 'https://www.google.com' },

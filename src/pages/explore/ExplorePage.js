@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import ExploreCards from '../../commonComponents/ExplorePageCards';
-import CustomPopOver from '../../commonComponents/PopOver';
+import ExploreCards from '../../component/ExplorePageCards';
+import CustomPopOver from '../../component/PopOver';
 import { Skeleton, Box, Stack, Button } from '@mui/material';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import CancelIcon from '@mui/icons-material/Cancel';
 import { fetchBookmarks, fetchExplore, PostBookmark } from '../../API/ApiService';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { EXPORT_CONSTANT } from '../../constant/HeadingConstant';
 
 function Explore() {
   const [exploreData, setExploreData] = useState([]);
@@ -13,7 +13,7 @@ function Explore() {
   const [error, setIsAlert] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [flag, setFlag] = useState(true);
-  const user = localStorage.getItem('userId')
+  const user = sessionStorage.getItem('userId')
   const [saveBookmark, setSaveBookmark] = useState([]);
 
   //first api to run
@@ -111,10 +111,8 @@ function Explore() {
         </Box>
       ) : (
         <div className="e-lable">
-          <h2 className="e-header">explore</h2>
-          <div className="htw-subheader">
-            Explore New place, food, culture around the world and many more
-          </div>
+          <h2 className="e-header">{EXPORT_CONSTANT.MAIN_TITLE}</h2>
+          <div className="htw-subheader">{EXPORT_CONSTANT.SECONDARY_TITLE}</div>
         </div>
       )}
 

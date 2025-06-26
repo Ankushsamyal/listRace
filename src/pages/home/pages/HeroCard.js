@@ -13,7 +13,7 @@ import MedicalServicesOutlinedIcon from '@mui/icons-material/MedicalServicesOutl
 import HotelOutlinedIcon from '@mui/icons-material/HotelOutlined';
 import DinnerDiningOutlinedIcon from '@mui/icons-material/DinnerDiningOutlined';
 import ApartmentIcon from '@mui/icons-material/Apartment';
-import CustomPopOver from '../../../commonComponents/PopOver';
+import CustomPopOver from '../../../component/PopOver';
 import useIsMobile from '../../../hooks/useIsMobile';
 
 const dataItems = [

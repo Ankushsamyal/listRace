@@ -8,7 +8,7 @@ const neumorphismShadow = {
 };
 
 const ProfilePage = () => {
-   const username = localStorage.getItem('userName') || 'user'
+   const username = sessionStorage.getItem('userName') || 'user'
 
     return (
         <Container maxWidth="sm" sx={{ mt: 5, marginTop: '150px', marginBottom: '100px' }}>

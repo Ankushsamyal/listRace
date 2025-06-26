@@ -7,7 +7,7 @@ import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import CloseIcon from '@mui/icons-material/Close';
 import BookmarkIcon from '@mui/icons-material/Bookmark';
-import '../components/explore/style.css';
+import '../pages/explore/style.css';
 
 const iconStyle = (valuedata) => ({
     fontSize: 'large',
@@ -26,7 +26,7 @@ const PhotoiconStyle = () => ({
 });
 function ExploreCards({ data, saveBookmark, flag, setSaveBookmark }) {
 
-    const user = localStorage.getItem('userId')
+    const user = sessionStorage.getItem('userId')
     const getBackgroundColor = (rating) => {
         if (rating >= 4.5) return 'green';
         else if (rating >= 3) return 'orange';

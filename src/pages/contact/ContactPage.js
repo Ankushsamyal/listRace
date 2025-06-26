@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { Box, Button, TextField } from '@mui/material';
 import { red } from '@mui/material/colors';
 import React from 'react'
+import { CONTACT_CONSTANT } from '../../constant/HeadingConstant';
 
 
 function Contact() {
@@ -16,9 +17,8 @@ function Contact() {
   return (
     <div className='Blog-main-box' style={{ backgroundColor: '#f8fafb', paddingTop: '20vh', marginTop: '13vh',paddingBottom:'30vh' }}>
       <div className="Blog-lable">
-        <h2 className='Blog-header'>
-          do you want to add your business listing with us</h2>
-        <div className="Blog-subheader" style={{padding:'10px'}}>Listrace offer you to list your business with us and we very much able to promote your Business.</div>
+        <h2 className='Blog-header'>{CONTACT_CONSTANT.MAIN_TITLE}</h2>
+        <div className="Blog-subheader" style={{padding:'10px'}}>{CONTACT_CONSTANT.SECONDARY_TITLE}</div>
         <Box style={{ marginTop: '60px',padding:'10px', display: 'flex', justifyContent: 'center' }}>
 
 

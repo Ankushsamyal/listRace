@@ -1,18 +1,18 @@
 
 import React, { useLayoutEffect } from 'react';
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom';
-import Home from './components/home/HomePage';
-import Signup from './Login_Signup/signup/SignUp';
-import Blogpage from './components/blog/HomePage';
-import Howitworks from './components/how-it-works/HowItWork';
-import Explore from './components/explore/ExplorePage';
-import Review from './components/review/ReviewPage';
-import Contact from './components/contact/ContactPage';
-import { AuthProvider } from './commonComponents/AuthProvider';
-import ProfilePage from './Login_Signup/profile Page/ProfilePages';
-import Navbar from './navbar/nabar';
-import Login from './Login_Signup/login/LogInPage';
+import Home from './pages/home/HomePage';
+import Signup from './pages/login_signup/signup/SignUp';
+import Blogpage from './pages/blog/HomePage';
+import Howitworks from './pages/how-it-works/HowItWork';
+import Explore from './pages/explore/ExplorePage';
+import Review from './pages/review/ReviewPage';
+import Contact from './pages/contact/ContactPage';
+import { AuthProvider } from './component/AuthProvider';
+import ProfilePage from './pages/login_signup/profile Page/ProfilePages';
+import Login from './pages/login_signup/login/LogInPage';
 import { CssBaseline } from '@mui/material';
+import Navbar from './pages/navbar/nabar'
 
 function ScrollToTop() {
   const location = useLocation();
@@ -35,12 +35,6 @@ function NavigationWrapper({ children }) {
 }
 
 function App() {
-  //  const navigate = useNavigate();
-  // const user = localStorage.getItem('userId')
-  // if(!user){
-      
-    
-  // }
   const router = createBrowserRouter(
     [
       { path: '/', element: <NavigationWrapper><Home /></NavigationWrapper> },
