@@ -1,6 +1,6 @@
 export const HOME_CONSTANT ={   
-        MAIN_TITLE:'Best place to find and explore that all you need',
-        SECONDARY_TITLE:'Find Best Place, Restaurant, Hotel, Real Estate and many more think in just One click'
+    MAIN_TITLE:'Best place to find and explore that all you need',
+    SECONDARY_TITLE:'Find Best Place, Restaurant, Hotel, Real Estate and many more think in just One click'
 }
 
 export const EXPORT_CONSTANT ={
