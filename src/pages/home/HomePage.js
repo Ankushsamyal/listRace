@@ -11,7 +11,6 @@ const HeroMainBox = styled.div`
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-color: red;
     background-image: 
         linear-gradient(to bottom, rgba(7, 7, 7, 0.6), rgba(46, 30, 110, 0.3)),
         url(${Heroimage});  

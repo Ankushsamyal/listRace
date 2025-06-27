@@ -13,6 +13,7 @@ import ProfilePage from './pages/login_signup/profile Page/ProfilePages';
 import Login from './pages/login_signup/login/LogInPage';
 import { CssBaseline } from '@mui/material';
 import Navbar from './pages/navbar/nabar'
+import HomePageChatBot from './chatBot/HomePageChatBot';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -46,6 +47,7 @@ function App() {
       { path: '/login', element: <NavigationWrapper><Login /></NavigationWrapper> },
       { path: '/signup', element: <NavigationWrapper><Signup /></NavigationWrapper> },
       { path: '/profile', element: <NavigationWrapper><ProfilePage /></NavigationWrapper> },
+      { path: '/chatbot', element: <NavigationWrapper><HomePageChatBot /></NavigationWrapper> },
     ],
     {
       future: {

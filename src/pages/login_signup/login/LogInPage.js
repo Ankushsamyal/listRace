@@ -8,7 +8,8 @@ import {
   CircularProgress,
   Alert,
   InputAdornment,
-  IconButton
+  IconButton,
+  Divider
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
@@ -37,7 +38,7 @@ const pageStyles = {
   },
   icon: {
     fontSize: 100,
-    mb: 2,
+    mb: 2,  
     color: '#ff6b6b',
     background: '#e0e5ec',
     padding: '15px',
@@ -242,8 +243,8 @@ const Login = () => {
                 Sign Up
               </HeroButton>
             </Box>
+            <Divider style={{paddingTop:'20px'}}>OR</Divider>
             <div style={{ display: 'inline-grid', marginTop: '10px' }}>
-            
               <GoogleLogin
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse)
@@ -251,7 +252,7 @@ const Login = () => {
                   console.log(jwtDecode(credentialResponse.credential))
                   setJwtGooglecredentialResponse(jwtDecode(credentialResponse.credential))
                 }}
-                onError={() => console.log('Login fail')}
+                onError={() => console.error('Login fail')}
               />
             </div>
           </Box>
