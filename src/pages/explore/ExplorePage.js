@@ -103,33 +103,12 @@ function Explore() {
 
   return (
     <div className="E-Main-Box">
-      {/* Header Skeleton */}
-      {loading ? (
-        <Box sx={{ width: '100%' }}>
-          <Skeleton className="e-lable" variant="text" width="30%" height={40} sx={{ mb: 1 }} />
-          <Skeleton className="e-header" variant="text" width="80%" height={24} />
-        </Box>
-      ) : (
         <div className="e-lable">
           <h2 className="e-header">{EXPORT_CONSTANT.MAIN_TITLE}</h2>
           <div className="htw-subheader">{EXPORT_CONSTANT.SECONDARY_TITLE}</div>
         </div>
-      )}
 
       {/* Bookmark Button Skeleton */}
-      {loading ? (
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          paddingRight: '40px',
-          alignItems: 'center',
-          gap: '5px',
-          mb: 3
-        }}>
-          <Skeleton variant="circular" width={24} height={24} />
-          <Skeleton variant="text" width={80} height={24} />
-        </Box>
-      ) : (
         <Button className="bookmark-icon"
           style={{ paddingLeft: '5%',fontWeight:'bolder' }}
           color='black'
@@ -137,21 +116,38 @@ function Explore() {
           onClick={showBookmarkData}
           startIcon={<BookmarkIcon />}>
           Bookmark</Button>
-      )}
 
       {/* Cards Skeleton */}
       {loading ? (
-        <Stack spacing={3}>
-          {[...Array(4)].map((_, index) => (
-            <Box key={index} sx={{ width: '100%' }}>
-              <Skeleton variant="rectangular" width="100%" height={200} sx={{ borderRadius: 2 }} />
-              <Box sx={{ pt: 1 }}>
-                <Skeleton width="60%" />
-                <Skeleton width="40%" />
-              </Box>
-            </Box>
-          ))}
-        </Stack>
+      <Stack
+      sx={{
+        display: 'grid',
+        gridTemplateColumns: {
+          xs: '1fr',
+          sm: 'repeat(2, 1fr)',
+          md: 'repeat(3, 1fr)',
+          lg: 'repeat(3, 1fr)',
+        },
+        padding: '40px',
+        gap: '50px',
+        justifyItems: 'center',
+      }}
+    >
+      {[...Array(7)].map((_, index) => (
+        <Box key={index} sx={{ width: '100%', maxWidth: 280 }}>
+          <Skeleton
+            variant="rectangular"
+            width="100%"
+            height={170}
+            sx={{ borderRadius: 2 }}
+          />
+          <Box sx={{ mt: 1 }}>
+            <Skeleton width="70%" height={20} />
+            <Skeleton width="40%" height={20} />
+          </Box>
+        </Box>
+      ))}
+    </Stack>
       ) : (
         <>
           <ExploreCards
