@@ -73,11 +73,29 @@ function Home() {
 
         fetchData();
     }, []);
+//     const nested = [1, 2, [3, [4, 5,[1], [6], 7], 8], 9]
+    
+//     const flatArray = function nestedArr(array){
+//         const result =[]
+//         for(let i=0;i<array.length;i++){
+//             if(Array.isArray(array[i])){
+//                 const flatArray = nestedArr(array[i])
+//                 console.log(flatArray,"flatArray");
+//                 for(let j=0;j<flatArray.length;j++){
+//                     result.push(flatArray[j])
+//                 }
+
+//             }
+//             else result.push(array[i])
+//         }
+//         return result;
+//     }
+// console.log('nested array',flatArray(nested))
     return (
         <div style={{ backgroundColor: 'whitesmoke' }}>
             <HeroMainBox className="Hero-Main-box">
                 <HeroTitleStyles className={`animate__fadeInDown`}>
-                   {HOME_CONSTANT.MAIN_TITLE}
+                    {HOME_CONSTANT.MAIN_TITLE}
                 </HeroTitleStyles>
                 <HeroDescriptionStyles>
                     {HOME_CONSTANT.SECONDARY_TITLE}
@@ -86,6 +104,7 @@ function Home() {
             </HeroMainBox>
             <HeroCards catagoriData={catagoriData} />
         </div>
+
     );
 };
 
