@@ -1,78 +1,114 @@
-import { Box, Card, CardContent, CardMedia, Divider, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Divider,
+  Typography,
+} from '@mui/material';
 import { fetchBlog } from '../../API/ApiService';
 
-function BlogCards() {
-    const[blogData, setBlogData] = useState([]);
-    useEffect(() => {
-        const fetchBlogData = async () => {
-            try {
-                const BlogData = await fetchBlog();
-                setBlogData(BlogData);
-            } catch (err) {
-                console.error('Error fetching explore data:', err);
-            }
-        };
+const BlogCards = () => {
+  const [blogData, setBlogData] = useState([]);
 
-        fetchBlogData();
-    }, []);
-    return (
-        <div className='BlogCards-Main-box' style={{ paddingTop: '30px' }}>
-            <Box className="e-Card-box"  sx={{
-                display: 'grid',
-                gridTemplateColumns: {
-                    xs: '1fr',
-                    sm: 'repeat(2, 1fr)',
-                    md: 'repeat(3, 1fr)',
-                    lg: 'repeat(3, 1fr)'
-                },
-                padding: '40px',
-                gridGap: '50px',
-                justifyItems:'center'
-            }}>
-                {blogData && blogData.map(value => (
-                    <Card key={value.id} className='e-card' sx={{
-                        maxWidth: 280, borderRadius: '0.7',
-                        '&:hover': { boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px' }
-                    }}>
-                        <CardMedia
-                            sx={{ height: 170 }}
-                            image={value.image}
-                            title="hotel img"
-                        />
-                        <CardContent className='E-card-content'>
-                            <Typography className='e-Card-header' gutterBottom variant="h7" component="div">
-                                {value.title}
-                            </Typography>
-                            <Box className="e-subheading-main-box">
-                                <Box className="e-sub-header-box" component='span'>
-                                    <div>
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchBlog();
+        setBlogData(data);
+      } catch (error) {
+        console.error('Error fetching blog data:', error);
+      }
+    };
 
-                                        <Typography sx={{ color: 'text.secondary' }} component='span' fontSize={13} >Posted By </Typography>
-                                        <Typography className="e-rating-lable" component='span' fontSize={13}>{value.PostBy}</Typography>
-                                    </div>
+    fetchData();
+  }, []);
 
-                                    <Divider orientation="vertical" flexItem />
-                                    <Typography className="e-hotel-price-lable" sx={{ textTransform: 'uppercase', color: 'text.secondary' }} component='span' fontSize={13}>
-                                        {value.date}
-                                    </Typography>
-                                </Box>
+  return (
+    <Box className="BlogCards-Main-box" sx={{ paddingTop: 4 }}>
+      <Box
+        className="e-Card-box"
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: {
+            xs: '1fr',
+            sm: 'repeat(2, 1fr)',
+            md: 'repeat(3, 1fr)',
+          },
+          padding: 5,
+          gap: 6,
+          justifyItems: 'center',
+        }}
+      >
+        {blogData.map(({ id, image, title, PostBy, date, comment }) => (
+          <Card
+            key={id}
+            className="e-card"
+            sx={{
+              maxWidth: 280,
+              borderRadius: 0.7,
+              '&:hover': {
+                boxShadow:
+                  'rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px',
+              },
+            }}
+          >
+            <CardMedia sx={{ height: 170 }} image={image} title="blog image" />
+            <CardContent className="E-card-content">
+              <Typography
+                className="e-Card-header"
+                gutterBottom
+                variant="subtitle1"
+                component="div"
+              >
+                {title}
+              </Typography>
 
-                            </Box>
-                            <Box className="e-image-box">
+              <Box className="e-subheading-main-box">
+                <Box className="e-sub-header-box" component="span" display="flex" alignItems="center" gap={1}>
+                  <Typography
+                    sx={{ color: 'text.secondary' }}
+                    component="span"
+                    fontSize={13}
+                  >
+                    Posted By
+                  </Typography>
+                  <Typography className="e-rating-lable" component="span" fontSize={13}>
+                    {PostBy}
+                  </Typography>
 
-                                <Typography variant="body2" fontSize={15} sx={{ color: 'text.secondary', paddingLeft: '5px', lineHeight: '25px' }}>
-                                    {value.comment}
-                                </Typography>
-                            </Box>
+                  <Divider orientation="vertical" flexItem />
+                  <Typography
+                    className="e-hotel-price-lable"
+                    sx={{ textTransform: 'uppercase', color: 'text.secondary' }}
+                    component="span"
+                    fontSize={13}
+                  >
+                    {date}
+                  </Typography>
+                </Box>
+              </Box>
 
-                        </CardContent>
-                    </Card>
-                ))}
-            </Box>
+              <Box className="e-image-box">
+                <Typography
+                  variant="body2"
+                  fontSize={15}
+                  sx={{
+                    color: 'text.secondary',
+                    paddingLeft: 1,
+                    lineHeight: '25px',
+                  }}
+                >
+                  {comment}
+                </Typography>
+              </Box>
+            </CardContent>
+          </Card>
+        ))}
+      </Box>
+    </Box>
+  );
+};
 
-        </div>
-    )
-}
-
-export default BlogCards
+export default BlogCards;
