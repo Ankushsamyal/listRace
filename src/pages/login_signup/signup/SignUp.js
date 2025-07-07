@@ -110,7 +110,7 @@ const Signup = () => {
     return password.length >= minLength && hasUpperCase && hasNumber;
   };
 
-    const validateName = (name) => {
+  const validateName = (name) => {
     if (!name.trim()) {
       return 'Name is required.';
     } else if (!/^[a-zA-Z\s]+$/.test(name)) {
@@ -120,44 +120,44 @@ const Signup = () => {
     }
     return '';
   };
- const handleSignup = async (e) => {
-  e?.preventDefault();
-if (validateName(name)){
-  setError('please enter a valid name')
-  return
-}
-  if (!validateEmail(email)) {
-    setError('Please enter a valid email address');
-    return;
-  }
-
-  if (!validatePassword(password)) {
-    setError('Password must be 8+ characters with at least one uppercase letter and one number');
-    return;
-  }
-
-  if (password !== confirmPassword) {
-    setError('Passwords do not match.');
-    return;
-  }
-
-  setLoading(true);
-  setError('');
-
-  try {
-    const data = await signupUser(email, password, confirmPassword ,name);
-
-    if (data.token) {
-      sessionStorage.setItem('authToken', data.token);
+  const handleSignup = async (e) => {
+    e?.preventDefault();
+    if (validateName(name)) {
+      setError('please enter a valid name')
+      return
+    }
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address');
+      return;
     }
 
-    navigate('/login');
-  } catch (err) {
-    setError(err);
-  } finally {
-    setLoading(false);
-  }
-};
+    if (!validatePassword(password)) {
+      setError('Password must be 8+ characters with at least one uppercase letter and one number');
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      return;
+    }
+
+    setLoading(true);
+    setError('');
+
+    try {
+      const data = await signupUser(email, password, confirmPassword, name);
+
+      if (data.token) {
+        sessionStorage.setItem('authToken', data.token);
+      }
+
+      navigate('/login');
+    } catch (err) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   const handleSignIn = () => {
@@ -190,20 +190,20 @@ if (validateName(name)){
           <Typography component="h1" variant="h5" sx={pageStyles.title}>
             Create Account
           </Typography>
-          
+
           {error && (
             <Alert severity="error" sx={pageStyles.alert}>
               {error}
             </Alert>
           )}
-          
-          <Box 
+
+          <Box
             component="form"
             sx={pageStyles.form}
             onSubmit={handleSignup}
             onKeyPress={handleKeyPress}
           >
-             <TextField
+            <TextField
               margin="normal"
               required
               fullWidth
@@ -228,7 +228,7 @@ if (validateName(name)){
               onChange={(e) => setEmail(e.target.value)}
               sx={pageStyles.textField}
             />
-            
+
             <TextField
               margin="normal"
               required
@@ -257,7 +257,7 @@ if (validateName(name)){
                 )
               }}
             />
-            
+
             <TextField
               margin="normal"
               required
@@ -286,7 +286,7 @@ if (validateName(name)){
                 )
               }}
             />
-            
+
             <Box sx={pageStyles.buttonContainer}>
               <HeroButton
                 fullWidth
@@ -296,7 +296,7 @@ if (validateName(name)){
               >
                 {loading ? <CircularProgress size={24} /> : 'Sign Up'}
               </HeroButton>
-              
+
               <HeroButton
                 handleClick={handleSignIn}
               >
