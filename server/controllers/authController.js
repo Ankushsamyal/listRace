@@ -1,6 +1,7 @@
 const { getDb } = require('../connect.cjs');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { use } = require('react');
 const { isEmail } = require('validator');
 require('dotenv').config({ path: './config.env' });
 
@@ -45,10 +46,10 @@ const signup = async (req, res) => {
       });
     }
 
-    const { email, password, confirmPassword,name } = req.body;
+    const { email, password, confirmPassword,name, userRole } = req.body;
     
     // Validate required fields
-    if (!email || !password || !confirmPassword || !name) {
+    if (!email || !password || !confirmPassword || !name ) {
       return res.status(400).json({
         success: false,
         error: 'VALIDATION_ERROR',
@@ -108,7 +109,8 @@ const signup = async (req, res) => {
       passwordHash,
       createdAt: new Date(),
       updatedAt: new Date(),
-      lastLogin: null 
+      lastLogin: null,
+      userRole: userRole
     };
 
     const result = await loginCollection.insertOne(newUser);
@@ -117,7 +119,8 @@ const signup = async (req, res) => {
     const token = jwt.sign(
       {
         userId: result.insertedId,
-        email: newUser.email
+        email: newUser.email,
+        userRole: newUser.userRole
       },
       process.env.JWT_SECRET,
       {
@@ -132,7 +135,8 @@ const signup = async (req, res) => {
       token,
       user: {
         email: newUser.email,
-        id: result.insertedId
+        id: result.insertedId,
+        userRole: newUser.userRole
       }
     });
 
@@ -198,7 +202,8 @@ const login = async (req, res) => {
     const token = jwt.sign(
       {
         userId: user._id,
-        email: user.email
+        email: user.email,
+        userRole: user.userRole
       },
       process.env.JWT_SECRET,
       {
@@ -220,7 +225,8 @@ const login = async (req, res) => {
       user: {
         email: user.email,
         id: user._id,
-        name:user.name
+        name:user.name,
+        userRole: user.userRole
       }
     });
 

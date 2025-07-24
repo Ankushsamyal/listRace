@@ -87,7 +87,7 @@ const pageStyles = {
   }
 };
 
-const Signup = () => {
+const Signup = ({SignupTitle,userRole}) => {
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
@@ -97,7 +97,6 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-
   const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -145,7 +144,7 @@ const Signup = () => {
     setError('');
 
     try {
-      const data = await signupUser(email, password, confirmPassword, name);
+      const data = await signupUser(email, password, confirmPassword, name, userRole);
 
       if (data.token) {
         sessionStorage.setItem('authToken', data.token);
@@ -188,7 +187,7 @@ const Signup = () => {
         <Box sx={pageStyles.container}>
           <PersonAddIcon sx={pageStyles.icon} />
           <Typography component="h1" variant="h5" sx={pageStyles.title}>
-            Create Account
+            {SignupTitle}
           </Typography>
 
           {error && (

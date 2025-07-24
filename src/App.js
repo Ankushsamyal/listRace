@@ -2,7 +2,6 @@
 import React, { useLayoutEffect } from 'react';
 import { RouterProvider, createBrowserRouter, useLocation } from 'react-router-dom';
 import Home from './pages/home/HomePage';
-import Signup from './pages/login_signup/signup/SignUp';
 import Blogpage from './pages/blog/HomePage';
 import Howitworks from './pages/how-it-works/HowItWork';
 import Explore from './pages/explore/ExplorePage';
@@ -14,6 +13,10 @@ import Login from './pages/login_signup/login/LogInPage';
 import { CssBaseline } from '@mui/material';
 import Navbar from './pages/navbar/nabar'
 import HomePageChatBot from './chatBot/HomePageChatBot';
+import UserSignup from './pages/login_signup/signup/RoleBaseSignUp/UserSignup'
+import AdminSignup from './pages/login_signup/signup/RoleBaseSignUp/AdminSignup';
+import ProtectedRoute from './component/ProtectedRoute';
+import UploadAdminExplore from './pages/explore/UploadAdminExplore';
 
 function ScrollToTop() {
   const location = useLocation();
@@ -41,13 +44,15 @@ function App() {
       { path: '/', element: <NavigationWrapper><Home /></NavigationWrapper> },
       { path: '/how-it-works', element: <NavigationWrapper><Howitworks /></NavigationWrapper> },
       { path: '/explore', element: <NavigationWrapper><Explore /></NavigationWrapper> },
-      { path: '/review', element: <NavigationWrapper><Review /></NavigationWrapper> },
+      { path: '/review', element: <NavigationWrapper><ProtectedRoute><Review /></ProtectedRoute></NavigationWrapper> },
       { path: '/blog', element: <NavigationWrapper><Blogpage /></NavigationWrapper> },
       { path: '/contact', element: <NavigationWrapper><Contact /></NavigationWrapper> },
       { path: '/login', element: <NavigationWrapper><Login /></NavigationWrapper> },
-      { path: '/signup', element: <NavigationWrapper><Signup /></NavigationWrapper> },
+      { path: '/signup', element: <NavigationWrapper><UserSignup /></NavigationWrapper> },
+      { path: '/admin-signup', element: <NavigationWrapper><AdminSignup /></NavigationWrapper> },
       { path: '/profile', element: <NavigationWrapper><ProfilePage /></NavigationWrapper> },
       { path: '/chatbot', element: <NavigationWrapper><HomePageChatBot /></NavigationWrapper> },
+      { path: '/upload-bookmark', element: <NavigationWrapper><UploadAdminExplore /></NavigationWrapper> },
     ],
     {
       future: {
@@ -56,7 +61,6 @@ function App() {
       },
     }
   );
-  
 
   return (
     <div>

@@ -6,16 +6,27 @@ import BookmarkIcon from '@mui/icons-material/Bookmark';
 import { fetchBookmarks, fetchExplore, PostBookmark } from '../../API/ApiService';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { EXPORT_CONSTANT } from '../../constant/HeadingConstant';
+import { ROLE } from '../../constant/Role';
+import Unauthorized from '../../component/Unauthorized';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
+import { useNavigate } from 'react-router-dom';
+import useIsMobile from '../../hooks/useIsMobile';
+import { useDispatch } from 'react-redux';
+import { IdData } from '../../redux_store/slice/CounterSlice';
 
 function Explore() {
   const [exploreData, setExploreData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setIsAlert] = useState(null);
+  const [, setIsAlert] = useState(null);
   const [anchorEl, setAnchorEl] = useState(null);
   const [flag, setFlag] = useState(true);
   const user = sessionStorage.getItem('userId')
   const [saveBookmark, setSaveBookmark] = useState([]);
-
+  const userRole = ROLE
+  const CurrentUserRole = sessionStorage.getItem('userRole')
+  const navigate = useNavigate();
+  const isMoble = useIsMobile()
+  const dispatch = useDispatch()
   //first api to run
   useEffect(() => {
     const fetchExploreData = async () => {
@@ -24,6 +35,7 @@ function Explore() {
         setIsAlert(null);
         const exploreData = await fetchExplore();
         setExploreData(exploreData);
+        dispatch(IdData(exploreData))
       } catch (err) {
         setLoading(true);
         console.error('Error fetching explore data:', err);
@@ -98,56 +110,69 @@ function Explore() {
       setAnchorEl(event.currentTarget);
     }
   };
-
-  if (error) return <div>Error: {error}</div>;
-
+  const allowedRoles = [userRole.USER, userRole.ADMIN];
+  if (!allowedRoles.includes(CurrentUserRole)) {
+    return <Unauthorized />;
+  }
+  const showUploadBookmarkData = () => {
+    navigate('/upload-bookmark');
+  }
   return (
     <div className="E-Main-Box">
-        <div className="e-lable">
-          <h2 className="e-header">{EXPORT_CONSTANT.MAIN_TITLE}</h2>
-          <div className="htw-subheader">{EXPORT_CONSTANT.SECONDARY_TITLE}</div>
-        </div>
+      <div className="e-lable">
+        <h2 className="e-header">{EXPORT_CONSTANT.MAIN_TITLE}</h2>
+        <div className="htw-subheader">{EXPORT_CONSTANT.SECONDARY_TITLE}</div>
+      </div>
 
       {/* Bookmark Button Skeleton */}
+      <Box sx={{display:'flex',justifyContent:'space-between',flexDirection:isMoble ? 'column' : 'row'}}>
         <Button className="bookmark-icon"
-          style={{ paddingLeft: '5%',fontWeight:'bolder' }}
+          style={{ paddingLeft: '5%', fontWeight: 'bolder' }}
           color='black'
           size='large'
           onClick={showBookmarkData}
           startIcon={<BookmarkIcon />}>
           Bookmark</Button>
-
+          {ROLE.ADMIN === CurrentUserRole && <Button className="bookmark-icon"
+          style={{ paddingRight: '5%', fontWeight: 'bolder' }}
+          color='black'
+          size='large'
+          
+          onClick={showUploadBookmarkData}
+          startIcon={<DriveFolderUploadIcon />}>
+          Upload Bookmark</Button>}
+      </Box>
       {/* Cards Skeleton */}
       {loading ? (
-      <Stack
-      sx={{
-        display: 'grid',
-        gridTemplateColumns: {
-          xs: '1fr',
-          sm: 'repeat(2, 1fr)',
-          md: 'repeat(3, 1fr)',
-          lg: 'repeat(3, 1fr)',
-        },
-        padding: '40px',
-        gap: '50px',
-        justifyItems: 'center',
-      }}
-    >
-      {[...Array(7)].map((_, index) => (
-        <Box key={index} sx={{ width: '100%', maxWidth: 280 }}>
-          <Skeleton
-            variant="rectangular"
-            width="100%"
-            height={170}
-            sx={{ borderRadius: 2 }}
-          />
-          <Box sx={{ mt: 1 }}>
-            <Skeleton width="70%" height={20} />
-            <Skeleton width="40%" height={20} />
-          </Box>
-        </Box>
-      ))}
-    </Stack>
+        <Stack
+          sx={{
+            display: 'grid',
+            gridTemplateColumns: {
+              xs: '1fr',
+              sm: 'repeat(2, 1fr)',
+              md: 'repeat(3, 1fr)',
+              lg: 'repeat(3, 1fr)',
+            },
+            padding: '40px',
+            gap: '50px',
+            justifyItems: 'center',
+          }}
+        >
+          {[...Array(7)].map((_, index) => (
+            <Box key={index} sx={{ width: '100%', maxWidth: 280 }}>
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                height={170}
+                sx={{ borderRadius: 2 }}
+              />
+              <Box sx={{ mt: 1 }}>
+                <Skeleton width="70%" height={20} />
+                <Skeleton width="40%" height={20} />
+              </Box>
+            </Box>
+          ))}
+        </Stack>
       ) : (
         <>
           <ExploreCards

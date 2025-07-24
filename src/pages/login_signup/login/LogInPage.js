@@ -138,6 +138,7 @@ const Login = () => {
         sessionStorage.setItem('userEmail', data.user.email);
         sessionStorage.setItem('userName', data.user.name);
         sessionStorage.setItem('userId', data.user.id);
+        sessionStorage.setItem('userRole', data.user.userRole);
       }
 
       navigate('/');
