@@ -27,6 +27,7 @@ export default function   UserProfile({setMobileOpen,mobileOpen}) {
    sessionStorage.removeItem('userEmail');
    sessionStorage.removeItem('userId');
    sessionStorage.removeItem('userName');
+   sessionStorage.removeItem('userRole');
    navigate("/login")
     console.log('User has been logged out'); 
   };

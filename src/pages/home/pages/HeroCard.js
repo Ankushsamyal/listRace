@@ -185,4 +185,4 @@ function HeroCards({ catagoriData, loading, error }) {
   );
 }
 
-export default HeroCards;
+export default HeroCards; 

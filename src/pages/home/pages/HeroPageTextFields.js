@@ -82,14 +82,12 @@ function HeroPageTextArea({ catagoriData, isAlert, setIsAlert }) {
                             renderInput={(params) => (
                                 <StyledTextField
                                     {...params}
-                                    width='auto'
                                     id="choose-what-to"
                                     data_test_id="choose-what-to-data"
                                     placeholder="Ex: Place, Food"
                                     onChange={handleData}
                                     sx={{ width: 300 }}
                                     InputProps={{
-                                        style: { width: 'auto' },
                                         ...params.InputProps,
                                         type: 'search',
                                         startAdornment: (

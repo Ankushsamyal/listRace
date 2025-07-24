@@ -77,10 +77,10 @@ export const loginUser = async (email, password) => {
 };
 
 
-export const signupUser = async (email, password, confirmPassword ,name) => {
+export const signupUser = async (email, password, confirmPassword ,name, userRole) => {
   try {
     const response = await api.post(API_URL.SIGNUP, 
-      { email, password, confirmPassword,name },
+      { email, password, confirmPassword,name, userRole },
       { withCredentials: true }
     );
     return response.data;

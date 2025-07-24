@@ -22,3 +22,8 @@ export const REVIEW_CONSTANT ={
     MAIN_TITLE:' clients reviews',
     SECONDARY_TITLE:'What our client say about us'
 }
+
+export const SIGNUP_CONSTANT ={
+    ADMIN_SIGNUP_TITLE:'Admin Create Account',
+    USER_SIGNUP_TITLE:'Create Account',
+}
